@@ -18,30 +18,56 @@ class GameController extends AbstractController
         $filepath = $projectDir . '/config/game/maps/' . $map . '.yaml';
 
         if ($map == 'random') {
-            $config = ['random'];
-            $json = '{"random"}';
-            $style = [];
+            $args = $this->generateRandomMap();
         } elseif (file_exists($filepath)) {
-            $config = Yaml::parseFile($filepath);
-            $data = base64_encode(json_encode($config));
-
-            $this->calculateCityNameStyle($config);
-
-            $style = [
-                'map' => [
-                    'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
-                    'background_colors' => $this->generateTileBackgroundColors($config),
-                ],
-            ];
+            $args = $this->loadPredefinedMap($filepath);
         } else {
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('game/index.html.twig', [
+        var_dump($args['config']); die;
+
+        return $this->render('game/index.html.twig', $args);
+    }
+
+    private function generateRandomMap(): array
+    {
+        $config = [
+            'world' => [
+                'xSize' => 20,
+                'ySize' => 10,
+                'startGold' => 100,
+                'turnsAmount' => 10,
+                'cities' => [],
+            ]
+        ];
+        $data = base64_encode(json_encode($config));
+        $style = [];
+        return [
             'config' => $config,
             'data' => $data,
             'style' => $style,
-        ]);
+        ];
+    }
+
+    private function loadPredefinedMap(string $filepath): array
+    {
+        $config = Yaml::parseFile($filepath);
+        $data = base64_encode(json_encode($config));
+
+        $this->calculateCityNameStyle($config);
+        $style = [
+            'map' => [
+                'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
+                'background_colors' => $this->generateTileBackgroundColors($config),
+            ],
+        ];
+
+        return [
+            'config' => $config,
+            'data' => $data,
+            'style' => $style,
+        ];
     }
 
     /**
