@@ -27,7 +27,8 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        var_dump($args['config']['world']['cities']); die;
+        var_dump($args['config']['world']['cities']);
+        die;
 
         return $this->render('game/index.html.twig', $args);
     }
@@ -54,6 +55,12 @@ class GameController extends AbstractController
 
     private function generateRandomCities(): array
     {
+        $cities = $this->randomCityNames();
+        return $cities;
+    }
+
+    private function randomCityNames(): array
+    {
         $projectDir = $this->getParameter('kernel.project_dir');
         $filepath = $projectDir . '/config/game/city-names.txt';
 
@@ -71,8 +78,45 @@ class GameController extends AbstractController
         foreach ($cities as $key => $value) {
             $cities[$key] = [ 'name' => $value ];
         }
-            
+
         return $cities;
+    }
+
+    /**
+     * Random cities position indexes.
+     */
+    private function randomCitiesPositionIndexes()
+    {
+        foreach ($this->cities as $key => $value) {
+            $this->cities[$key]['x'] = null;
+            $this->cities[$key]['y'] = null;
+        }
+        foreach ($this->cities as $key => $value) {
+            do {
+                $posX = mt_rand(0, $this->getXSize() - 1);
+                $posY = mt_rand(0, $this->getYSize() - 1);
+            } while (!$this->areCoordinatesOfCityCorrect($posX, $posY));
+            $this->cities[$key]['x'] = $posX;
+            $this->cities[$key]['y'] = $posY;
+        }
+    }
+
+    /**
+     * Check if coordinates of new city are correct.
+     */
+    private function areCoordinatesOfCityCorrect(int $x, int $y): bool
+    {
+        foreach ($this->cities as $key => $city) {
+            if (
+                $x >= $city['x'] - 1
+                and $x <= $city['x'] + 1
+                and $y >= $city['y'] - 1
+                and $y <= $city['y'] + 1
+            ) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private function loadPredefinedMap(string $filepath): array
