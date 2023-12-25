@@ -1,0 +1,12 @@
+{% for y in 1..config.world.ySize %}
+    {% for x in 1..config.world.xSize %}
+        <div class="tile" data-x={{ x }} data-y={{ y }} style="background-color: rgb({{ style.map.background_colors[x][y] }})">
+            {% for city in config.world.cities %}
+                {% if city.position.x == x and city.position.y == y %}
+                    <img src="{{ asset("assets/gfx/city.jpg") }}" class="city">
+                    <div class="city-name" style="{{ city.name_style }}">{{ city.name|raw }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endfor %}
