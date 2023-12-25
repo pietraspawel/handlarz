@@ -4,9 +4,12 @@
 
 {% block body %}
 
-<div>
-    Hello, Game!
-    {{ dump() }}
+<div class="main-container">
+    <div><a href="{{ path("app_home") }}">Menu<a></div>
+    <div class="player-info container-fluid">player-info</div>
+    <div class="map">map</div>
+    <table class="city-info table table-sm">city-info</table>
 </div>
+
 
 {% endblock %}
