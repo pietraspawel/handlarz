@@ -1,0 +1,39 @@
+world:
+  xSize: 20
+  ySize: 10
+  startGold: 100
+  turnsAmount: 30
+  cities:
+  - name: Ryga
+    position: 135
+    goods:
+    - name: bazylia
+      price: 9
+    - name: oregano
+      price: 43
+    - name: tymianek
+      price: 49
+  - name: Praga
+    position: 87
+    goods:
+    - name: bazylia
+      price: 21
+    - name: oregano
+      price: 3
+    - name: tymianek
+      price: 58
+  - name: Lizbona
+    position: 122
+    goods:
+    - name: bazylia
+      price: 66
+    - name: oregano
+      price: 41
+    - name: tymianek
+      price: 11
+  traders:
+  - type: bot
+    ai: AI0
+    position: 135
+  - type: human
+    position: 135

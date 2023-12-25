@@ -1,0 +1,33 @@
+world:
+  xSize: 20
+  ySize: 10
+  startGold: 100
+  turnsAmount: 10
+  cities:
+  - name: Luksemburg
+    position: 65
+    goods:
+    - name: bazylia
+      price: 16
+    - name: oregano
+      price: 64
+    - name: tymianek
+      price: 19
+  - name: San&nbsp;Marino
+    position: 109
+    goods:
+    - name: bazylia
+      price: 71
+    - name: oregano
+      price: 96
+    - name: tymianek
+      price: 64
+  - name: Kiszyniów
+    position: 54
+    goods:
+    - name: bazylia
+      price: 45
+    - name: oregano
+      price: 3
+    - name: tymianek
+      price: 37

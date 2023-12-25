@@ -1,0 +1,39 @@
+world:
+  xSize: 20
+  ySize: 10
+  startGold: 100
+  turnsAmount: 20
+  cities:
+  - name: Astana
+    position: 69
+    goods:
+    - name: bazylia
+      price: 17
+    - name: oregano
+      price: 76
+    - name: tymianek
+      price: 98
+  - name: Skopje
+    position: 86
+    goods:
+    - name: bazylia
+      price: 98
+    - name: oregano
+      price: 58
+    - name: tymianek
+      price: 10
+  - name: Zagrzeb
+    position: 152
+    goods:
+    - name: bazylia
+      price: 41
+    - name: oregano
+      price: 46
+    - name: tymianek
+      price: 88
+  traders:
+  - type: bot
+    ai: AI0
+    position: 38
+  - type: human
+    position: 69
