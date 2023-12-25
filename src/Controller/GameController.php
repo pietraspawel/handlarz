@@ -23,7 +23,7 @@ class GameController extends AbstractController
             $style = [];
         } elseif (file_exists($filepath)) {
             $config = Yaml::parseFile($filepath);
-            $json = json_encode($config);
+            $data = base64_encode(json_encode($config));
 
             $this->calculateCityNameStyle($config);
 
@@ -39,7 +39,7 @@ class GameController extends AbstractController
 
         return $this->render('game/index.html.twig', [
             'config' => $config,
-            'json' => $json,
+            'data' => $data,
             'style' => $style,
         ]);
     }
