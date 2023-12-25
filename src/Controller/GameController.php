@@ -60,6 +60,7 @@ class GameController extends AbstractController
     private function generateRandomCities(): array
     {
         $cities = $this->randomCityNames();
+        $cities = $this->randomCityPositionIndexes($cities);
         return $cities;
     }
 
@@ -89,33 +90,34 @@ class GameController extends AbstractController
     /**
      * Random cities position indexes.
      */
-    private function randomCitiesPositionIndexes(array $cities): array
+    private function randomCityPositionIndexes(array $cities): array
     {
         foreach ($cities as $key => $value) {
-            $cities[$key]['x'] = null;
-            $cities[$key]['y'] = null;
+            $cities[$key]['position']['x'] = null;
+            $cities[$key]['position']['y'] = null;
         }
         foreach ($cities as $key => $value) {
             do {
-                $posX = mt_rand(0, $this->getXSize() - 1);
-                $posY = mt_rand(0, $this->getYSize() - 1);
-            } while (!$this->areCoordinatesOfCityCorrect($posX, $posY));
-            $cities[$key]['x'] = $posX;
-            $cities[$key]['y'] = $posY;
+                $posX = mt_rand(0, self::DEFAULT_WORLD_X_SIZE - 1);
+                $posY = mt_rand(0, self::DEFAULT_WORLD_Y_SIZE - 1);
+            } while (!$this->areCoordinatesOfCityCorrect($cities, $posX, $posY));
+            $cities[$key]['position']['x'] = $posX;
+            $cities[$key]['position']['y'] = $posY;
         }
+        return $cities;
     }
 
     /**
      * Check if coordinates of new city are correct.
      */
-    private function areCoordinatesOfCityCorrect(int $x, int $y): bool
+    private function areCoordinatesOfCityCorrect(array $cities, int $x, int $y): bool
     {
-        foreach ($this->cities as $key => $city) {
+        foreach ($cities as $key => $city) {
             if (
-                $x >= $city['x'] - 1
-                and $x <= $city['x'] + 1
-                and $y >= $city['y'] - 1
-                and $y <= $city['y'] + 1
+                $x >= $city['position']['x'] - 1
+                and $x <= $city['position']['x'] + 1
+                and $y >= $city['position']['y'] - 1
+                and $y <= $city['position']['y'] + 1
             ) {
                 return false;
             }
