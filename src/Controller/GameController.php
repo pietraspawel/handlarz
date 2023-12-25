@@ -9,6 +9,8 @@ use Symfony\Component\Yaml\Yaml;
 
 class GameController extends AbstractController
 {
+    private const CITIES_AMOUNT = 3;
+
     /**
      * @Route("/game/{map}", name="app_game")
      */
@@ -25,7 +27,7 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        var_dump($args['config']); die;
+        var_dump($args['config']['world']['cities']); die;
 
         return $this->render('game/index.html.twig', $args);
     }
@@ -38,7 +40,7 @@ class GameController extends AbstractController
                 'ySize' => 10,
                 'startGold' => 100,
                 'turnsAmount' => 10,
-                'cities' => [],
+                'cities' => $this->generateRandomCities(),
             ]
         ];
         $data = base64_encode(json_encode($config));
@@ -48,6 +50,29 @@ class GameController extends AbstractController
             'data' => $data,
             'style' => $style,
         ];
+    }
+
+    private function generateRandomCities(): array
+    {
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $filepath = $projectDir . '/config/game/city-names.txt';
+
+        $cities = array();
+        $list = file($filepath);
+        foreach ($list as $key => $value) {
+            $list[$key] = trim($value);
+        }
+        while (count($cities) < self::CITIES_AMOUNT) {
+            $randomName = $list[mt_rand(0, count($list) - 1)];
+            if (!in_array($randomName, $cities)) {
+                $cities[] = $randomName;
+            }
+        }
+        foreach ($cities as $key => $value) {
+            $cities[$key] = [ 'name' => $value ];
+        }
+            
+        return $cities;
     }
 
     private function loadPredefinedMap(string $filepath): array
