@@ -25,12 +25,6 @@ class GameController extends AbstractController
             $config = Yaml::parseFile($filepath);
             $json = json_encode($config);
 
-            $styleMapGridTemplateColumns = '';
-            for ($i = 0; $i < $config['world']['xSize']; $i++) {
-                $styleMapGridTemplateColumns .= 'auto ';
-            }
-            $styleMapGridTemplateColumns .= ';';
-
             $backgroundColors = [];
             for ($y = 1; $y <= $config['world']['ySize']; $y++) {
                 for ($x = 1; $x <= $config['world']['xSize']; $x++) {
@@ -42,7 +36,7 @@ class GameController extends AbstractController
 
             $style = [
                 'map' => [
-                    'grid_template_columns' => $styleMapGridTemplateColumns,
+                    'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
                     'background_colors' => $backgroundColors,
                 ],
             ];
@@ -55,6 +49,19 @@ class GameController extends AbstractController
             'json' => $json,
             'style' => $style,
         ]);
+    }
+
+    /**
+     * Generate style for map depends on world xSize.
+     */
+    private function calculateStyleMapGridTemplateColumns($config): string
+    {
+        $styleMapGridTemplateColumns = '';
+        for ($i = 0; $i < $config['world']['xSize']; $i++) {
+            $styleMapGridTemplateColumns .= 'auto ';
+        }
+        $styleMapGridTemplateColumns .= ';';
+        return $styleMapGridTemplateColumns;
     }
 
     /**
