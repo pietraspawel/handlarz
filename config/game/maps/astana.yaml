@@ -2,7 +2,7 @@ world:
   xSize: 20
   ySize: 10
   startGold: 100
-  turnsAmount: 20
+  turnsAmount: 10
   cities:
   - name: Astana
     position:
