@@ -9,6 +9,7 @@ class GameService
 {
     private const CITIES_AMOUNT = 3;
     private const CITY_NAMES_FILEPATH = '/config/game/city-names.txt';
+    private const GOODS_NAMES_FILEPATH = '/config/game/goods-names.txt';
     private const START_GOLD = 100;
     private const TURNS_AMOUNT = 10;
     private const WORLD_X_SIZE = 20;
@@ -45,6 +46,7 @@ class GameService
     {
         $cities = $this->randomCityNames();
         $cities = $this->randomCityPositionIndexes($cities);
+        $cities = $this->randomGoodsPrices($cities);
         return $cities;
     }
 
@@ -106,6 +108,29 @@ class GameService
             }
         }
         return true;
+    }
+
+    /**
+     * Random goods prices.
+     */
+    private function randomGoodsPrices($cities): array
+    {
+        $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
+
+        $goods = file($filepath);
+        foreach ($goods as $key => $value) {
+            $goods[$key] = trim($value);
+        }
+
+        foreach ($cities as $key => $city) {
+            foreach ($goods as $goodKey => $good) {
+                $cities[$key]['goods'][] = [
+                    'name' => $good,
+                    'price' => mt_rand(1, 100),
+                ];
+            }
+        }
+        return $cities;
     }
 
     public function loadPredefinedMap(string $filepath): array
