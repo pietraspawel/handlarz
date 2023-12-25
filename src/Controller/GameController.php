@@ -38,17 +38,7 @@ class GameController extends AbstractController
                 }
             }
 
-            foreach ($config['world']['cities'] as $key => $city) {
-                $top = "32px";
-                $left = "0px";
-                if ($city['position']['x'] >= $config['world']['xSize'] - 2) {
-                    $left = "auto";
-                }
-                if ($city['position']['y'] >= $config['world']['ySize'] - 1) {
-                    $top = "-25px";
-                }
-                $config['world']['cities'][$key]['name_style'] = "top: $top; left: $left;";
-            }
+            $this->calculateCityNameStyle($config);
 
             $style = [
                 'map' => [
@@ -83,5 +73,23 @@ class GameController extends AbstractController
             $blue = mt_rand(0, 150);
         }
         return "$red, $green, $blue";
+    }
+
+    /**
+     * Calculate city name position depends on city position.
+     */
+    private function calculateCityNameStyle(&$config)
+    {
+        foreach ($config['world']['cities'] as $key => $city) {
+            $top = "32px";
+            $left = "0px";
+            if ($city['position']['x'] >= $config['world']['xSize'] - 2) {
+                $left = "auto";
+            }
+            if ($city['position']['y'] >= $config['world']['ySize'] - 1) {
+                $top = "-25px";
+            }
+            $config['world']['cities'][$key]['name_style'] = "top: $top; left: $left;";
+        }
     }
 }
