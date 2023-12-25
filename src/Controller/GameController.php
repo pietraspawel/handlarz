@@ -38,6 +38,18 @@ class GameController extends AbstractController
                 }
             }
 
+            foreach ($config['world']['cities'] as $key => $city) {
+                $top = "32px";
+                $left = "0px";
+                if ($city['position']['x'] >= $config['world']['xSize'] - 2) {
+                    $left = "auto";
+                }
+                if ($city['position']['y'] >= $config['world']['ySize'] - 1) {
+                    $top = "-25px";
+                }
+                $config['world']['cities'][$key]['name_style'] = "top: $top; left: $left;";
+            }
+
             $style = [
                 'map' => [
                     'grid_template_columns' => $styleMapGridTemplateColumns,

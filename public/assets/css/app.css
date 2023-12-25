@@ -22,3 +22,9 @@
     overflow: visible;
     position: relative;
 }
+
+.city-name {
+    position: absolute;
+    right: 0px;
+    z-index: 1000;
+}

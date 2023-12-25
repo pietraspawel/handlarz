@@ -33,7 +33,7 @@
                     {% for city in config.world.cities %}
                         {% if city.position.x == x and city.position.y == y %}
                             <img src="{{ asset("assets/gfx/city.jpg") }}" class="city">
-                            {# <div id="cityName_{{ tileIndex }}" class="cityName" style="z-index: 1000;">{{ city.name|raw }}</div> #}
+                            <div class="city-name" style="{{ city.name_style }}">{{ city.name|raw }}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
