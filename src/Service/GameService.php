@@ -34,7 +34,15 @@ class GameService
             ]
         ];
         $data = base64_encode(json_encode($config));
-        $style = [];
+
+        $this->calculateCityNameStyle($config);
+        $style = [
+            'map' => [
+                'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
+                'background_colors' => $this->generateTileBackgroundColors($config),
+            ],
+        ];
+
         return [
             'config' => $config,
             'data' => $data,
@@ -83,8 +91,8 @@ class GameService
         }
         foreach ($cities as $key => $value) {
             do {
-                $posX = mt_rand(0, self::WORLD_X_SIZE - 1);
-                $posY = mt_rand(0, self::WORLD_Y_SIZE - 1);
+                $posX = mt_rand(1, self::WORLD_X_SIZE);
+                $posY = mt_rand(1, self::WORLD_Y_SIZE);
             } while (!$this->areCoordinatesOfCityCorrect($cities, $posX, $posY));
             $cities[$key]['position']['x'] = $posX;
             $cities[$key]['position']['y'] = $posY;
@@ -100,9 +108,9 @@ class GameService
         foreach ($cities as $key => $city) {
             if (
                 $x >= $city['position']['x'] - 1
-                and $x <= $city['position']['x'] + 1
-                and $y >= $city['position']['y'] - 1
-                and $y <= $city['position']['y'] + 1
+                && $x <= $city['position']['x'] + 2
+                && $y >= $city['position']['y'] - 1
+                && $y <= $city['position']['y'] + 1
             ) {
                 return false;
             }

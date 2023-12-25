@@ -25,9 +25,6 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        var_dump($args['config']['world']['cities'][0], $args['config']['world']);
-        die;
-
         return $this->render('game/index.html.twig', $args);
     }
 }
