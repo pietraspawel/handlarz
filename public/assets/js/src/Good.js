@@ -11,4 +11,10 @@ class Good
         good.price = data.price;
         return good;
     }
+
+    static createForTrader(data) {
+        let good = new Good(data.name);
+        good.quantity = 0;
+        return good;
+    }
 }
