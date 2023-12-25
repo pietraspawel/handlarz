@@ -25,19 +25,12 @@ class GameController extends AbstractController
             $config = Yaml::parseFile($filepath);
             $json = json_encode($config);
 
-            $backgroundColors = [];
-            for ($y = 1; $y <= $config['world']['ySize']; $y++) {
-                for ($x = 1; $x <= $config['world']['xSize']; $x++) {
-                    $backgroundColors[$x][$y] = $this->generateTileBackgroundColor();
-                }
-            }
-
             $this->calculateCityNameStyle($config);
 
             $style = [
                 'map' => [
                     'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
-                    'background_colors' => $backgroundColors,
+                    'background_colors' => $this->generateTileBackgroundColors($config),
                 ],
             ];
         } else {
@@ -62,6 +55,20 @@ class GameController extends AbstractController
         }
         $styleMapGridTemplateColumns .= ';';
         return $styleMapGridTemplateColumns;
+    }
+
+    /**
+     * Generate random tile background colors.
+     */
+    private function generateTileBackgroundColors($config): array
+    {
+        $backgroundColors = [];
+        for ($y = 1; $y <= $config['world']['ySize']; $y++) {
+            for ($x = 1; $x <= $config['world']['xSize']; $x++) {
+                $backgroundColors[$x][$y] = $this->generateTileBackgroundColor();
+            }
+        }
+        return $backgroundColors;
     }
 
     /**
