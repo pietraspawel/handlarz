@@ -7,7 +7,7 @@
 {{ dump() }}
 
 <div class="main-container">
-    <div><a href="{{ path("app_home") }}">Menu<a></div>
+    <div><a href="{{ path("app_home") }}">Menu</a></div>
     <div class="player-info container-fluid mt-3">
         <table class="table table-sm table-borderless">
             <thead>
@@ -26,7 +26,12 @@
             </tbody>
         </table>
     </div>
-    <div class="map">
+    <div class="map" style="grid-template-columns: {{ style.map.grid_template_columns }}">
+        {% for y in 1..config.world.ySize %}
+            {% for x in 1..config.world.xSize %}
+                <div class="tile x-{{ x }} y-{{ y }}" style="background-color: rgb({{ style.map.background_colors[x][y] }})"></div>
+            {% endfor %}
+        {% endfor %}
     </div>
     <table class="city-info table table-sm">city-info</table>
 </div>

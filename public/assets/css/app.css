@@ -7,3 +7,18 @@
 .player-info table thead th {
     width: 33%;
 }
+
+.map {
+    display: grid;
+    overflow: visible; 
+    border: 10px solid green;
+    border-radius: 5px;
+}
+
+.tile {
+    height: 32px;
+    width: 32px;
+    background-color: rgb(0, 200, 0);
+    overflow: visible;
+    position: relative;
+}
