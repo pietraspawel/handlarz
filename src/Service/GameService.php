@@ -33,21 +33,7 @@ class GameService
                 'cities' => $this->generateRandomCities(),
             ]
         ];
-        $data = base64_encode(json_encode($config));
-
-        $this->calculateCityNameStyle($config);
-        $style = [
-            'map' => [
-                'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
-                'background_colors' => $this->generateTileBackgroundColors($config),
-            ],
-        ];
-
-        return [
-            'config' => $config,
-            'data' => $data,
-            'style' => $style,
-        ];
+        return $this->generateTwigData($config);
     }
 
     private function generateRandomCities(): array
@@ -144,6 +130,11 @@ class GameService
     public function loadPredefinedMap(string $filepath): array
     {
         $config = Yaml::parseFile($filepath);
+        return $this->generateTwigData($config);
+    }
+
+    private function generateTwigData($config): array
+    {
         $data = base64_encode(json_encode($config));
 
         $this->calculateCityNameStyle($config);
