@@ -37,9 +37,3 @@ world:
       price: 41
     - name: tymianek
       price: 11
-  traders:
-  - type: bot
-    ai: AI0
-    position: 135
-  - type: human
-    position: 135
