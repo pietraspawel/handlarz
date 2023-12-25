@@ -9,6 +9,10 @@ use Symfony\Component\Yaml\Yaml;
 
 class GameController extends AbstractController
 {
+    private const DEFAULT_WORLD_X_SIZE = 20;
+    private const DEFAULT_WORLD_Y_SIZE = 10;
+    private const DEFAULT_WORLD_START_GOLD = 100;
+    private const DEFAULT_WORLD_TURNS_AMOUNT = 10;
     private const CITIES_AMOUNT = 3;
 
     /**
@@ -37,10 +41,10 @@ class GameController extends AbstractController
     {
         $config = [
             'world' => [
-                'xSize' => 20,
-                'ySize' => 10,
-                'startGold' => 100,
-                'turnsAmount' => 10,
+                'xSize' => self::DEFAULT_WORLD_X_SIZE,
+                'ySize' => self::DEFAULT_WORLD_Y_SIZE,
+                'startGold' => self::DEFAULT_WORLD_START_GOLD,
+                'turnsAmount' => self::DEFAULT_WORLD_TURNS_AMOUNT,
                 'cities' => $this->generateRandomCities(),
             ]
         ];
@@ -85,19 +89,19 @@ class GameController extends AbstractController
     /**
      * Random cities position indexes.
      */
-    private function randomCitiesPositionIndexes()
+    private function randomCitiesPositionIndexes(array $cities): array
     {
-        foreach ($this->cities as $key => $value) {
-            $this->cities[$key]['x'] = null;
-            $this->cities[$key]['y'] = null;
+        foreach ($cities as $key => $value) {
+            $cities[$key]['x'] = null;
+            $cities[$key]['y'] = null;
         }
-        foreach ($this->cities as $key => $value) {
+        foreach ($cities as $key => $value) {
             do {
                 $posX = mt_rand(0, $this->getXSize() - 1);
                 $posY = mt_rand(0, $this->getYSize() - 1);
             } while (!$this->areCoordinatesOfCityCorrect($posX, $posY));
-            $this->cities[$key]['x'] = $posX;
-            $this->cities[$key]['y'] = $posY;
+            $cities[$key]['x'] = $posX;
+            $cities[$key]['y'] = $posY;
         }
     }
 
