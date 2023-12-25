@@ -5,7 +5,9 @@ world:
   turnsAmount: 30
   cities:
   - name: Ryga
-    position: 135
+    position:
+      x: 16
+      y: 5
     goods:
     - name: bazylia
       price: 9
@@ -14,7 +16,9 @@ world:
     - name: tymianek
       price: 49
   - name: Praga
-    position: 87
+    position:
+      x: 8
+      y: 1
     goods:
     - name: bazylia
       price: 21
@@ -23,7 +27,9 @@ world:
     - name: tymianek
       price: 58
   - name: Lizbona
-    position: 122
+    position:
+      x: 2
+      y: 5
     goods:
     - name: bazylia
       price: 66

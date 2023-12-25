@@ -29,7 +29,14 @@
     <div class="map" style="grid-template-columns: {{ style.map.grid_template_columns }}">
         {% for y in 1..config.world.ySize %}
             {% for x in 1..config.world.xSize %}
-                <div class="tile x-{{ x }} y-{{ y }}" style="background-color: rgb({{ style.map.background_colors[x][y] }})"></div>
+                <div class="tile" data-x={{ x }} data-y={{ y }} style="background-color: rgb({{ style.map.background_colors[x][y] }})">
+                    {% for city in config.world.cities %}
+                        {% if city.position.x == x and city.position.y == y %}
+                            <img src="{{ asset("assets/gfx/city.jpg") }}" class="city">
+                            {# <div id="cityName_{{ tileIndex }}" class="cityName" style="z-index: 1000;">{{ city.name|raw }}</div> #}
+                        {% endif %}
+                    {% endfor %}
+                </div>
             {% endfor %}
         {% endfor %}
     </div>

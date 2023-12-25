@@ -5,7 +5,9 @@ world:
   turnsAmount: 20
   cities:
   - name: Astana
-    position: 69
+    position:
+      x: 10
+      y: 7
     goods:
     - name: bazylia
       price: 17
@@ -14,7 +16,9 @@ world:
     - name: tymianek
       price: 98
   - name: Skopje
-    position: 86
+    position:
+      x: 17
+      y: 8
     goods:
     - name: bazylia
       price: 98
@@ -23,7 +27,9 @@ world:
     - name: tymianek
       price: 10
   - name: Zagrzeb
-    position: 152
+    position:
+      x: 9
+      y: 4
     goods:
     - name: bazylia
       price: 41

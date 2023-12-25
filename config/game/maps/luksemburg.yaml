@@ -5,7 +5,9 @@ world:
   turnsAmount: 10
   cities:
   - name: Luksemburg
-    position: 65
+    position:
+      x: 6
+      y: 7
     goods:
     - name: bazylia
       price: 16
@@ -14,7 +16,9 @@ world:
     - name: tymianek
       price: 19
   - name: San&nbsp;Marino
-    position: 109
+    position:
+      x: 20
+      y: 10
     goods:
     - name: bazylia
       price: 71
@@ -23,7 +27,9 @@ world:
     - name: tymianek
       price: 64
   - name: Kiszyniów
-    position: 54
+    position:
+      x: 16
+      y: 4
     goods:
     - name: bazylia
       price: 45
