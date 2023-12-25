@@ -4,10 +4,30 @@
 
 {% block body %}
 
+{{ dump() }}
+
 <div class="main-container">
     <div><a href="{{ path("app_home") }}">Menu<a></div>
-    <div class="player-info container-fluid">player-info</div>
-    <div class="map">map</div>
+    <div class="player-info container-fluid mt-3">
+        <table class="table table-sm table-borderless">
+            <thead>
+                <tr>
+                    <th>majątek</th>
+                    <th>rekord planszy</th>
+                    <th>pozostały czas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="wealth">9999999$</td>
+                    <td class="stage-record">99999999$</td>
+                    <td class="turns-left">10</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="map">
+    </div>
     <table class="city-info table table-sm">city-info</table>
 </div>
 

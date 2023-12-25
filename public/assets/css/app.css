@@ -3,3 +3,7 @@
     margin: auto;
     text-align: center;
 }
+
+.player-info table thead th {
+    width: 33%;
+}
