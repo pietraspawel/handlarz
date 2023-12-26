@@ -143,6 +143,14 @@ class GameService
         $filepath = $this->projectDir . self::HIGHSCORES_PATH . $config['world']['map'] . '.hs';
         $highscore = file_get_contents($filepath);
         $config['world']['highscore'] = $highscore;
+
+        $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
+        $goods = file($filepath);
+        foreach ($goods as $key => $value) {
+            $goods[$key] = trim($value);
+        }
+        $config['world']['goods'] = $goods;
+
         $data = base64_encode(json_encode($config));
 
         $this->calculateCityNameStyle($config);

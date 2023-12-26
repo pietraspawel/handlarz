@@ -4,6 +4,9 @@
     </tr>
     <tr class="goods-names">
         <th></th>
+        {% for good in config.world.goods %}
+            <th>{{ good }}</th>
+        {% endfor %}
     </tr>
     <tr class="cargo-quantity">
         <th>ładunek [szt.]</th>
