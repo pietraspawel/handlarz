@@ -21,6 +21,7 @@ $().ready(() => {
     $(".city-info .sell").on("click", "button", (e) => {
         let target = $(e.target);
         let id = target.data("id");
-        console.log(`Sell ${id} clicked.`);
+        player.sell(id);
+        world.refreshAll(player);
     })
 });
