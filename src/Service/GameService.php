@@ -139,8 +139,9 @@ class GameService
 
     private function generateTwigData($config): array
     {
-        // $filename =
-        // $highscore = file_get_contents(self::HIGHSCORES_PATH)
+        $filepath = $this->projectDir . self::HIGHSCORES_PATH . $config['world']['map'] . '.hs';
+        $highscore = file_get_contents($filepath);
+        $config['world']['highscore'] = $highscore;
         $data = base64_encode(json_encode($config));
 
         $this->calculateCityNameStyle($config);

@@ -1,6 +1,7 @@
 class World
 {
     constructor (data) {
+        this.highscore = parseInt(data.world.highscore);
         this.turnsLeft = data.world.turnsAmount;
         this.startGold = data.world.startGold;
         this.goods = [];
