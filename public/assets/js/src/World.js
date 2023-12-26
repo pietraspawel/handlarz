@@ -22,6 +22,11 @@ class World
     }
 
     refreshView() {
-        
+        this.refreshMapRecordView();
+    }
+
+    refreshMapRecordView() {
+        let string = Library.separateThousands(this.highscore) + " $";
+        $(".player-info .stage-record").text(string);
     }
 }
