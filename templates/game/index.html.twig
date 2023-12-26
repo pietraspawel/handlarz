@@ -17,7 +17,15 @@
 
 <div class="main-container">
     <div class="js-data d-none" data-json="{{ data }}"></div>
-    <div><a href="{{ path("app_home") }}">Menu</a></div>
+    <div class="menu-container d-flex justify-content-between">
+        <div class="menu-link"><a href="{{ path("app_home") }}">Menu</a></div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Pokaż podpowiedzi
+            </label>
+        </div>
+    </div>
     <div class="player-info container-fluid mt-3">
         {% include("game/_player_info.html.twig") %}
     </div>
