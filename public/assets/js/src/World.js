@@ -23,10 +23,15 @@ class World
 
     refreshView() {
         this.refreshMapRecordView();
+        this.refreshTurnsLeftView();
     }
 
     refreshMapRecordView() {
         let string = Library.separateThousands(this.highscore) + " $";
         $(".player-info .map-record").text(string);
+    }
+
+    refreshTurnsLeftView() {
+        $(".player-info .turns-left").text(this.turnsLeft);
     }
 }
