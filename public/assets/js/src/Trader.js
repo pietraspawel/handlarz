@@ -16,10 +16,17 @@ class Trader
 
     refreshView() {
         this.refreshWealth();
+        this.refreshPlayerPosition();
     }
 
     refreshWealth() {
         let goldString = Library.separateThousands(this.gold) + " $";
         $(".player-info .wealth").text(goldString);
+    }
+
+    refreshPlayerPosition() {
+        $(".map .tile .player-position").remove();
+        let tileSelector = `.map .tile[data-x='${this.city.position.x}'][data-y='${this.city.position.y}']`;
+        $(tileSelector).prepend("<div class='player-position'> G </div>");
     }
 }

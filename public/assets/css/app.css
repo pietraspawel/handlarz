@@ -23,6 +23,13 @@
     position: relative;
 }
 
+.player-position {
+    position: absolute;
+    top: -6px;
+    left: 0px;
+    cursor: default;
+}
+
 .city-name {
     position: absolute;
     right: 0px;
