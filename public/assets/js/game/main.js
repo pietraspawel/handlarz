@@ -33,4 +33,18 @@ $().ready(() => {
         player.sell(id);
         world.refreshAll(player);
     })
+
+    $(".menu-container").on("change", "#checkShowTooltips", (e) => {
+        let target = $(e.target);
+
+        if (target.prop("checked")) {
+            for (let i = 0; i < tooltipList.length; i++) {
+                tooltipList[i].enable();
+            }
+        } else {
+            for (let i = 0; i < tooltipList.length; i++) {
+                tooltipList[i].disable();
+            }
+        }
+    });
 });
