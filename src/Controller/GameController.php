@@ -27,4 +27,12 @@ class GameController extends AbstractController
 
         return $this->render('game/index.html.twig', $args);
     }
+
+    /**
+     * @Route("/game-over", name="app_game_over")
+     */
+    public function gameOver(): Response
+    {
+        return $this->render('game/game_over.html.twig');
+    }
 }

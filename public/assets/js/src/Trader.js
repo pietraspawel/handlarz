@@ -83,6 +83,15 @@ class Trader
         this.goods[goodId].quantity = 0;
     }
 
+    sellAll() {
+        for (let goodId in this.city.goods){
+            let price = this.city.goods[goodId].price;
+            let amount = this.goods[goodId].quantity;
+            this.gold += price * amount;
+            this.goods[goodId].quantity = 0;
+        }
+    }
+
     goTo(city) {
         this.city = city;
         this.position = city.position;

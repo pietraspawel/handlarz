@@ -82,8 +82,8 @@ class World
         this.turnsLeft--;
         this.refreshAll(player);
         if (this.turnsLeft <= 0) {
-            // sprzedaj wszystko
-            console.log("Game over!");
+            player.sellAll();
+            location.replace("/game-over");
         }
     }
 }
