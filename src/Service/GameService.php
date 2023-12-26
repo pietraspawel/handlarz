@@ -10,7 +10,7 @@ class GameService
     private const CITIES_AMOUNT = 3;
     private const CITY_NAMES_FILEPATH = '/config/game/city-names.txt';
     private const GOODS_NAMES_FILEPATH = '/config/game/goods-names.txt';
-    private const HIGHSCORES_PATH = '/config/game/maps/';
+    public const HIGHSCORES_PATH = '/config/game/maps/';
     public const MAPS_PATH = '/config/game/maps/';
     private const START_GOLD = 100;
     private const TURNS_AMOUNT = 10;

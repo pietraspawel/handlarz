@@ -1,6 +1,7 @@
 class World
 {
     constructor (data) {
+        this.map = data.world.map;
         this.highscore = parseInt(data.world.highscore);
         this.turnsLeft = data.world.turnsAmount;
         this.startGold = data.world.startGold;
@@ -83,7 +84,9 @@ class World
         this.refreshAll(player);
         if (this.turnsLeft <= 0) {
             player.sellAll();
+            document.cookie = `map=${this.map}; path=/`;
             document.cookie = `score=${player.gold}; path=/`;
+            document.cookie = `highscore=${this.highscore}; path=/`;
             location.replace("/game-over");
         }
     }

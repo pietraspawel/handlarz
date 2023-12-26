@@ -33,7 +33,18 @@ class GameController extends AbstractController
      */
     public function gameOver(): Response
     {
-        var_dump($_COOKIE); die;
-        return $this->render('game/game_over.html.twig');
+        $map = filter_input(INPUT_COOKIE, 'map');
+        $score = filter_input(INPUT_COOKIE, 'score');
+        $highscore = filter_input(INPUT_COOKIE, 'highscore');
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
+        $currentHighscore = file_get_contents($filepath);
+
+        // skasuj ciastka
+        // zapisz highscore
+        return $this->render('game/game_over.html.twig', [
+            'score' => $score,
+            'highscore' => $highscore,
+        ]);
     }
 }
