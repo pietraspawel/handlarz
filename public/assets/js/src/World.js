@@ -60,13 +60,10 @@ class World
 
     refreshCityPrices() {
         let container = $(".city-info .prices");
-        container.find("th").remove();
-        container.find("td").remove();
-        let element = `<td colspan="4">Ceny</td>`;
-        container.append(element);
+        $(".city-info .city-prices").remove();
 
         for (let i = this.cities.length - 1; i >= 0; i--) {
-            element = `<tr>`;
+            let element = `<tr class="city-prices">`;
             element += `<th>${this.cities[i].name}</th>`;
             for (let j in this.cities[i].goods) {
                 let string = Library.separateThousands(this.cities[i].goods[j].price);
