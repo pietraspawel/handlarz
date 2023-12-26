@@ -26,6 +26,11 @@ class World
         return $(tileSelector);
     }
 
+    refreshAll(player) {
+        this.refreshView(player);
+        player.refreshView();
+    }
+
     refreshView(player) {
         this.refreshMapRecordView();
         this.refreshTurnsLeftView();

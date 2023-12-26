@@ -3,8 +3,7 @@ $().ready(() => {
     let world = new World(data);
     let player = new Trader(world);
 
-    world.refreshView(player);
-    player.refreshView();
+    world.refreshAll(player);
     
     $(".map .tile").on("click", "img.city", (e) => {
         let target = $(e.target);
@@ -16,8 +15,7 @@ $().ready(() => {
         let target = $(e.target);
         let id = target.data("id");
         player.buy(id);
-        world.refreshView(player);
-        player.refreshView();
+        world.refreshAll(player);
     })
 
     $(".city-info .sell").on("click", "button", (e) => {
