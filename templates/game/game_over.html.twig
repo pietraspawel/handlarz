@@ -5,7 +5,27 @@
 {% block body %}
 
 <div class="main-container">
-    Koniec gry!
+    <div><a href="{{ path("app_home") }}">Menu</a></div>
+
+    {% if score < highscore %}
+        <div>
+            <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
+            Twój czas minął.<br>
+            Zakończyłeś grę z majątkiem {{ score }} $
+        </div>
+    {% elseif score == highscore %}
+        <div>
+            <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
+            Brawo! Powtórzyłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score }} $
+        </div>
+    {% elseif score > highscore %}
+        <div>
+            <img src="{{ asset('assets/gfx/record.png') }}"><br>
+            Gratulacje! Pobiłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score }} $
+        </div>
+    {% endif %}
 </div>
 
 
