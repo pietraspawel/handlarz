@@ -15,7 +15,7 @@ class GameController extends AbstractController
     public function index(string $map, GameService $gameService): Response
     {
         $projectDir = $this->getParameter('kernel.project_dir');
-        $filepath = $projectDir . '/config/game/maps/' . $map . '.yaml';
+        $filepath = $projectDir . GameService::MAPS_PATH . $map . '.yaml';
 
         if ($map == 'random') {
             $args = $gameService->generateRandomMap($map);

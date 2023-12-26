@@ -11,6 +11,7 @@ class GameService
     private const CITY_NAMES_FILEPATH = '/config/game/city-names.txt';
     private const GOODS_NAMES_FILEPATH = '/config/game/goods-names.txt';
     private const HIGHSCORES_PATH = '/config/game/maps/';
+    public const MAPS_PATH = '/config/game/maps/';
     private const START_GOLD = 100;
     private const TURNS_AMOUNT = 10;
     private const WORLD_X_SIZE = 20;
@@ -131,7 +132,7 @@ class GameService
 
     public function loadPredefinedMap(string $map): array
     {
-        $filepath = $this->projectDir . '/config/game/maps/' . $map . '.yaml';
+        $filepath = $this->projectDir . self::MAPS_PATH . $map . '.yaml';
         $config = Yaml::parseFile($filepath);
         $config['world']['map'] = $map;
         return $this->generateTwigData($config);
