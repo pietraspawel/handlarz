@@ -3,5 +3,8 @@ $().ready(() => {
     let world = new World(data);
     let player = new Trader(world);
 
-    console.log(data, world, player);
+    world.refreshView();
+    player.refreshView();
+    
+    // eventy - może w klasach?
 });

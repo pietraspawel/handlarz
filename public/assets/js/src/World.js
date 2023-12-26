@@ -19,4 +19,8 @@ class World
             this.cities.push(new City(name, position, goods));
         }
     }
+
+    refreshView() {
+        
+    }
 }

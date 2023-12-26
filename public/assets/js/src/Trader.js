@@ -13,4 +13,14 @@ class Trader
             this.goods.push(Good.createForTrader(good));
         }
     }
+
+    refreshView() {
+        this.refreshWealth();
+    }
+
+    refreshWealth() {
+        let goldString = Library.separateThousands(this.gold) + " $";
+        $(".player-info .wealth").text(goldString);
+        console.log("refreshWealth", goldString);
+    }
 }
