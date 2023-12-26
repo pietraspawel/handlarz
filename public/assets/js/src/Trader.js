@@ -16,7 +16,8 @@ class Trader
 
     refreshView() {
         this.refreshWealth();
-        this.refreshPlayerPosition();
+        this.refreshPosition();
+        this.refreshCargo();
     }
 
     refreshWealth() {
@@ -24,12 +25,22 @@ class Trader
         $(".player-info .wealth").text(goldString);
     }
 
-    refreshPlayerPosition() {
+    refreshPosition() {
         $(".map .tile .player-position").remove();
         let tile = World.getTileElementByCoords(this.city.position.x, this.city.position.y);
         tile.prepend("<div class='player-position'> G </div>");
         let string = `Jesteś w: ${this.city.name}`;
         $(".city-info .player-position").text(string);
+    }
+
+    refreshCargo() {
+        let container = $(".city-info .cargo-quantity");
+        container.find("td").remove();
+        for (let i in this.goods) {
+            let string = Library.separateThousands(this.goods[i].quantity);
+            let element = `<td>${string}</td>`;
+            container.append(element);
+        }
     }
 
     getPosition() {
