@@ -18,6 +18,7 @@ class Trader
         this.refreshWealth();
         this.refreshPosition();
         this.refreshCargo();
+        this.refreshBuyButtons();
     }
 
     refreshWealth() {
@@ -39,6 +40,16 @@ class Trader
         for (let i in this.goods) {
             let string = Library.separateThousands(this.goods[i].quantity);
             let element = `<td>${string}</td>`;
+            container.append(element);
+        }
+    }
+
+    refreshBuyButtons() {
+        let container = $(".city-info .buy");
+        container.find("td").remove();
+        for (let i in this.goods) {
+            let string = Library.separateThousands(Math.floor(this.gold / this.city.goods[i].price));
+            let element = `<td><button class="btn btn-info">${string}</button></td>`;
             container.append(element);
         }
     }
