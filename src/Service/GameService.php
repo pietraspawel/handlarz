@@ -99,7 +99,7 @@ class GameService
                 $x >= $city['position']['x'] - 1
                 && $x <= $city['position']['x'] + 2
                 && $y >= $city['position']['y'] - 1
-                && $y <= $city['position']['y'] + 1
+                && $y <= $city['position']['y'] + 2
             ) {
                 return false;
             }
@@ -179,7 +179,7 @@ class GameService
             if ($city['position']['x'] >= $config['world']['xSize'] - 2) {
                 $left = "auto";
             }
-            if ($city['position']['y'] >= $config['world']['ySize'] - 1) {
+            if ($city['position']['y'] >= $config['world']['ySize']) {
                 $top = "-25px";
             }
             $config['world']['cities'][$key]['name_style'] = "top: $top; left: $left;";
