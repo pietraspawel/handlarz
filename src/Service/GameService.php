@@ -10,6 +10,7 @@ class GameService
     private const CITIES_AMOUNT = 3;
     private const CITY_NAMES_FILEPATH = '/config/game/city-names.txt';
     private const GOODS_NAMES_FILEPATH = '/config/game/goods-names.txt';
+    private const HIGHSCORES_PATH = '/config/game/maps/';
     private const START_GOLD = 100;
     private const TURNS_AMOUNT = 10;
     private const WORLD_X_SIZE = 20;
@@ -22,10 +23,11 @@ class GameService
         $this->projectDir = $container->getParameter('kernel.project_dir');
     }
 
-    public function generateRandomMap(): array
+    public function generateRandomMap(string $map): array
     {
         $config = [
             'world' => [
+                'map' => $map,
                 'xSize' => self::WORLD_X_SIZE,
                 'ySize' => self::WORLD_Y_SIZE,
                 'startGold' => self::START_GOLD,
@@ -127,14 +129,18 @@ class GameService
         return $cities;
     }
 
-    public function loadPredefinedMap(string $filepath): array
+    public function loadPredefinedMap(string $map): array
     {
+        $filepath = $this->projectDir . '/config/game/maps/' . $map . '.yaml';
         $config = Yaml::parseFile($filepath);
+        $config['world']['map'] = $map;
         return $this->generateTwigData($config);
     }
 
     private function generateTwigData($config): array
     {
+        // $filename =
+        // $highscore = file_get_contents(self::HIGHSCORES_PATH)
         $data = base64_encode(json_encode($config));
 
         $this->calculateCityNameStyle($config);

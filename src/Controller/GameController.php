@@ -18,9 +18,9 @@ class GameController extends AbstractController
         $filepath = $projectDir . '/config/game/maps/' . $map . '.yaml';
 
         if ($map == 'random') {
-            $args = $gameService->generateRandomMap();
+            $args = $gameService->generateRandomMap($map);
         } elseif (file_exists($filepath)) {
-            $args = $gameService->loadPredefinedMap($filepath);
+            $args = $gameService->loadPredefinedMap($map);
         } else {
             return $this->redirectToRoute('app_home');
         }
