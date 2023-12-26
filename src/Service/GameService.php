@@ -151,6 +151,13 @@ class GameService
         }
         $config['world']['goods'] = $goods;
 
+        $cookie = filter_input(INPUT_COOKIE, 'tooltips');
+        $showTooltips = "";
+        if ($cookie == 1 || $cookie === null) {
+            $showTooltips = "checked";
+        }
+        $config['general']['tooltips'] = $showTooltips;
+
         $data = base64_encode(json_encode($config));
 
         $this->calculateCityNameStyle($config);

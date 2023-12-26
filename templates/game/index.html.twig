@@ -20,7 +20,7 @@
     <div class="menu-container d-flex justify-content-between">
         <div class="menu-link"><a href="{{ path("app_home") }}">Menu</a></div>
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" checked id="checkShowTooltips">
+            <input class="form-check-input" type="checkbox" {{ config.general.tooltips }} id="checkShowTooltips">
             <label class="form-check-label" for="checkShowTooltips">
                 Pokaż podpowiedzi
             </label>

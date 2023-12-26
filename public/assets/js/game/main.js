@@ -9,6 +9,7 @@ $().ready(() => {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl)
     });
+    handleTooltips();
 
     $(".map .tile").on("click", "img.city", (e) => {
         let target = $(e.target);
@@ -34,17 +35,26 @@ $().ready(() => {
         world.refreshAll(player);
     })
 
-    $(".menu-container").on("change", "#checkShowTooltips", (e) => {
-        let target = $(e.target);
+    $(".menu-container").on("change", "#checkShowTooltips", () => {
+        handleTooltips();
+    });
 
-        if (target.prop("checked")) {
+    function handleTooltips() {
+        let checkbox = $(".menu-container #checkShowTooltips");
+        let data = new Date();
+        data.setTime(data.getTime() + (365 * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + data.toUTCString();                
+
+        if (checkbox.prop("checked")) {
             for (let i = 0; i < tooltipList.length; i++) {
                 tooltipList[i].enable();
+                document.cookie = `tooltips=1; ${expires}; path=/`;
             }
         } else {
             for (let i = 0; i < tooltipList.length; i++) {
                 tooltipList[i].disable();
+                document.cookie = `tooltips=0; ${expires}; path=/`;
             }
         }
-    });
+    }
 });
