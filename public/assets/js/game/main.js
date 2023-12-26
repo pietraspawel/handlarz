@@ -15,7 +15,9 @@ $().ready(() => {
     $(".city-info .buy").on("click", "button", (e) => {
         let target = $(e.target);
         let id = target.data("id");
-        console.log(`Buy ${id} clicked.`);
+        player.buy(id);
+        world.refreshView(player);
+        player.refreshView();
     })
 
     $(".city-info .sell").on("click", "button", (e) => {

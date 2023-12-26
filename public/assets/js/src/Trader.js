@@ -68,4 +68,12 @@ class Trader
     getPosition() {
         return this.city.position;
     }
+
+    buy(goodId) {
+        let price = this.city.goods[goodId].price;
+        let amount = Math.floor(this.gold / price);
+        this.gold -= price * amount;
+        this.goods[goodId].quantity += amount;
+        console.log("BUY", this.goods[goodId].quantity, this.gold);
+    }
 }
