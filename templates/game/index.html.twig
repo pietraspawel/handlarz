@@ -21,10 +21,14 @@
     <div class="player-info container-fluid mt-3">
         {% include("game/_player_info.html.twig") %}
     </div>
-    <div class="map" style="grid-template-columns: {{ style.map.grid_template_columns }}">
+    <div class="map" style="grid-template-columns: {{ style.map.grid_template_columns }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="
+        Kliknij na ikonę miasta na mapie, aby się tam przemieścić. Ruch zakończy turę, więc nie zapomnij wcześniej kupić tanio jakiś towar! 
+        Obecnie jestś w mieście oznaczonym literą G (jak Gracz).">
         {% include("game/_map.html.twig") %}
     </div>
-    <div class="city-info container-fluid">
+    <div class="city-info container-fluid" data-bs-toggle="tooltip" data-bs-placement="top" 
+        title="Klikając na przyciski kupujesz i sprzedajesz towary w mieście, w którym obecnie przebywasz. Kupuj tanio, a potem przenieś się do innego miasta,
+        gdzie ten sam towar sprzedasz drożej! Ceny we wszystkich miastach masz poniżej.">
         {% include("game/_city_panel.html.twig") %}
     </div>
 </div>
