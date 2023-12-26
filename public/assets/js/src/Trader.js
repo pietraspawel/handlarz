@@ -26,7 +26,7 @@ class Trader
 
     refreshPlayerPosition() {
         $(".map .tile .player-position").remove();
-        let tileSelector = `.map .tile[data-x='${this.city.position.x}'][data-y='${this.city.position.y}']`;
-        $(tileSelector).prepend("<div class='player-position'> G </div>");
+        let tile = World.getTileElementByCoords(this.city.position.x, this.city.position.y);
+        tile.prepend("<div class='player-position'> G </div>");
     }
 }

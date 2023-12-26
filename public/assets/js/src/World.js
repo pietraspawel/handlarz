@@ -21,9 +21,15 @@ class World
         }
     }
 
-    refreshView() {
+    static getTileElementByCoords(x, y) {
+        let tileSelector = `.map .tile[data-x='${x}'][data-y='${y}']`;
+        return $(tileSelector);
+    }
+
+    refreshView(player) {
         this.refreshMapRecordView();
         this.refreshTurnsLeftView();
+        this.refreshCityCursors(player);
     }
 
     refreshMapRecordView() {
@@ -33,5 +39,16 @@ class World
 
     refreshTurnsLeftView() {
         $(".player-info .turns-left").text(this.turnsLeft);
+    }
+
+    refreshCityCursors(player) {
+        // for (let i in this.cities) {
+        //     let cityElement = $(".map .tile[]")
+        //     if (this.cities[i].x == player.position.x && this.cities[i].y == player.position.y) {
+
+        //     } else {
+
+        //     }
+        // }
     }
 }
