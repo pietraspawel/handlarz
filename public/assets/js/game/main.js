@@ -8,7 +8,11 @@ $().ready(() => {
     $(".map .tile").on("click", "img.city", (e) => {
         let target = $(e.target);
         let id = target.data("id");
-        console.log(`City ${id} clicked.`);
+        let city = world.getCity(id);
+        if (city.name != player.city.name) {
+            player.goTo(city);
+            world.nextTurn(player);
+        }
     }); 
 
     $(".city-info .buy").on("click", "button", (e) => {

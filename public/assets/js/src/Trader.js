@@ -74,7 +74,6 @@ class Trader
         let amount = Math.floor(this.gold / price);
         this.gold -= price * amount;
         this.goods[goodId].quantity += amount;
-        console.log("BUY", this.goods[goodId].name);
     }
 
     sell(goodId) {
@@ -82,6 +81,10 @@ class Trader
         let amount = this.goods[goodId].quantity;
         this.gold += price * amount;
         this.goods[goodId].quantity = 0;
-        console.log("SELL", this.goods[goodId].name);
     }
+
+    goTo(city) {
+        this.city = city;
+        this.position = city.position;
+    }    
 }

@@ -73,4 +73,17 @@ class World
             container.after(element);
         }
     }
+
+    getCity(id) {
+        return this.cities[id];
+    }
+
+    nextTurn(player) {
+        this.turnsLeft--;
+        this.refreshAll(player);
+        if (this.turnsLeft <= 0) {
+            // sprzedaj wszystko
+            console.log("Game over!");
+        }
+    }
 }
