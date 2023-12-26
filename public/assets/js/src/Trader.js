@@ -29,4 +29,8 @@ class Trader
         let tile = World.getTileElementByCoords(this.city.position.x, this.city.position.y);
         tile.prepend("<div class='player-position'> G </div>");
     }
+
+    getPosition() {
+        return this.city.position;
+    }
 }

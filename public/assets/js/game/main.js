@@ -3,7 +3,7 @@ $().ready(() => {
     let world = new World(data);
     let player = new Trader(world);
 
-    world.refreshView();
+    world.refreshView(player);
     player.refreshView();
     
     // eventy - może w klasach?

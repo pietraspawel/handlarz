@@ -42,13 +42,13 @@ class World
     }
 
     refreshCityCursors(player) {
-        // for (let i in this.cities) {
-        //     let cityElement = $(".map .tile[]")
-        //     if (this.cities[i].x == player.position.x && this.cities[i].y == player.position.y) {
-
-        //     } else {
-
-        //     }
-        // }
+        for (let i in this.cities) {
+            let tile = World.getTileElementByCoords(this.cities[i].position.x, this.cities[i].position.y);
+            if (this.cities[i].position.x == player.getPosition().x && this.cities[i].position.y == player.getPosition().y) {
+                tile.find("img").css("cursor", "default");
+            } else {
+                tile.find("img").css("cursor", "pointer");
+            }
+        }
     }
 }
