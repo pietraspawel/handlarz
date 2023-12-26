@@ -83,6 +83,7 @@ class World
         this.refreshAll(player);
         if (this.turnsLeft <= 0) {
             player.sellAll();
+            document.cookie = `score=${player.gold}; path=/`;
             location.replace("/game-over");
         }
     }

@@ -33,6 +33,7 @@ class GameController extends AbstractController
      */
     public function gameOver(): Response
     {
+        var_dump($_COOKIE); die;
         return $this->render('game/game_over.html.twig');
     }
 }
