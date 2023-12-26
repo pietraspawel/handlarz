@@ -40,8 +40,17 @@ class GameController extends AbstractController
         $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
         $currentHighscore = file_get_contents($filepath);
 
-        // skasuj ciastka
-        // zapisz highscore
+        unset($_COOKIE['map']);
+        unset($_COOKIE['score']);
+        unset($_COOKIE['highscore']);
+        setcookie('map', '', time() - 3600, '/');
+        setcookie('score', '', time() - 3600, '/');
+        setcookie('highscore', '', time() - 3600, '/');
+
+        if ($score > $currentHighscore) {
+            file_put_contents($filepath, $score);
+        }
+
         return $this->render('game/game_over.html.twig', [
             'score' => $score,
             'highscore' => $highscore,
