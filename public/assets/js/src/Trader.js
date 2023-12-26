@@ -50,7 +50,7 @@ class Trader
         container.find("td").remove();
         for (let i in this.goods) {
             let string = Library.separateThousands(Math.floor(this.gold / this.city.goods[i].price));
-            let element = `<td><button class="btn btn-info">${string}</button></td>`;
+            let element = `<td><button class="btn btn-info" data-id="${i}">${string}</button></td>`;
             container.append(element);
         }
     }
@@ -60,7 +60,7 @@ class Trader
         container.find("td").remove();
         for (let i in this.goods) {
             let string = Library.separateThousands(this.goods[i].quantity);
-            let element = `<td><button class="btn btn-info">${string}</button></td>`;
+            let element = `<td><button class="btn btn-info" data-id="${i}">${string}</button></td>`;
             container.append(element);
         }
     }

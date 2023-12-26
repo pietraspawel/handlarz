@@ -6,5 +6,21 @@ $().ready(() => {
     world.refreshView(player);
     player.refreshView();
     
-    // eventy - może w klasach?
+    $(".map .tile").on("click", "img.city", (e) => {
+        let target = $(e.target);
+        let id = target.data("id");
+        console.log(`City ${id} clicked.`);
+    }); 
+
+    $(".city-info .buy").on("click", "button", (e) => {
+        let target = $(e.target);
+        let id = target.data("id");
+        console.log(`Buy ${id} clicked.`);
+    })
+
+    $(".city-info .sell").on("click", "button", (e) => {
+        let target = $(e.target);
+        let id = target.data("id");
+        console.log(`Sell ${id} clicked.`);
+    })
 });
