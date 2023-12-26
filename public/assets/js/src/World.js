@@ -27,6 +27,6 @@ class World
 
     refreshMapRecordView() {
         let string = Library.separateThousands(this.highscore) + " $";
-        $(".player-info .stage-record").text(string);
+        $(".player-info .map-record").text(string);
     }
 }
