@@ -4,7 +4,12 @@ $().ready(() => {
     let player = new Trader(world);
 
     world.refreshAll(player);
-    
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+
     $(".map .tile").on("click", "img.city", (e) => {
         let target = $(e.target);
         let id = target.data("id");
