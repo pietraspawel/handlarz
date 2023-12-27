@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !(\.js$|\.css$|\.jpg$|\.png$|\.gif$|\.jpeg$|\.svg$|\.woff$|\.woff2$|\.map$)
+RewriteRule .* index.php [L]
+
+# File ../composer.json is required on production also!
