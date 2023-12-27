@@ -11,19 +11,19 @@
         <div class="mt-3">
             <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
             Twój czas minął.<br>
-            Zakończyłeś grę z majątkiem {{ score }} $
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
         </div>
     {% elseif score == highscore %}
         <div class="mt-3">
             <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
             Brawo! Powtórzyłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score }} $
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
         </div>
     {% elseif score > highscore %}
         <div class="mt-3">
             <img src="{{ asset('assets/gfx/record.png') }}"><br>
             Gratulacje! Pobiłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score }} $
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
         </div>
     {% endif %}
 </div>
