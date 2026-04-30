@@ -141,6 +141,9 @@ class GameService
     private function generateTwigData($config): array
     {
         $filepath = $this->projectDir . self::HIGHSCORES_PATH . $config['world']['map'] . '.hs';
+        if (!is_file($filepath)) {
+            file_put_contents($filepath, '0');
+        }
         $highscore = file_get_contents($filepath);
         $config['world']['highscore'] = $highscore;
 
