@@ -30,6 +30,13 @@
     cursor: default;
 }
 
+.map .aiPlayer1-position {
+    position: absolute;
+    top: -6px;
+    left: 22px;
+    cursor: default;
+}
+
 .city-name {
     position: absolute;
     right: 0px;

@@ -27,7 +27,13 @@ class World
         return $(tileSelector);
     }
 
-    refreshAll(player) {
+    refreshAll(player, aiPlayer) {
+        this.refreshView(player);
+        player.refreshView();
+        aiPlayer.refreshView();
+    }
+
+    refreshPlayer(player) {
         this.refreshView(player);
         player.refreshView();
     }
@@ -83,7 +89,7 @@ class World
         aiPlayer.turn(this, aiPlayer);
 
         this.turnsLeft--;
-        this.refreshAll(player);
+        this.refreshAll(player, aiPlayer);
         if (this.turnsLeft <= 0) {
             aiPlayer.sellAll();
             player.sellAll();

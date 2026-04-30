@@ -5,7 +5,7 @@ $().ready(() => {
     let aiPlayerStrategy = new GreedyStrategy();
     let aiPlayer = new TraderAI(world, aiPlayerStrategy);
 
-    world.refreshAll(player);
+    world.refreshAll(player, aiPlayer);
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -27,14 +27,14 @@ $().ready(() => {
         let target = $(e.target);
         let id = target.data("id");
         player.buy(id);
-        world.refreshAll(player);
+        world.refreshPlayer(player);
     })
 
     $(".city-info .sell").on("click", "button", (e) => {
         let target = $(e.target);
         let id = target.data("id");
         player.sell(id);
-        world.refreshAll(player);
+        world.refreshPlayer(player);
     })
 
     $(".menu-container").on("change", "#checkShowTooltips", () => {
