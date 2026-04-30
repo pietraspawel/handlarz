@@ -79,14 +79,18 @@ class World
         return this.cities[id];
     }
 
-    nextTurn(player) {
+    nextTurn(player, aiPlayer) {
+        aiPlayer.turn(this, aiPlayer);
+
         this.turnsLeft--;
         this.refreshAll(player);
         if (this.turnsLeft <= 0) {
+            aiPlayer.sellAll();
             player.sellAll();
             document.cookie = `map=${this.map}; path=/`;
             document.cookie = `score=${player.gold}; path=/`;
             document.cookie = `highscore=${this.highscore}; path=/`;
+            document.cookie = `aiScore=${aiPlayer.gold}; path=/`;
             location.replace("/game-over");
         }
     }

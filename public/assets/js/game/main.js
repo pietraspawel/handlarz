@@ -2,6 +2,8 @@ $().ready(() => {
     let data = JSON.parse(atob($(".js-data").data("json")));
     let world = new World(data);
     let player = new Trader(world);
+    let aiPlayerStrategy = new GreedyStrategy();
+    let aiPlayer = new TraderAI(world, aiPlayerStrategy);
 
     world.refreshAll(player);
 
@@ -17,7 +19,7 @@ $().ready(() => {
         let city = world.getCity(id);
         if (city.name != player.city.name) {
             player.goTo(city);
-            world.nextTurn(player);
+            world.nextTurn(player, aiPlayer);
         }
     }); 
 

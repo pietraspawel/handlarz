@@ -36,6 +36,7 @@ class GameController extends AbstractController
         $map = filter_input(INPUT_COOKIE, 'map');
         $score = filter_input(INPUT_COOKIE, 'score');
         $highscore = filter_input(INPUT_COOKIE, 'highscore');
+        $aiScore = filter_input(INPUT_COOKIE, 'aiScore');
         $projectDir = $this->getParameter('kernel.project_dir');
         $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
         $currentHighscore = file_get_contents($filepath);
@@ -43,9 +44,11 @@ class GameController extends AbstractController
         unset($_COOKIE['map']);
         unset($_COOKIE['score']);
         unset($_COOKIE['highscore']);
+        unset($_COOKIE['aiScore']);
         setcookie('map', '', time() - 3600, '/');
         setcookie('score', '', time() - 3600, '/');
         setcookie('highscore', '', time() - 3600, '/');
+        setcookie('aiScore', '', time() - 3600, '/');
 
         if ($score > $currentHighscore) {
             file_put_contents($filepath, $score);
@@ -54,6 +57,7 @@ class GameController extends AbstractController
         return $this->render('game/game_over.html.twig', [
             'score' => $score,
             'highscore' => $highscore,
+            'aiScore' => $aiScore,
         ]);
     }
 }
