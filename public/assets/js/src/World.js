@@ -86,7 +86,7 @@ class World
     }
 
     nextTurn(player, aiPlayer) {
-        aiPlayer.turn(this, aiPlayer);
+        aiPlayer.turn(this);
 
         this.turnsLeft--;
         this.refreshAll(player, aiPlayer);
