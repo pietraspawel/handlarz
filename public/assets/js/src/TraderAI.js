@@ -1,13 +1,22 @@
 class TraderAI extends Trader {
+    name;
+    lastTurnInfo;
     strategy;
 
-    constructor(world, strategy) {
+    constructor(world, name, strategy) {
         super(world);
         this.strategy = strategy;
+        this.name = name;
+        this.lastTurnInfo = {
+            'transaction': '-',
+            'lastCity': null,
+            'wealth': this.gold
+        };
     }
 
     refreshView() {
         this.refreshPosition();
+        this.refreshInfo();
     }
 
     refreshPosition() {
@@ -16,16 +25,32 @@ class TraderAI extends Trader {
         tile.prepend("<div class='aiPlayer1-position'> 1 </div>");
     }
 
+    refreshInfo() {
+        let transitText = this.city.name;
+        if (this.lastTurnInfo.lastCity !== null) {
+            transitText = `${this.lastTurnInfo.lastCity.name} -> ${this.city.name}`;
+        }
+
+        let wealth = Library.separateThousands(this.lastTurnInfo.wealth) + " $";
+
+        $(".ai-player-info .ai-name").text(this.name);
+        $(".ai-player-info .ai-transaction").text(this.lastTurnInfo.transaction);
+        $(".ai-player-info .ai-transit").text(transitText);
+        $(".ai-player-info .ai-wealth").text(wealth);
+    }
+
     turn(world) {
-        let currentCityName = this.city.name;
+        let lastCity = this.city;
 
         let decision = this.strategy.decide(world, this);
         this.buy(decision.goodId);
         this.goTo(decision.city);
         this.sellAll();
 
-        console.log('kupił:', this.goods[decision.goodId].name);
-        console.log('trasa:', currentCityName, decision.city.name);
-        console.log('złoto:', this.gold);
+        this.lastTurnInfo = {
+            'transaction': this.goods[decision.goodId].name,
+            'lastCity': lastCity,
+            'wealth': this.gold
+        };
     }
 }

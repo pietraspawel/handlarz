@@ -3,7 +3,7 @@ $().ready(() => {
     let world = new World(data);
     let player = new Trader(world);
     let aiPlayerStrategy = new GreedyStrategy();
-    let aiPlayer = new TraderAI(world, aiPlayerStrategy);
+    let aiPlayer = new TraderAI(world, 'AITrader', aiPlayerStrategy);
 
     world.refreshAll(player, aiPlayer);
 
