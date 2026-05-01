@@ -27,10 +27,12 @@ class World
         return $(tileSelector);
     }
 
-    refreshAll(player, aiPlayer) {
+    refreshAll(player, aiPlayersArray) {
         this.refreshView(player);
         player.refreshView();
-        aiPlayer.refreshView();
+        for (const aiPlayer of aiPlayersArray) {
+            aiPlayer.refreshView();
+        }
     }
 
     refreshPlayer(player) {
@@ -85,11 +87,13 @@ class World
         return this.cities[id];
     }
 
-    nextTurn(player, aiPlayer) {
-        aiPlayer.turn(this);
+    nextTurn(player, aiPlayersArray) {
+        for (const aiPlayer of aiPlayersArray) {
+            aiPlayer.turn(this);
+        }
 
         this.turnsLeft--;
-        this.refreshAll(player, aiPlayer);
+        this.refreshAll(player, aiPlayersArray);
         if (this.turnsLeft <= 0) {
             aiPlayer.sellAll();
             player.sellAll();
