@@ -15,7 +15,7 @@ world:
       price: 64
     - name: tymianek
       price: 19
-  - name: San&nbsp;Marino
+  - name: San Marino
     position:
       x: 20
       y: 10
