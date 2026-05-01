@@ -30,11 +30,24 @@
     cursor: default;
 }
 
-.map .aiPlayer1-position {
+.map .aiPlayer0-position, .map .aiPlayer1-position, .map .aiPlayer2-position {
     position: absolute;
+    cursor: default;
+}
+
+.map .aiPlayer0-position {
     top: -6px;
     left: 22px;
-    cursor: default;
+}
+
+.map .aiPlayer1-position {
+    top: 12px;
+    left: 22px;
+}
+
+.map .aiPlayer2-position {
+    top: 12px;
+    left: 0px;
 }
 
 .city-name {

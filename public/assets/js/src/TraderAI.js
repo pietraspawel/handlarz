@@ -3,11 +3,12 @@ class TraderAI extends Trader {
     lastTurnInfo;
     strategy;
 
-    constructor(world, name, city, strategy) {
+    constructor(world, index, name, strategy) {
         super(world);
         this.strategy = strategy;
+        this.id = index;
         this.name = name;
-        this.city = city;
+        this.city = world.cities[index];
         this.lastTurnInfo = {
             'transaction': '-',
             'lastCity': null,
@@ -21,9 +22,10 @@ class TraderAI extends Trader {
     }
 
     refreshPosition() {
-        $(".map .tile .aiPlayer1-position").remove();
+        const aiPlayerIdString = `aiPlayer${this.id}`;
+        $(`.map .tile .${aiPlayerIdString}-position`).remove();
         let tile = World.getTileElementByCoords(this.city.position.x, this.city.position.y);
-        tile.prepend("<div class='aiPlayer1-position'> 1 </div>");
+        tile.prepend(`<div class='${aiPlayerIdString}-position'> ${this.id} </div>`);
     }
 
     refreshInfo() {
