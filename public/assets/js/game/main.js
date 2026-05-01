@@ -3,9 +3,13 @@ $().ready(() => {
     let world = new World(data);
     let player = new Trader(world);
     let aiPlayerStrategy = new GreedyStrategy();
-    let aiPlayer = new TraderAI(world, 'AITrader', aiPlayerStrategy);
+    const aiPlayers = [ 
+        new TraderAI(world, 'AITrader1', aiPlayerStrategy),
+        new TraderAI(world, 'AITrader2', aiPlayerStrategy),
+        new TraderAI(world, 'AITrader3', aiPlayerStrategy)
+    ];
 
-    world.refreshAll(player, aiPlayer);
+    world.refreshAll(player, aiPlayers);
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -19,7 +23,7 @@ $().ready(() => {
         let city = world.getCity(id);
         if (city.name != player.city.name) {
             player.goTo(city);
-            world.nextTurn(player, aiPlayer);
+            world.nextTurn(player, aiPlayers);
         }
     }); 
 
