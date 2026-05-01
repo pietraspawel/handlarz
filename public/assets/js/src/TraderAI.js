@@ -3,10 +3,11 @@ class TraderAI extends Trader {
     lastTurnInfo;
     strategy;
 
-    constructor(world, name, strategy) {
+    constructor(world, name, city, strategy) {
         super(world);
         this.strategy = strategy;
         this.name = name;
+        this.city = city;
         this.lastTurnInfo = {
             'transaction': '-',
             'lastCity': null,
