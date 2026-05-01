@@ -7,25 +7,51 @@
 <div class="main-container">
     <div><a href="{{ path("app_home") }}">Menu</a></div>
 
-    {% if score < highscore %}
-        <div class="mt-3">
-            <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
-            Twój czas minął.<br>
+    <div class="mt-3">
+    {% if score > aiScore %}
+        {% if score < highscore %}
+            <img src="{{ asset('assets/gfx/winner.png') }}"><br>
+            Jesteś najbogatszy!<br>
             Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
-        </div>
-    {% elseif score == highscore %}
-        <div class="mt-3">
+        {% elseif score == highscore %}
+            <img src="{{ asset('assets/gfx/winner.png') }}"><br>
+            Brawo! Pokonałeś konkurentów i powtórzyłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% elseif score > highscore %}
+            <img src="{{ asset('assets/gfx/record.png') }}"><br>
+            Gratulacje! Pokonałeś konkurentów i pobiłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% endif %}
+    {% elseif score == aiScore %}
+        {% if score < highscore %}
+            <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
+            Jesteś jednym z najlepszych, ale Twój czas minął.<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% elseif score == highscore %}
             <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
             Brawo! Powtórzyłeś rekord!<br>
             Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
-        </div>
-    {% elseif score > highscore %}
-        <div class="mt-3">
+        {% elseif score > highscore %}
             <img src="{{ asset('assets/gfx/record.png') }}"><br>
             Gratulacje! Pobiłeś rekord!<br>
             Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
-        </div>
+        {% endif %}
+    {% elseif score < aiScore %}
+        {% if score < highscore %}
+            <img src="{{ asset('assets/gfx/poor.png') }}"><br>
+            Ale bieda! Twój czas minął.<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% elseif score == highscore %}
+            <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
+            Brawo! Nie pokonałeś konkurentów, ale powtórzyłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% elseif score > highscore %}
+            <img src="{{ asset('assets/gfx/record.png') }}"><br>
+            Gratulacje! Nie pokonałeś konkurentów, ale pobiłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% endif %}
     {% endif %}
+    </div>
     <div>wynik AI {{ aiScore|number_format(0, '.', ' ') }} $</div>
 </div>
 
