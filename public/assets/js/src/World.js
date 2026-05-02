@@ -94,14 +94,29 @@ class World
 
         this.turnsLeft--;
         this.refreshAll(player, aiPlayersArray);
+
         if (this.turnsLeft <= 0) {
-            aiPlayer.sellAll();
-            player.sellAll();
-            document.cookie = `map=${this.map}; path=/`;
-            document.cookie = `score=${player.gold}; path=/`;
-            document.cookie = `highscore=${this.highscore}; path=/`;
-            document.cookie = `aiScore=${aiPlayer.gold}; path=/`;
-            location.replace("/game-over");
+            this.gameOver(player, aiPlayersArray);
         }
+    }
+
+    async gameOver(player, aiPlayersArray) {
+        player.sellAll();
+        aiPlayersArray.forEach(ai => ai.sellAll());
+
+        await fetch("/game-over/save", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                map: this.map,
+                score: player.gold,
+                highscore: this.highscore,
+                aiPlayers: aiPlayersArray
+            })
+        });
+
+        location.replace("/game-over");
     }
 }

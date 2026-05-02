@@ -8,7 +8,7 @@
     <div><a href="{{ path("app_home") }}">Menu</a></div>
 
     <div class="mt-3">
-    {% if score > aiScore %}
+    {% if result == 'winner' %}
         {% if score < highscore %}
             <img src="{{ asset('assets/gfx/winner.png') }}"><br>
             Jesteś najbogatszy!<br>
@@ -22,7 +22,7 @@
             Gratulacje! Pokonałeś konkurentów i pobiłeś rekord!<br>
             Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
         {% endif %}
-    {% elseif score == aiScore %}
+    {% elseif result == 'remis' %}
         {% if score < highscore %}
             <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
             Jesteś jednym z najlepszych, ale Twój czas minął.<br>
@@ -36,7 +36,7 @@
             Gratulacje! Pobiłeś rekord!<br>
             Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
         {% endif %}
-    {% elseif score < aiScore %}
+    {% elseif result == 'loser' %}
         {% if score < highscore %}
             <img src="{{ asset('assets/gfx/poor.png') }}"><br>
             Ale bieda! Twój czas minął.<br>
@@ -52,7 +52,20 @@
         {% endif %}
     {% endif %}
     </div>
-    <div>wynik AI {{ aiScore|number_format(0, '.', ' ') }} $</div>
+    <div class="d-flex justify-content-center align-items-center">
+        <table class="table text-center w-auto">
+            <tbody>
+            {% for item in results %}
+                <tr class="{{ item.type == 'player' ? 'fw-bold' : '' }}">
+                    <td>
+                        {{ item.name ? item.name : 'Player' }}
+                    </td>
+                    <td>{{ item.gold|number_format(0, '.', ' ') }} $</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

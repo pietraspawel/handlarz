@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\GameService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GameController extends AbstractController
@@ -29,35 +30,80 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/game-over", name="app_game_over")
+     * @Route("/game-over/save", name="app_game_over_save", methods={"POST"})
      */
-    public function gameOver(): Response
+    public function saveGameOver(Request $request): Response
     {
-        $map = filter_input(INPUT_COOKIE, 'map');
-        $score = filter_input(INPUT_COOKIE, 'score');
-        $highscore = filter_input(INPUT_COOKIE, 'highscore');
-        $aiScore = filter_input(INPUT_COOKIE, 'aiScore');
+        $data = json_decode($request->getContent(), true);
+        $this->get('session')->set('game_over_data', $data);
+        return new Response('', 204);
+    }
+
+    /**
+     * @Route("/game-over", name="app_game_over", methods={"GET"})
+     */
+    public function gameOver(Request $request): Response
+    {
+        $data = $request->getSession()->get('game_over_data');
+
+        if (!$data) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $map = $data['map'];
+        $score = $data['score'];
+        $aiPlayers = $data['aiPlayers'];
+
+        // HIGH SCORE
         $projectDir = $this->getParameter('kernel.project_dir');
         $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
-        $currentHighscore = file_get_contents($filepath);
 
-        unset($_COOKIE['map']);
-        unset($_COOKIE['score']);
-        unset($_COOKIE['highscore']);
-        unset($_COOKIE['aiScore']);
-        setcookie('map', '', time() - 3600, '/');
-        setcookie('score', '', time() - 3600, '/');
-        setcookie('highscore', '', time() - 3600, '/');
-        setcookie('aiScore', '', time() - 3600, '/');
+        $currentHighscore = file_get_contents($filepath);
 
         if ($score > $currentHighscore) {
             file_put_contents($filepath, $score);
+            $currentHighscore = $score;
+        }
+
+        // BUILD RANKING
+        $results = [];
+
+        $results[] = [
+            'type' => 'player',
+            'name' => null,
+            'gold' => $score,
+        ];
+
+        foreach ($aiPlayers as $ai) {
+            $results[] = [
+                'type' => 'ai',
+                'name' => $ai['name'],
+                'gold' => $ai['gold'],
+            ];
+        }
+
+        // SORT DESC
+        usort($results, function ($a, $b) {
+            return $b['gold'] <=> $a['gold'];
+        });
+
+        // RESULT LOGIC
+        $bestScore = $results[0]['gold'];
+
+        if ($score == $bestScore) {
+            $result = 'remis';
+        } elseif ($score < $bestScore) {
+            $result = 'loser';
+        } else {
+            $result = 'winner';
         }
 
         return $this->render('game/game_over.html.twig', [
             'score' => $score,
-            'highscore' => $highscore,
-            'aiScore' => $aiScore,
+            'highscore' => $currentHighscore,
+            'result' => $result,
+            'results' => $results,
         ]);
     }
+
 }

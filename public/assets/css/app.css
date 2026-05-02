@@ -56,3 +56,15 @@
     z-index: 1000;
     cursor: default;
 }
+
+.results-table {
+    border-collapse: collapse;
+}
+
+.results-table td {
+    padding: 4px 10px;
+}
+
+.player-row {
+    font-weight: bold;
+}
