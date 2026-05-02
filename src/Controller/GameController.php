@@ -54,25 +54,20 @@ class GameController extends AbstractController
         $score = $data['score'];
         $aiPlayers = $data['aiPlayers'];
 
-        // HIGH SCORE
+        // High score
         $projectDir = $this->getParameter('kernel.project_dir');
         $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
 
-        $currentHighscore = file_get_contents($filepath);
+        $highscore = file_get_contents($filepath);
 
-        if ($score > $currentHighscore) {
+        if ($score > $highscore) {
             file_put_contents($filepath, $score);
-            $currentHighscore = $score;
         }
+        $oldHighscore = $highscore;
 
-        // BUILD RANKING
+        // Result
+        $result = 'winner';
         $results = [];
-
-        $results[] = [
-            'type' => 'player',
-            'name' => null,
-            'gold' => $score,
-        ];
 
         foreach ($aiPlayers as $ai) {
             $results[] = [
@@ -82,25 +77,32 @@ class GameController extends AbstractController
             ];
         }
 
-        // SORT DESC
         usort($results, function ($a, $b) {
             return $b['gold'] <=> $a['gold'];
         });
 
-        // RESULT LOGIC
         $bestScore = $results[0]['gold'];
 
         if ($score == $bestScore) {
             $result = 'remis';
         } elseif ($score < $bestScore) {
             $result = 'loser';
-        } else {
-            $result = 'winner';
         }
+
+        // Results list
+        $results[] = [
+            'type' => 'player',
+            'name' => null,
+            'gold' => $score,
+        ];
+
+        usort($results, function ($a, $b) {
+            return $b['gold'] <=> $a['gold'];
+        });
 
         return $this->render('game/game_over.html.twig', [
             'score' => $score,
-            'highscore' => $currentHighscore,
+            'oldHighscore' => $oldHighscore,
             'result' => $result,
             'results' => $results,
         ]);
