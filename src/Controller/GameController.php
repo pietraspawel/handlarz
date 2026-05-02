@@ -73,8 +73,8 @@ class GameController extends AbstractController
         });
 
         if (!empty($aiPlayers)) {
-            $result = $this->_calculateResult($results);
-            $results = $this->_calculateResults($results);
+            $result = $this->_calculateResult($results, $score);
+            $results = $this->_calculateResults($results, $score);
         }
 
         return $this->render('game/game_over.html.twig', [
@@ -97,7 +97,7 @@ class GameController extends AbstractController
         return $highscore;
     }
 
-    private function _calculateResult(array $results): string {
+    private function _calculateResult(array $results, int $score): string {
         $bestScore = $results[0]['gold'];
 
         if ($score == $bestScore) {
@@ -105,9 +105,10 @@ class GameController extends AbstractController
         } elseif ($score < $bestScore) {
             return 'loser';
         }
+        return 'winner';
     }
 
-    private function _calculateResults(array $results): array {
+    private function _calculateResults(array $results, int $score): array {
         $results[] = [
             'type' => 'player',
             'name' => null,

@@ -4,9 +4,9 @@ $().ready(() => {
     let player = new Trader(world);
     let aiPlayerStrategy = new GreedyStrategy();
     const aiPlayers = [ 
-        new TraderAI(world, 0, 'AITrader1', aiPlayerStrategy),
-        new TraderAI(world, 1, 'AITrader2', aiPlayerStrategy),
-        new TraderAI(world, 2, 'AITrader3', aiPlayerStrategy)
+        new TraderAI(world, 0, 'AITrader0', aiPlayerStrategy),
+        new TraderAI(world, 1, 'AITrader1', aiPlayerStrategy),
+        new TraderAI(world, 2, 'AITrader2', aiPlayerStrategy)
     ];
 
     world.refreshAll(player, aiPlayers);
