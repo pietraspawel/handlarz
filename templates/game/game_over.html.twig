@@ -50,6 +50,20 @@
             Gratulacje! Nie pokonałeś konkurentów, ale pobiłeś rekord!<br>
             Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
         {% endif %}
+    {% elseif result == 'solo' %}
+        {% if score < oldHighscore %}
+            <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
+            Twój czas minął.<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% elseif score == oldHighscore %}
+            <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
+            Brawo! Powtórzyłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% elseif score > oldHighscore %}
+            <img src="{{ asset('assets/gfx/record.png') }}"><br>
+            Gratulacje! Pobiłeś rekord!<br>
+            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+        {% endif %}
     {% endif %}
     </div>
     <div class="d-flex justify-content-center align-items-center">
@@ -67,6 +81,5 @@
         </table>
     </div>
 </div>
-
 
 {% endblock %}

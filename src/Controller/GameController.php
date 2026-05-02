@@ -54,19 +54,10 @@ class GameController extends AbstractController
         $score = $data['score'];
         $aiPlayers = $data['aiPlayers'];
 
-        // High score
-        $projectDir = $this->getParameter('kernel.project_dir');
-        $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
-
-        $highscore = file_get_contents($filepath);
-
-        if ($score > $highscore) {
-            file_put_contents($filepath, $score);
-        }
-        $oldHighscore = $highscore;
+        $oldHighscore = $this->_handleHighscore($map, $score);
 
         // Result
-        $result = 'winner';
+        $result = 'solo';
         $results = [];
 
         foreach ($aiPlayers as $ai) {
@@ -81,15 +72,42 @@ class GameController extends AbstractController
             return $b['gold'] <=> $a['gold'];
         });
 
+        if (!empty($aiPlayers)) {
+            $result = $this->_calculateResult($results);
+            $results = $this->_calculateResults($results);
+        }
+
+        return $this->render('game/game_over.html.twig', [
+            'score' => $score,
+            'oldHighscore' => $oldHighscore,
+            'result' => $result,
+            'results' => $results,
+        ]);
+    }
+
+    private function _handleHighscore(string $map, int $score): int {
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
+
+        $highscore = file_get_contents($filepath);
+
+        if ($score > $highscore) {
+            file_put_contents($filepath, $score);
+        }
+        return $highscore;
+    }
+
+    private function _calculateResult(array $results): string {
         $bestScore = $results[0]['gold'];
 
         if ($score == $bestScore) {
-            $result = 'remis';
+            return 'remis';
         } elseif ($score < $bestScore) {
-            $result = 'loser';
+            return 'loser';
         }
+    }
 
-        // Results list
+    private function _calculateResults(array $results): array {
         $results[] = [
             'type' => 'player',
             'name' => null,
@@ -99,13 +117,7 @@ class GameController extends AbstractController
         usort($results, function ($a, $b) {
             return $b['gold'] <=> $a['gold'];
         });
-
-        return $this->render('game/game_over.html.twig', [
-            'score' => $score,
-            'oldHighscore' => $oldHighscore,
-            'result' => $result,
-            'results' => $results,
-        ]);
+        return $results;
     }
 
 }
