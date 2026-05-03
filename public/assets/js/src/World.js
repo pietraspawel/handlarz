@@ -1,5 +1,7 @@
 class World
 {
+    static MAX_NON_HIDDEN_AI = 3;
+
     constructor (data) {
         this.map = data.world.map;
         this.highscore = parseInt(data.world.highscore);
@@ -30,9 +32,10 @@ class World
     refreshAll(player, aiPlayersArray) {
         this.refreshView(player);
         player.refreshView();
-        for (const aiPlayer of aiPlayersArray) {
-            aiPlayer.refreshView();
+        for (let i = 0; i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length; i++) {
+            aiPlayersArray[i].refreshPosition();
         }
+        aiPlayersArray.forEach(ai => ai.refreshInfo());
     }
 
     refreshPlayer(player) {
@@ -87,6 +90,11 @@ class World
         return this.cities[id];
     }
 
+    getRandomCity() {
+        const index = Math.floor(Math.random() * this.cities.length);
+        return this.cities[index];
+    }
+    
     nextTurn(player, aiPlayersArray) {
         for (const aiPlayer of aiPlayersArray) {
             aiPlayer.turn(this);
