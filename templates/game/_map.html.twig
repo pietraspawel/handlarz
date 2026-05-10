@@ -28,57 +28,109 @@
     xmlns="http://www.w3.org/2000/svg"
 >
 
-{% for y in 1..config.world.ySize %}
-    {% for x in 1..config.world.xSize %}
+    <g id="terrain">
 
-        {# ========================= #}
-        {# OFFSET -> PIXEL (flat-top odd-q) #}
-        {# ========================= #}
+    {% for y in 1..config.world.ySize %}
+        {% for x in 1..config.world.xSize %}
 
+            {# ========================= #}
+            {# OFFSET -> PIXEL (flat-top odd-q) #}
+            {# ========================= #}
+
+            {% set px = (x - 1) * H_SPACING %}
+            {% set py = (y - 1) * V_SPACING + (((x - 1) % 2) * (HEX_HEIGHT / 2)) %}
+
+            {# ========================= #}
+            {# OFFSET -> AXIAL #}
+            {# ========================= #}
+
+            {% set q = (x - 1) %}
+            {% set r = (y - 1) - (((x - 1) - ((x - 1) % 2)) / 2) %}
+
+            {# ========================= #}
+            {# HEX POINTS (flat-top) #}
+            {# ========================= #}
+
+            {% set cx = px + HEX_WIDTH / 2 %}
+            {% set cy = py + HEX_HEIGHT / 2 %}
+
+            {% set points =
+                (cx - HEX_WIDTH * 0.25) ~ ',' ~ (cy - HEX_HEIGHT / 2) ~ ' ' ~
+                (cx + HEX_WIDTH * 0.25) ~ ',' ~ (cy - HEX_HEIGHT / 2) ~ ' ' ~
+                (cx + HEX_WIDTH * 0.5)  ~ ',' ~ cy ~ ' ' ~
+                (cx + HEX_WIDTH * 0.25) ~ ',' ~ (cy + HEX_HEIGHT / 2) ~ ' ' ~
+                (cx - HEX_WIDTH * 0.25) ~ ',' ~ (cy + HEX_HEIGHT / 2) ~ ' ' ~
+                (cx - HEX_WIDTH * 0.5)  ~ ',' ~ cy
+            %}
+
+            <g
+                class="hex"
+                data-x="{{ x }}"
+                data-y="{{ y }}"
+                data-q="{{ q }}"
+                data-r="{{ r }}"
+            >
+
+                <polygon
+                    class="hex-tile"
+                    points="{{ points }}"
+                    fill="rgb({{ style.map.background_colors[x][y] }})"
+                    stroke="rgba(0,0,0,0.25)"
+                    stroke-width="1"
+                />
+            </g>
+
+        {% endfor %}
+    {% endfor %}
+
+    </g>
+
+    <g id="cities">
+
+    {% for city_key, city in config.world.cities %}
+
+        {% set x = city.position.x %}
+        {% set y = city.position.y %}
+
+        {# OFFSET -> PIXEL #}
         {% set px = (x - 1) * H_SPACING %}
         {% set py = (y - 1) * V_SPACING + (((x - 1) % 2) * (HEX_HEIGHT / 2)) %}
-
-        {# ========================= #}
-        {# OFFSET -> AXIAL #}
-        {# ========================= #}
-
-        {% set q = (x - 1) %}
-        {% set r = (y - 1) - (((x - 1) - ((x - 1) % 2)) / 2) %}
-
-        {# ========================= #}
-        {# HEX POINTS (flat-top) #}
-        {# ========================= #}
 
         {% set cx = px + HEX_WIDTH / 2 %}
         {% set cy = py + HEX_HEIGHT / 2 %}
 
-        {% set points =
-            (cx - HEX_WIDTH * 0.25) ~ ',' ~ (cy - HEX_HEIGHT / 2) ~ ' ' ~
-            (cx + HEX_WIDTH * 0.25) ~ ',' ~ (cy - HEX_HEIGHT / 2) ~ ' ' ~
-            (cx + HEX_WIDTH * 0.5)  ~ ',' ~ cy ~ ' ' ~
-            (cx + HEX_WIDTH * 0.25) ~ ',' ~ (cy + HEX_HEIGHT / 2) ~ ' ' ~
-            (cx - HEX_WIDTH * 0.25) ~ ',' ~ (cy + HEX_HEIGHT / 2) ~ ' ' ~
-            (cx - HEX_WIDTH * 0.5)  ~ ',' ~ cy
-        %}
-
         <g
-            class="hex"
+            class="city-group"
+            data-id="{{ city_key }}"
             data-x="{{ x }}"
             data-y="{{ y }}"
-            data-q="{{ q }}"
-            data-r="{{ r }}"
         >
 
-            <polygon
-                class="hex-tile"
-                points="{{ points }}"
-                fill="rgb({{ style.map.background_colors[x][y] }})"
-                stroke="rgba(0,0,0,0.25)"
-                stroke-width="1"
+            {# ikonka miasta #}
+            <image
+                href="{{ asset('assets/gfx/city.jpg') }}"
+                x="{{ cx - 16 }}"
+                y="{{ cy - 16 }}"
+                width="32"
+                height="32"
+                class="city"
             />
+
+            {# nazwa miasta #}
+            <text
+                x="{{ cx }}"
+                y="{{ cy + 34 }}"
+                text-anchor="middle"
+                class="city-name"
+                style="{{ city.name_style }}"
+            >
+                {{ city.name|raw }}
+            </text>
+
         </g>
 
     {% endfor %}
-{% endfor %}
+
+    </g>
 
 </svg>

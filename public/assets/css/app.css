@@ -50,13 +50,6 @@
     left: 0px;
 }
 
-.city-name {
-    position: absolute;
-    right: 0px;
-    z-index: 1000;
-    cursor: default;
-}
-
 .results-table {
     border-collapse: collapse;
 }
@@ -72,4 +65,8 @@
 #map {
     background: rgb(0, 128, 0);
     top: 500px;
+}
+
+.city-group {
+    cursor: pointer;
 }
