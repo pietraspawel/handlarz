@@ -11,43 +11,74 @@
     {% endfor %}
 {% endfor %}
 
-<div id="map">
+{% set HEX_WIDTH = config.world.hexWidth %}
+{% set HEX_HEIGHT = config.world.hexHeight %}
+
+{% set H_SPACING = HEX_WIDTH * 0.75 %}
+{% set V_SPACING = HEX_HEIGHT %}
+
+{% set svgWidth = HEX_WIDTH + (config.world.xSize - 1) * H_SPACING %}
+
+{% set svgHeight = config.world.ySize * HEX_HEIGHT + (HEX_HEIGHT / 2) %}
+
+<svg
+    id="map"
+    width="{{ svgWidth }}"
+    height="{{ svgHeight }}"
+    xmlns="http://www.w3.org/2000/svg"
+>
 
 {% for y in 1..config.world.ySize %}
     {% for x in 1..config.world.xSize %}
 
+        {# ========================= #}
         {# OFFSET -> PIXEL (flat-top odd-q) #}
-        {% set px = (x - 1) * (config.world.hexWidth * 0.75) %}
-        {% set py = (y - 1) * config.world.hexHeight + (((x - 1) % 2) * (config.world.hexHeight / 2)) %}
+        {# ========================= #}
 
+        {% set px = (x - 1) * H_SPACING %}
+        {% set py = (y - 1) * V_SPACING + (((x - 1) % 2) * (HEX_HEIGHT / 2)) %}
+
+        {# ========================= #}
         {# OFFSET -> AXIAL #}
+        {# ========================= #}
+
         {% set q = (x - 1) %}
         {% set r = (y - 1) - (((x - 1) - ((x - 1) % 2)) / 2) %}
 
-        <div
-            class="hex-tile"
+        {# ========================= #}
+        {# HEX POINTS (flat-top) #}
+        {# ========================= #}
+
+        {% set cx = px + HEX_WIDTH / 2 %}
+        {% set cy = py + HEX_HEIGHT / 2 %}
+
+        {% set points =
+            (cx - HEX_WIDTH * 0.25) ~ ',' ~ (cy - HEX_HEIGHT / 2) ~ ' ' ~
+            (cx + HEX_WIDTH * 0.25) ~ ',' ~ (cy - HEX_HEIGHT / 2) ~ ' ' ~
+            (cx + HEX_WIDTH * 0.5)  ~ ',' ~ cy ~ ' ' ~
+            (cx + HEX_WIDTH * 0.25) ~ ',' ~ (cy + HEX_HEIGHT / 2) ~ ' ' ~
+            (cx - HEX_WIDTH * 0.25) ~ ',' ~ (cy + HEX_HEIGHT / 2) ~ ' ' ~
+            (cx - HEX_WIDTH * 0.5)  ~ ',' ~ cy
+        %}
+
+        <g
+            class="hex"
             data-x="{{ x }}"
             data-y="{{ y }}"
             data-q="{{ q }}"
             data-r="{{ r }}"
-            style="
-                left: {{ px }}px;
-                top: {{ py }}px;
-                width: {{ config.world.hexWidth }}px;
-                height: {{ config.world.hexHeight }}px;
-            "
         >
 
-            <div
-                class="hex-content"
-                style="
-                    background-color: rgb({{ style.map.background_colors[x][y] }});
-                "
-            >
-            </div>
-        </div>
+            <polygon
+                class="hex-tile"
+                points="{{ points }}"
+                fill="rgb({{ style.map.background_colors[x][y] }})"
+                stroke="rgba(0,0,0,0.25)"
+                stroke-width="1"
+            />
+        </g>
 
     {% endfor %}
 {% endfor %}
 
-</div>
+</svg>
