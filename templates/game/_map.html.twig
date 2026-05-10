@@ -33,12 +33,18 @@
             style="
                 left: {{ px }}px;
                 top: {{ py }}px;
-                background-color: rgb({{ style.map.background_colors[x][y] }});
                 width: {{ config.world.hexWidth }}px;
                 height: {{ config.world.hexHeight }}px;
             "
         >
 
+            <div
+                class="hex-content"
+                style="
+                    background-color: rgb({{ style.map.background_colors[x][y] }});
+                "
+            >
+            </div>
         </div>
 
     {% endfor %}

@@ -71,10 +71,29 @@
 
 #map {
     position: relative;
+    top: 500px;
 }
 
 .hex-tile {
     position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    isolation: isolate;
+}
+
+/* RAMKA */
+.hex-tile::before {
+    content: "";
+
+    position: absolute;
+    inset: -1px;
+
+    background: rgba(0,0,0,0.4);
 
     clip-path: polygon(
         25% 0%,
@@ -85,11 +104,26 @@
         0% 50%
     );
 
+    z-index: 0;
+}
+
+/* WŁAŚCIWY HEX */
+.hex-content {
+    position: absolute;
+    inset: 1px;
+
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    border: 1px solid rgba(0,0,0,0.2);
+    clip-path: polygon(
+        25% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        25% 100%,
+        0% 50%
+    );
 
-    box-sizing: border-box;
+    z-index: 1;
 }
