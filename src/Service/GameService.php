@@ -124,19 +124,38 @@ class GameService
 
     /**
      * Check if coordinates of new city are correct.
+     * Cities must be at least 3 hexes apart.
      */
     private function areCoordinatesOfCityCorrect(array $cities, int $x, int $y): bool
     {
-        foreach ($cities as $key => $city) {
+        // candidate city → axial
+        [$q1, $r1] = $this->offsetToAxial($x, $y);
+
+        foreach ($cities as $city) {
+
+            // pomiń miasta bez pozycji
             if (
-                $x >= $city['position']['x'] - 1
-                && $x <= $city['position']['x'] + 2
-                && $y >= $city['position']['y'] - 1
-                && $y <= $city['position']['y'] + 2
+                !isset($city['position']['x']) ||
+                !isset($city['position']['y']) ||
+                $city['position']['x'] === null ||
+                $city['position']['y'] === null
             ) {
+                continue;
+            }
+
+            // existing city → axial
+            [$q2, $r2] = $this->offsetToAxial(
+                $city['position']['x'],
+                $city['position']['y']
+            );
+
+            $distance = $this->hexDistance($q1, $r1, $q2, $r2);
+
+            if ($distance < 3) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -304,5 +323,27 @@ class GameService
             $blue = mt_rand(0, 150);
         }
         return "$red, $green, $blue";
+    }
+
+    /**
+     * Convert odd-q offset coordinates (x,y) to axial (q,r)
+     * Flat-top hex grid.
+     */
+    private function offsetToAxial(int $x, int $y): array
+    {
+        $q = $x - 1;
+        $r = ($y - 1) - intdiv($q - ($q & 1), 2);
+
+        return [$q, $r];
+    }
+
+    /**
+     * Hex distance in axial coordinates.
+     */
+    private function hexDistance(int $q1, int $r1, int $q2, int $r2): int
+    {
+        return (abs($q1 - $q2)
+            + abs($r1 - $r2)
+            + abs(($q1 + $r1) - ($q2 + $r2))) / 2;
     }
 }
