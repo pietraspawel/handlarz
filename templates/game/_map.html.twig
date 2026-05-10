@@ -1,3 +1,6 @@
+{# do usunięcia: #}
+{# city.name.style #}
+
 {% for y in 1..config.world.ySize %}
     {% for x in 1..config.world.xSize %}
         <div class="tile" data-x={{ x }} data-y={{ y }} style="background-color: rgb({{ style.map.background_colors[x][y] }})">
@@ -118,11 +121,10 @@
 
             {# nazwa miasta #}
             <text
-                x="{{ cx }}"
-                y="{{ cy + 34 }}"
-                text-anchor="middle"
+                x="{{ cx + city.name_position.dx }}"
+                y="{{ cy + 34 + city.name_position.dy }}"
+                text-anchor="{{ city.name_position.anchor }}"
                 class="city-name"
-                style="{{ city.name_style }}"
             >
                 {{ city.name|raw }}
             </text>

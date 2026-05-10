@@ -17,7 +17,8 @@ class GameService
     private const WORLD_X_SIZE = 20;
     private const WORLD_Y_SIZE = 10;
     /**
-     * Mogą być podane obydwa HEX_WIDTH i HEX_HEIGHT. Jeśli jedno z nich jest null to jest obliczane na podstawie drugiego. Oczywiście obydwa nie * mogą być null.
+     * Mogą być podane obydwa HEX_WIDTH i HEX_HEIGHT. Jeśli jedno z nich jest null
+     * to jest obliczane na podstawie drugiego. Oczywiście obydwa nie * mogą być null.
     */
     private const HEX_WIDTH = 42;
     private const HEX_HEIGHT = null;
@@ -199,6 +200,7 @@ class GameService
         $data = base64_encode(json_encode($config));
 
         $this->calculateCityNameStyle($config);
+        $this->calculateCityNamePosition($config);
         $style = [
             'map' => [
                 'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
@@ -228,6 +230,34 @@ class GameService
                 $top = "-25px";
             }
             $config['world']['cities'][$key]['name_style'] = "top: $top; left: $left;";
+        }
+    }
+
+    /**
+     * Calculate city name position depends on city position.
+     */
+    private function calculateCityNamePosition(&$config)
+    {
+        foreach ($config['world']['cities'] as $key => $city) {
+            $dx = 0;
+            $dy = 0;
+            $anchor = 'middle';
+            if ($city['position']['x'] >= $config['world']['xSize'] - 2) {
+                $dx = 20;
+                $anchor = 'end';
+            }
+            if ($city['position']['x'] <= 3) {
+                $dx = -20;
+                $anchor = 'start';
+            }
+            if ($city['position']['y'] >= $config['world']['ySize']) {
+                $dy = -20-34;
+            }
+            $config['world']['cities'][$key]['name_position'] = [
+                'dx' => $dx,
+                'dy' => $dy,
+                'anchor' => $anchor,
+            ];
         }
     }
 
