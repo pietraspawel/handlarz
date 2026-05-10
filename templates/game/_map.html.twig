@@ -10,3 +10,38 @@
         </div>
     {% endfor %}
 {% endfor %}
+
+<div id="map">
+
+{% for y in 1..config.world.ySize %}
+    {% for x in 1..config.world.xSize %}
+
+        {# OFFSET -> PIXEL (flat-top odd-q) #}
+        {% set px = (x - 1) * (config.world.hexWidth * 0.75) %}
+        {% set py = (y - 1) * config.world.hexHeight + (((x - 1) % 2) * (config.world.hexHeight / 2)) %}
+
+        {# OFFSET -> AXIAL #}
+        {% set q = (x - 1) %}
+        {% set r = (y - 1) - (((x - 1) - ((x - 1) % 2)) / 2) %}
+
+        <div
+            class="hex-tile"
+            data-x="{{ x }}"
+            data-y="{{ y }}"
+            data-q="{{ q }}"
+            data-r="{{ r }}"
+            style="
+                left: {{ px }}px;
+                top: {{ py }}px;
+                background-color: rgb({{ style.map.background_colors[x][y] }});
+                width: {{ config.world.hexWidth }}px;
+                height: {{ config.world.hexHeight }}px;
+            "
+        >
+
+        </div>
+
+    {% endfor %}
+{% endfor %}
+
+</div>

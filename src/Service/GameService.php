@@ -16,12 +16,44 @@ class GameService
     private const TURNS_AMOUNT = 10;
     private const WORLD_X_SIZE = 20;
     private const WORLD_Y_SIZE = 10;
+    /**
+     * Mogą być podane obydwa HEX_WIDTH i HEX_HEIGHT. Jeśli jedno z nich jest null to jest obliczane na podstawie drugiego. Oczywiście obydwa nie * mogą być null.
+    */
+    private const HEX_WIDTH = 42;
+    private const HEX_HEIGHT = null;
 
     private $projectDir;
+    private float $hexWidth;
+    private float $hexHeight;
 
     public function __construct(ContainerInterface $container)
     {
         $this->projectDir = $container->getParameter('kernel.project_dir');
+
+        if (
+            self::HEX_WIDTH === null &&
+            self::HEX_HEIGHT === null
+        ) {
+            throw new \RuntimeException(
+                'HEX_WIDTH and HEX_HEIGHT cannot both equal null.'
+            );
+        }
+
+        if (self::HEX_WIDTH !== null) {
+            $this->hexWidth = self::HEX_WIDTH;
+        }
+
+        if (self::HEX_HEIGHT !== null) {
+            $this->hexHeight = self::HEX_HEIGHT;
+        }
+
+        if (self::HEX_HEIGHT === null) {
+            $this->hexHeight = $this->hexWidth * sqrt(3) / 2;
+        }
+
+        if (self::HEX_WIDTH === null) {
+            $this->hexWidth = $this->hexHeight * 2 / sqrt(3);
+        }
     }
 
     public function generateRandomMap(string $map): array
@@ -160,6 +192,9 @@ class GameService
             $showTooltips = "checked";
         }
         $config['general']['tooltips'] = $showTooltips;
+
+        $config['world']['hexWidth'] = $this->hexWidth;
+        $config['world']['hexHeight'] = $this->hexHeight;
 
         $data = base64_encode(json_encode($config));
 

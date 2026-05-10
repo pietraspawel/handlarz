@@ -68,3 +68,28 @@
 .player-row {
     font-weight: bold;
 }
+
+#map {
+    position: relative;
+}
+
+.hex-tile {
+    position: absolute;
+
+    clip-path: polygon(
+        25% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        25% 100%,
+        0% 50%
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid rgba(0,0,0,0.2);
+
+    box-sizing: border-box;
+}
