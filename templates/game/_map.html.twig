@@ -74,8 +74,9 @@
                 data-y="{{ y }}"
                 data-q="{{ q }}"
                 data-r="{{ r }}"
+                data-cx="{{ cx }}"
+                data-cy="{{ cy }}"
             >
-
                 <polygon
                     class="hex-tile"
                     points="{{ points }}"
@@ -130,6 +131,11 @@
 
     {% endfor %}
 
+    </g>
+
+    <g id="player">
+        <circle r="7" fill="orange" />
+        <text y="4" text-anchor="middle" font-size="10">G</text>
     </g>
 
 </svg>

@@ -70,3 +70,7 @@
 .city-group {
     cursor: pointer;
 }
+
+#player {
+    cursor: default;
+}

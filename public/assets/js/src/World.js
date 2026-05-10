@@ -1,3 +1,7 @@
+// do usunięcia:
+// refreshCityCursors(player)
+// getTileElementByCoords
+
 class World
 {
     static MAX_NON_HIDDEN_AI = 3;
@@ -27,6 +31,12 @@ class World
     static getTileElementByCoords(x, y) {
         let tileSelector = `.map .tile[data-x='${x}'][data-y='${y}']`;
         return $(tileSelector);
+    }
+
+    static getHexElementByCoords(x, y) {
+        return document.querySelector(
+            `#terrain .hex[data-x="${x}"][data-y="${y}"]`
+        );
     }
 
     refreshAll(player, aiPlayersArray) {

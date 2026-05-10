@@ -28,12 +28,18 @@ class Trader
     }
 
     refreshPosition() {
-        $(".map .tile .player-position").remove();
-        let tile = World.getTileElementByCoords(this.city.position.x, this.city.position.y);
-        tile.prepend("<div class='player-position'> G </div>");
+        const tile = World.getHexElementByCoords(this.city.position.x, this.city.position.y);
+        const cx = tile.dataset.cx;
+        const cy = tile.dataset.cy;
+        let player = document.getElementById("player");
+
+        player.setAttribute("cx", parseFloat(cx));
+        player.setAttribute("cy", parseFloat(cy));
+        player.setAttribute("transform", `translate(${cx - 10}, ${cy - 10})`);
+
         let string = `Jesteś w: ${this.city.name}`;
         $(".city-info .player-position").text(string);
-    }
+    }    
 
     refreshCargo() {
         let container = $(".city-info .cargo-quantity");
