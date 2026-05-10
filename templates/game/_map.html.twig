@@ -110,14 +110,9 @@
         >
 
             {# ikonka miasta #}
-            <image
-                href="{{ asset('assets/gfx/city.jpg') }}"
-                x="{{ cx - 16 }}"
-                y="{{ cy - 16 }}"
-                width="32"
-                height="32"
-                class="city"
-            />
+            <g class="city" transform="translate({{ cx }}, {{ cy }})">
+                <text y="4" text-anchor="middle" font-size="15">🏠</text>
+            </g>
 
             {# nazwa miasta #}
             <text
