@@ -307,18 +307,4 @@ class GameService
             + abs($r1 - $r2)
             + abs(($q1 + $r1) - ($q2 + $r2))) / 2;
     }
-
-    private function offsetToAxialAndPixel(int $x, int $y): array
-    {
-        $q = $x - 1;
-        $r = ($y - 1) - intdiv($q - ($q & 1), 2);
-
-        $px = $q * ($this->hexWidth * 0.75);
-        $py = ($y - 1) * $this->hexHeight + (($q & 1) * ($this->hexHeight / 2));
-
-        $cx = $px + $this->hexWidth / 2;
-        $cy = $py + $this->hexHeight / 2;
-
-        return [$q, $r, $cx, $cy];
-    }
 }
