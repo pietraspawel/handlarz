@@ -67,8 +67,12 @@
     top: 500px;
 }
 
-.city-group {
+.city-active {
     cursor: pointer;
+}
+
+.city-current {
+    cursor: default;
 }
 
 #player {

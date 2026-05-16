@@ -39,6 +39,12 @@ class World
         );
     }
 
+    static getCityElementByCoords(x, y) {
+        return document.querySelector(
+            `#cities .city-group[data-x="${x}"][data-y="${y}"]`
+        );
+    }
+
     refreshAll(player, aiPlayersArray) {
         this.refreshView(player);
         player.refreshView();
@@ -70,12 +76,30 @@ class World
     }
 
     refreshCityCursors(player) {
+        const playerX = player.getPosition().x;
+        const playerY = player.getPosition().y;
+
         for (let i in this.cities) {
-            let tile = World.getTileElementByCoords(this.cities[i].position.x, this.cities[i].position.y);
-            if (this.cities[i].position.x == player.getPosition().x && this.cities[i].position.y == player.getPosition().y) {
-                tile.find("img").css("cursor", "default");
+            const city = this.cities[i];
+            const cityElement = World.getCityElementByCoords(
+                city.position.x,
+                city.position.y
+            );
+
+            if (!cityElement) {
+                continue;
+            }
+
+            cityElement.classList.remove("city-active");
+            cityElement.classList.remove("city-current");
+
+            if (
+                city.position.x === playerX &&
+                city.position.y === playerY
+            ) {
+                cityElement.classList.add("city-current");
             } else {
-                tile.find("img").css("cursor", "pointer");
+                cityElement.classList.add("city-active");
             }
         }
     }
