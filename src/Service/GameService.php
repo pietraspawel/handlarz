@@ -224,6 +224,8 @@ class GameService
             ],
         ];
 
+        $config['world']['grid'] = $this->generateGrid($config);
+
         return [
             'config' => $config,
             'data' => $data,
@@ -311,5 +313,41 @@ class GameService
         return (abs($q1 - $q2)
             + abs($r1 - $r2)
             + abs(($q1 + $r1) - ($q2 + $r2))) / 2;
+    }
+
+    private function offsetToAxialAndPixel(int $x, int $y): array
+    {
+        $q = $x - 1;
+        $r = ($y - 1) - intdiv($q - ($q & 1), 2);
+
+        $px = $q * ($this->hexWidth * 0.75);
+        $py = ($y - 1) * $this->hexHeight + (($q & 1) * ($this->hexHeight / 2));
+
+        $cx = $px + $this->hexWidth / 2;
+        $cy = $py + $this->hexHeight / 2;
+
+        return [$q, $r, $cx, $cy];
+    }
+
+    private function generateGrid(array &$config): array
+    {
+        $grid = [];
+
+        for ($y = 1; $y <= $config['world']['ySize']; $y++) {
+            for ($x = 1; $x <= $config['world']['xSize']; $x++) {
+                [$q, $r, $cx, $cy] = $this->offsetToAxialAndPixel($x, $y);
+
+                $grid[$x][$y] = [
+                'x' => $x,
+                'y' => $y,
+                'q' => $q,
+                'r' => $r,
+                'cx' => $cx,
+                'cy' => $cy,
+                ];
+            }
+        }
+
+        return $grid;
     }
 }
