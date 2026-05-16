@@ -6,14 +6,16 @@ class GridService
 {
     private float $hexWidth;
     private float $hexHeight;
+    private $colorGenerator;
 
-    public function __construct(float $hexWidth, float $hexHeight)
+    public function __construct(float $hexWidth, float $hexHeight, callable $colorGenerator)
     {
         $this->hexWidth = $hexWidth;
         $this->hexHeight = $hexHeight;
+        $this->colorGenerator = $colorGenerator;
     }
 
-    /**
+        /**
      * Build full grid
      */
     public function build(int $width, int $height): array
@@ -46,6 +48,8 @@ class GridService
         $cx = $px + $this->hexWidth / 2;
         $cy = $py + $this->hexHeight / 2;
 
-        return new Tile($x, $y, $q, $r, $cx, $cy);
+        $color = ($this->colorGenerator)();
+
+        return new Tile($x, $y, $q, $r, $cx, $cy, $color);
     }
 }

@@ -10,6 +10,7 @@ class Tile
     private int $r;
     private float $cx;
     private float $cy;
+    private string $color;
 
     public function __construct(
         int $x,
@@ -17,7 +18,8 @@ class Tile
         int $q,
         int $r,
         float $cx,
-        float $cy
+        float $cy,
+        string $color
     ) {
         $this->x = $x;
         $this->y = $y;
@@ -25,6 +27,7 @@ class Tile
         $this->r = $r;
         $this->cx = $cx;
         $this->cy = $cy;
+        $this->color = $color;
     }
 
     public function getX(): int
@@ -57,15 +60,21 @@ class Tile
         return $this->cy;
     }
 
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
     public function toArray(): array
     {
         return [
-            'x' => $this->x,
-            'y' => $this->y,
-            'q' => $this->q,
-            'r' => $this->r,
-            'cx' => $this->cx,
-            'cy' => $this->cy,
+        'x' => $this->x,
+        'y' => $this->y,
+        'q' => $this->q,
+        'r' => $this->r,
+        'cx' => $this->cx,
+        'cy' => $this->cy,
+        'color' => $this->color,
         ];
     }
 }

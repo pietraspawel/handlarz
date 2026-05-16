@@ -60,7 +60,10 @@ class GameService
 
         $this->gridService = new GridService(
             $this->hexWidth,
-            $this->hexHeight
+            $this->hexHeight,
+            function () {
+                return $this->generateTileBackgroundColor();
+            }
         );
     }
 
@@ -225,11 +228,6 @@ class GameService
         $data = base64_encode(json_encode($config));
 
         $this->calculateCityNamePosition($config);
-        $style = [
-            'map' => [
-                'background_colors' => $this->generateTileBackgroundColors($config),
-            ],
-        ];
 
         $config['world']['grid'] = $this->gridService->build(
             $config['world']['xSize'],
@@ -239,7 +237,6 @@ class GameService
         return [
             'config' => $config,
             'data' => $data,
-            'style' => $style,
         ];
     }
 
@@ -269,20 +266,6 @@ class GameService
                 'anchor' => $anchor,
             ];
         }
-    }
-
-    /**
-     * Generate random tile background colors.
-     */
-    private function generateTileBackgroundColors($config): array
-    {
-        $backgroundColors = [];
-        for ($y = 1; $y <= $config['world']['ySize']; $y++) {
-            for ($x = 1; $x <= $config['world']['xSize']; $x++) {
-                $backgroundColors[$x][$y] = $this->generateTileBackgroundColor();
-            }
-        }
-        return $backgroundColors;
     }
 
     /**
