@@ -1,20 +1,5 @@
-{# do usunięcia: #}
-{# city.name.style #}
 {# do przerobienia: #}
 {# q i r mogę liczyć w php #}
-
-{% for y in 1..config.world.ySize %}
-    {% for x in 1..config.world.xSize %}
-        <div class="tile" data-x={{ x }} data-y={{ y }} style="background-color: rgb({{ style.map.background_colors[x][y] }})">
-            {% for city_key, city in config.world.cities %}
-                {% if city.position.x == x and city.position.y == y %}
-                    <img src="{{ asset("assets/gfx/city.jpg") }}" class="city" data-id="{{ city_key }}">
-                    <div class="city-name" style="{{ city.name_style }}">{{ city.name|raw }}</div>
-                {% endif %}
-            {% endfor %}
-        </div>
-    {% endfor %}
-{% endfor %}
 
 {% set HEX_WIDTH = config.world.hexWidth %}
 {% set HEX_HEIGHT = config.world.hexHeight %}

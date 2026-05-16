@@ -218,11 +218,9 @@ class GameService
 
         $data = base64_encode(json_encode($config));
 
-        $this->calculateCityNameStyle($config);
         $this->calculateCityNamePosition($config);
         $style = [
             'map' => [
-                'grid_template_columns' => $this->calculateStyleMapGridTemplateColumns($config),
                 'background_colors' => $this->generateTileBackgroundColors($config),
             ],
         ];
@@ -232,24 +230,6 @@ class GameService
             'data' => $data,
             'style' => $style,
         ];
-    }
-
-    /**
-     * Calculate city name position depends on city position.
-     */
-    private function calculateCityNameStyle(&$config)
-    {
-        foreach ($config['world']['cities'] as $key => $city) {
-            $top = "32px";
-            $left = "0px";
-            if ($city['position']['x'] >= $config['world']['xSize'] - 2) {
-                $left = "auto";
-            }
-            if ($city['position']['y'] >= $config['world']['ySize']) {
-                $top = "-25px";
-            }
-            $config['world']['cities'][$key]['name_style'] = "top: $top; left: $left;";
-        }
     }
 
     /**
@@ -278,19 +258,6 @@ class GameService
                 'anchor' => $anchor,
             ];
         }
-    }
-
-    /**
-     * Generate style for map depends on world xSize.
-     */
-    private function calculateStyleMapGridTemplateColumns($config): string
-    {
-        $styleMapGridTemplateColumns = '';
-        for ($i = 0; $i < $config['world']['xSize']; $i++) {
-            $styleMapGridTemplateColumns .= 'auto ';
-        }
-        $styleMapGridTemplateColumns .= ';';
-        return $styleMapGridTemplateColumns;
     }
 
     /**
