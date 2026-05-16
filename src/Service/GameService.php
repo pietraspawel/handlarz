@@ -132,7 +132,6 @@ class GameService
         [$q1, $r1] = $this->offsetToAxial($x, $y);
 
         foreach ($cities as $city) {
-
             // pomiń miasta bez pozycji
             if (
                 !isset($city['position']['x']) ||
@@ -250,7 +249,7 @@ class GameService
                 $anchor = 'start';
             }
             if ($city['position']['y'] >= $config['world']['ySize']) {
-                $dy = -20-34;
+                $dy = -20 - 34;
             }
             $config['world']['cities'][$key]['name_position'] = [
                 'dx' => $dx,
