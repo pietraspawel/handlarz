@@ -22,10 +22,26 @@ class TraderAI extends Trader {
     }
 
     refreshPosition() {
-        const aiPlayerIdString = `aiPlayer${this.id}`;
-        $(`.map .tile .${aiPlayerIdString}-position`).remove();
-        let tile = World.getTileElementByCoords(this.city.position.x, this.city.position.y);
-        tile.prepend(`<div class='${aiPlayerIdString}-position'> ${this.id} </div>`);
+        const tile = World.getHexElementByCoords(this.city.position.x, this.city.position.y);
+        const cx = parseFloat(tile.dataset.cx);
+        const cy = parseFloat(tile.dataset.cy);
+        const aiId = this.id;
+        const offsets = [
+            { x:  10, y: -10 },
+            { x:  10, y:  10 },
+            { x: -10, y:  10 },
+        ];
+        const offset = offsets[aiId] || { x: 0, y: 0 };
+        let aiPlayer = document.getElementById(`ai-player-${aiId}`);
+
+        if (!aiPlayer) {
+            aiPlayer = document.getElementById("ai-player-template").cloneNode(true);
+            aiPlayer.setAttribute("id", `ai-player-${aiId}`);
+            aiPlayer.querySelector("text").textContent = aiId;
+            document.getElementById("ai-layer").appendChild(aiPlayer);
+        }
+
+        aiPlayer.setAttribute("transform", `translate(${cx + offset.x}, ${cy + offset.y})`);
     }
 
     refreshInfo() {
