@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Game\Map\GridService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -26,6 +27,7 @@ class GameService
     private $projectDir;
     private float $hexWidth;
     private float $hexHeight;
+    private GridService $gridService;
 
     public function __construct(ContainerInterface $container)
     {
@@ -55,6 +57,11 @@ class GameService
         if (self::HEX_WIDTH === null) {
             $this->hexWidth = $this->hexHeight * 2 / sqrt(3);
         }
+
+        $this->gridService = new GridService(
+            $this->hexWidth,
+            $this->hexHeight
+        );
     }
 
     public function generateRandomMap(string $map): array
@@ -224,7 +231,10 @@ class GameService
             ],
         ];
 
-        $config['world']['grid'] = $this->generateGrid($config);
+        $config['world']['grid'] = $this->gridService->build(
+            $config['world']['xSize'],
+            $config['world']['ySize']
+        );
 
         return [
             'config' => $config,
@@ -327,27 +337,5 @@ class GameService
         $cy = $py + $this->hexHeight / 2;
 
         return [$q, $r, $cx, $cy];
-    }
-
-    private function generateGrid(array &$config): array
-    {
-        $grid = [];
-
-        for ($y = 1; $y <= $config['world']['ySize']; $y++) {
-            for ($x = 1; $x <= $config['world']['xSize']; $x++) {
-                [$q, $r, $cx, $cy] = $this->offsetToAxialAndPixel($x, $y);
-
-                $grid[$x][$y] = [
-                'x' => $x,
-                'y' => $y,
-                'q' => $q,
-                'r' => $r,
-                'cx' => $cx,
-                'cy' => $cy,
-                ];
-            }
-        }
-
-        return $grid;
     }
 }
