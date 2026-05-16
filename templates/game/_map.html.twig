@@ -33,6 +33,15 @@
     xmlns="http://www.w3.org/2000/svg"
 >
 
+    <defs>
+
+        <g id="player-template">
+            <circle r="7" fill="orange" stroke="black" stroke-width="1"></circle>
+            <text y="4" text-anchor="middle" font-size="10" fill="black">G</text>
+        </g>
+
+    </defs>
+
     <g id="terrain">
 
     {% for y in 1..config.world.ySize %}
@@ -133,9 +142,6 @@
 
     </g>
 
-    <g id="player">
-        <circle r="7" fill="orange" />
-        <text y="4" text-anchor="middle" font-size="10">G</text>
-    </g>
+    <g id="player-layer"></g>
 
 </svg>

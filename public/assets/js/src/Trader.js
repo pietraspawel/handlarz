@@ -31,15 +31,17 @@ class Trader
         const tile = World.getHexElementByCoords(this.city.position.x, this.city.position.y);
         const cx = tile.dataset.cx;
         const cy = tile.dataset.cy;
+
         let player = document.getElementById("player");
+        if (!player) {
+            player = document.getElementById("player-template").cloneNode(true);
+            player.setAttribute("id", "player");
+            document.getElementById("player-layer").appendChild(player);
+        }
 
-        player.setAttribute("cx", parseFloat(cx));
-        player.setAttribute("cy", parseFloat(cy));
-        player.setAttribute("transform", `translate(${cx - 10}, ${cy - 10})`);
-
-        let string = `Jesteś w: ${this.city.name}`;
-        $(".city-info .player-position").text(string);
-    }    
+        player.setAttribute("transform", `translate(${cx-10}, ${cy-10})`);
+        $(".city-info .player-position").text(`Jesteś w: ${this.city.name}`);
+    }
 
     refreshCargo() {
         let container = $(".city-info .cargo-quantity");
