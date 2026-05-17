@@ -41,7 +41,7 @@ class World
     refreshView(player) {
         this.refreshMapRecordView();
         this.refreshTurnsLeftView();
-        this.refreshCityCursors(player);
+        CityView.refreshCityCursors(this.cities, player);
         CityView.refreshCityPrices(this.cities);
     }
 
@@ -52,35 +52,6 @@ class World
 
     refreshTurnsLeftView() {
         $(".player-info .turns-left").text(this.turnsLeft);
-    }
-
-    refreshCityCursors(player) {
-        const playerX = player.getPosition().x;
-        const playerY = player.getPosition().y;
-
-        for (let i in this.cities) {
-            const city = this.cities[i];
-            const cityElement = WorldView.getCityElementByCoords(
-                city.position.x,
-                city.position.y
-            );
-
-            if (!cityElement) {
-                continue;
-            }
-
-            cityElement.classList.remove("city-active");
-            cityElement.classList.remove("city-current");
-
-            if (
-                city.position.x === playerX &&
-                city.position.y === playerY
-            ) {
-                cityElement.classList.add("city-current");
-            } else {
-                cityElement.classList.add("city-active");
-            }
-        }
     }
 
     getCity(id) {

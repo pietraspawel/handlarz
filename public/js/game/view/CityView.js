@@ -16,4 +16,30 @@ class CityView {
 			container.after(element);
 		}
 	}
+
+	static refreshCityCursors(cities, player) {
+		const playerX = player.getPosition().x;
+		const playerY = player.getPosition().y;
+
+		for (let i in cities) {
+			const city = cities[i];
+			const cityElement = WorldView.getCityElementByCoords(
+				city.position.x,
+				city.position.y,
+			);
+
+			if (!cityElement) {
+				continue;
+			}
+
+			cityElement.classList.remove("city-active");
+			cityElement.classList.remove("city-current");
+
+			if (city.position.x === playerX && city.position.y === playerY) {
+				cityElement.classList.add("city-current");
+			} else {
+				cityElement.classList.add("city-active");
+			}
+		}
+	}
 }
