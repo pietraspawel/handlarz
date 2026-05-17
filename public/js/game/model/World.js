@@ -40,7 +40,7 @@ class World
 
     refreshView(player) {
         this.refreshMapRecordView();
-        this.refreshTurnsLeftView();
+        GameView.refreshTurnsLeftView(this.turnsLeft);
         CityView.refreshCityCursors(this.cities, player);
         CityView.refreshCityPrices(this.cities);
     }
@@ -48,10 +48,6 @@ class World
     refreshMapRecordView() {
         let string = Library.separateThousands(this.highscore) + " $";
         $(".player-info .map-record").text(string);
-    }
-
-    refreshTurnsLeftView() {
-        $(".player-info .turns-left").text(this.turnsLeft);
     }
 
     getCity(id) {
