@@ -30,10 +30,30 @@ class CityService
     }
 
     /**
+     * Random cities position indexes.
+     */
+    public function randomCityPositionIndexes(array $cities, int $worldXSize, int $worldYSize): array
+    {
+        foreach ($cities as $key => $value) {
+            $cities[$key]['position']['x'] = null;
+            $cities[$key]['position']['y'] = null;
+        }
+        foreach ($cities as $key => $value) {
+            do {
+                $posX = mt_rand(1, $worldXSize);
+                $posY = mt_rand(1, $worldYSize);
+            } while (!$this->areCoordinatesOfCityCorrect($cities, $posX, $posY));
+            $cities[$key]['position']['x'] = $posX;
+            $cities[$key]['position']['y'] = $posY;
+        }
+        return $cities;
+    }
+
+    /**
      * Check if coordinates of new city are correct.
      * Cities must be at least 3 hexes apart.
      */
-    public function areCoordinatesOfCityCorrect(array $cities, int $x, int $y): bool
+    private function areCoordinatesOfCityCorrect(array $cities, int $x, int $y): bool
     {
         // candidate city → axial
         [$q1, $r1] = GridService::offsetToAxial($x, $y);

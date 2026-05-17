@@ -94,28 +94,8 @@ class GameService
     private function generateRandomCities(): array
     {
         $cities = $this->cityService->randomCityNames();
-        $cities = $this->randomCityPositionIndexes($cities);
+        $cities = $this->cityService->randomCityPositionIndexes($cities, self::WORLD_X_SIZE, self::WORLD_Y_SIZE);
         $cities = $this->goodService->randomGoodsPrices($cities);
-        return $cities;
-    }
-
-    /**
-     * Random cities position indexes.
-     */
-    private function randomCityPositionIndexes(array $cities): array
-    {
-        foreach ($cities as $key => $value) {
-            $cities[$key]['position']['x'] = null;
-            $cities[$key]['position']['y'] = null;
-        }
-        foreach ($cities as $key => $value) {
-            do {
-                $posX = mt_rand(1, self::WORLD_X_SIZE);
-                $posY = mt_rand(1, self::WORLD_Y_SIZE);
-            } while (!$this->cityService->areCoordinatesOfCityCorrect($cities, $posX, $posY));
-            $cities[$key]['position']['x'] = $posX;
-            $cities[$key]['position']['y'] = $posY;
-        }
         return $cities;
     }
 
