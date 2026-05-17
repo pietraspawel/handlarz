@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Game\Map;
+namespace App\Game\Service;
+
+use App\Game\Map\Tile;
 
 class GridService
 {

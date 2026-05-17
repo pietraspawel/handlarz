@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Game\UI\UIService;
-use App\Game\Map\GridService;
+use App\Game\Service\GridService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Yaml;
 
