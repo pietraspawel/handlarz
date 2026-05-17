@@ -1,5 +1,4 @@
-class Trader
-{
+class Trader {
     city;
     gold;
     goods = [];
@@ -33,7 +32,7 @@ class Trader
     }
 
     sellAll() {
-        for (let goodId in this.city.goods){
+        for (let goodId in this.city.goods) {
             let price = this.city.goods[goodId].price;
             let amount = this.goods[goodId].quantity;
             this.gold += price * amount;
@@ -44,5 +43,5 @@ class Trader
     goTo(city) {
         this.city = city;
         this.position = city.position;
-    }    
+    }
 }
