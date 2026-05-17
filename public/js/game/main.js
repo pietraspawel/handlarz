@@ -15,32 +15,5 @@ $().ready(() => {
     world.refreshAll(player, aiPlayers);
 
     let tooltipsView = new TooltipsView();
-
-    $("#cities").on("click", ".city-group", (e) => {
-        let target = $(e.currentTarget);
-        let id = target.data("id");
-        let city = world.getCity(id);
-        if (city.name != player.city.name) {
-            player.goTo(city);
-            world.nextTurn(player, aiPlayers);
-        }
-    }); 
-
-    $(".city-info .buy").on("click", "button", (e) => {
-        let target = $(e.target);
-        let id = target.data("id");
-        player.buy(id);
-        world.refreshPlayer(player);
-    })
-
-    $(".city-info .sell").on("click", "button", (e) => {
-        let target = $(e.target);
-        let id = target.data("id");
-        player.sell(id);
-        world.refreshPlayer(player);
-    })
-
-    $(".menu-container").on("change", "#checkShowTooltips", () => {
-        tooltipsView.handleTooltips();
-    });
+    let gameEventsHandler = new GameEventsHandler(aiPlayers, player, world, tooltipsView);
 });
