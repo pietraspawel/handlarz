@@ -20,4 +20,14 @@ class TraderView {
 			container.append(element);
 		}
 	}
+
+	static refreshCargo(trader) {
+		let container = $(".city-info .cargo-quantity");
+		container.find("td").remove();
+		for (let i in trader.goods) {
+			let string = Library.separateThousands(trader.goods[i].quantity);
+			let element = `<td>${string}</td>`;
+			container.append(element);
+		}
+	}
 }

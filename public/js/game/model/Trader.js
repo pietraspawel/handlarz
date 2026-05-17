@@ -17,7 +17,7 @@ class Trader
     refreshView() {
         this.refreshWealth();
         this.refreshPosition();
-        this.refreshCargo();
+        TraderView.refreshCargo(this);
         TraderView.refreshBuyButtons(this);
         TraderView.refreshSellButtons(this);
     }
@@ -41,16 +41,6 @@ class Trader
 
         player.setAttribute("transform", `translate(${cx-10}, ${cy-10})`);
         $(".city-info .player-position").text(`Jesteś w: ${this.city.name}`);
-    }
-
-    refreshCargo() {
-        let container = $(".city-info .cargo-quantity");
-        container.find("td").remove();
-        for (let i in this.goods) {
-            let string = Library.separateThousands(this.goods[i].quantity);
-            let element = `<td>${string}</td>`;
-            container.append(element);
-        }
     }
 
     getPosition() {
