@@ -24,18 +24,6 @@ class World
         }
     }
 
-    static getHexElementByCoords(x, y) {
-        return document.querySelector(
-            `#terrain .hex[data-x="${x}"][data-y="${y}"]`
-        );
-    }
-
-    static getCityElementByCoords(x, y) {
-        return document.querySelector(
-            `#cities .city-group[data-x="${x}"][data-y="${y}"]`
-        );
-    }
-
     refreshAll(player, aiPlayersArray) {
         this.refreshView(player);
         player.refreshView();
@@ -72,7 +60,7 @@ class World
 
         for (let i in this.cities) {
             const city = this.cities[i];
-            const cityElement = World.getCityElementByCoords(
+            const cityElement = WorldView.getCityElementByCoords(
                 city.position.x,
                 city.position.y
             );

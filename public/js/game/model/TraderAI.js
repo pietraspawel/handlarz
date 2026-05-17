@@ -22,7 +22,7 @@ class TraderAI extends Trader {
     }
 
     refreshPosition() {
-        const tile = World.getHexElementByCoords(this.city.position.x, this.city.position.y);
+        const tile = WorldView.getHexElementByCoords(this.city.position.x, this.city.position.y);
         const cx = parseFloat(tile.dataset.cx);
         const cy = parseFloat(tile.dataset.cy);
         const aiId = this.id;

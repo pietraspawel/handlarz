@@ -28,7 +28,7 @@ class Trader
     }
 
     refreshPosition() {
-        const tile = World.getHexElementByCoords(this.city.position.x, this.city.position.y);
+        const tile = WorldView.getHexElementByCoords(this.city.position.x, this.city.position.y);
         const cx = tile.dataset.cx;
         const cy = tile.dataset.cy;
 
