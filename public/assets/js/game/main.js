@@ -20,7 +20,7 @@ $().ready(() => {
     });
     handleTooltips();
 
-    $(".map .tile").on("click", "img.city", (e) => {
+    $(".map-container .tile").on("click", "img.city", (e) => {
         let target = $(e.target);
         let id = target.data("id");
         let city = world.getCity(id);
