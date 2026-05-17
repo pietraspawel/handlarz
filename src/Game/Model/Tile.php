@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Map;
+namespace App\Game\Model;
 
 class Tile
 {

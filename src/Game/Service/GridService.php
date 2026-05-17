@@ -2,7 +2,7 @@
 
 namespace App\Game\Service;
 
-use App\Game\Map\Tile;
+use App\Game\Model\Tile;
 
 class GridService
 {
