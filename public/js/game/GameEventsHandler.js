@@ -19,7 +19,7 @@ class GameEventsHandler {
 			let city = this.world.getCity(id);
 			if (city.name != this.player.city.name) {
 				this.player.goTo(city);
-				this.world.nextTurn(this.player, this.aiPlayers);
+				TurnSystem.nextTurn(this.world, this.player, this.aiPlayers);
 			}
 		});
 

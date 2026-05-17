@@ -33,17 +33,5 @@ class World
         return this.cities[index];
     }
     
-    nextTurn(player, aiPlayersArray) {
-        for (const aiPlayer of aiPlayersArray) {
-            aiPlayer.turn(this);
-        }
-
-        this.turnsLeft--;
-        GameView.refreshAll(this, player, aiPlayersArray);
-
-        if (this.turnsLeft <= 0) {
-            GameOverService.gameOver(this, player, aiPlayersArray);
-        }
-    }
 
 }
