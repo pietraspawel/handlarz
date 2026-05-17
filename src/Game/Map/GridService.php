@@ -6,13 +6,11 @@ class GridService
 {
     private float $hexWidth;
     private float $hexHeight;
-    private $colorGenerator;
 
-    public function __construct(float $hexWidth, float $hexHeight, callable $colorGenerator)
+    public function __construct(float $hexWidth, float $hexHeight)
     {
         $this->hexWidth = $hexWidth;
         $this->hexHeight = $hexHeight;
-        $this->colorGenerator = $colorGenerator;
     }
 
         /**
@@ -48,8 +46,26 @@ class GridService
         $cx = $px + $this->hexWidth / 2;
         $cy = $py + $this->hexHeight / 2;
 
-        $color = ($this->colorGenerator)();
+        $color = $this->generateTileBackgroundColor();
 
         return new Tile($x, $y, $q, $r, $cx, $cy, $color);
+    }
+
+    /**
+     * Generate random background color.
+     */
+    private function generateTileBackgroundColor(): string
+    {
+        $colour = mt_rand(0, 9); //0 red 2-8 green 9 blue
+        $green = mt_rand(225, 255);
+        $red = 0;
+        $blue = 0;
+        if ($colour == 0) {
+            $red = mt_rand(0, 150);
+        }
+        if ($colour == 9) {
+            $blue = mt_rand(0, 150);
+        }
+        return "$red, $green, $blue";
     }
 }

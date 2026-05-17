@@ -58,13 +58,7 @@ class GameService
             $this->hexWidth = $this->hexHeight * 2 / sqrt(3);
         }
 
-        $this->gridService = new GridService(
-            $this->hexWidth,
-            $this->hexHeight,
-            function () {
-                return $this->generateTileBackgroundColor();
-            }
-        );
+        $this->gridService = new GridService($this->hexWidth, $this->hexHeight);
     }
 
     public function generateRandomMap(string $map): array
@@ -266,24 +260,6 @@ class GameService
                 'anchor' => $anchor,
             ];
         }
-    }
-
-    /**
-     * Generate random background color.
-     */
-    private function generateTileBackgroundColor(): string
-    {
-        $colour = mt_rand(0, 9); //0 red 2-8 green 9 blue
-        $green = mt_rand(225, 255);
-        $red = 0;
-        $blue = 0;
-        if ($colour == 0) {
-            $red = mt_rand(0, 150);
-        }
-        if ($colour == 9) {
-            $blue = mt_rand(0, 150);
-        }
-        return "$red, $green, $blue";
     }
 
     /**
