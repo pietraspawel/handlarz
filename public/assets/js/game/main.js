@@ -20,8 +20,8 @@ $().ready(() => {
     });
     handleTooltips();
 
-    $(".map-container .tile").on("click", "img.city", (e) => {
-        let target = $(e.target);
+    $("#cities").on("click", ".city-group", (e) => {
+        let target = $(e.currentTarget);
         let id = target.data("id");
         let city = world.getCity(id);
         if (city.name != player.city.name) {
