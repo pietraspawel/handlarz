@@ -15,16 +15,11 @@ class Trader
     }
 
     refreshView() {
-        this.refreshWealth();
+        TraderView.refreshWealth(this);
         TraderView.refreshPosition(this);
         TraderView.refreshCargo(this);
         TraderView.refreshBuyButtons(this);
         TraderView.refreshSellButtons(this);
-    }
-
-    refreshWealth() {
-        let goldString = Library.separateThousands(this.gold) + " $";
-        $(".player-info .wealth").text(goldString);
     }
 
     getPosition() {
