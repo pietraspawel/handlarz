@@ -25,7 +25,7 @@ class World
     }
 
     refreshAll(player, aiPlayersArray) {
-        this.refreshView(player);
+        GameView.refreshView(this.highscore, this.turnsLeft, this.cities, player);
         player.refreshView();
         for (let i = 0; i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length; i++) {
             aiPlayersArray[i].refreshPosition();
@@ -34,15 +34,8 @@ class World
     }
 
     refreshPlayer(player) {
-        this.refreshView(player);
+        GameView.refreshView(this.highscore, this.turnsLeft, this.cities, player);
         player.refreshView();
-    }
-
-    refreshView(player) {
-        GameView.refreshMapRecordView(this.highscore);
-        GameView.refreshTurnsLeftView(this.turnsLeft);
-        CityView.refreshCityCursors(this.cities, player);
-        CityView.refreshCityPrices(this.cities);
     }
 
     getCity(id) {
