@@ -4,19 +4,19 @@ namespace App\Game\Service;
 
 class CityService
 {
-    private const CITIES_AMOUNT = 3;
-
+    private $citiesAmount;
     private $cityNamesList;
 
-    public function __construct(array $cityNamesList)
+    public function __construct(int $citiesAmount, array $cityNamesList)
     {
+        $this->citiesAmount = $citiesAmount;
         $this->cityNamesList = $cityNamesList;
     }
 
     public function randomCityNames(): array
     {
         $cities = array();
-        while (count($cities) < self::CITIES_AMOUNT) {
+        while (count($cities) < $this->citiesAmount) {
             $randomName = $this->cityNamesList[mt_rand(0, count($this->cityNamesList) - 1)];
             if (!in_array($randomName, $cities)) {
                 $cities[] = $randomName;
