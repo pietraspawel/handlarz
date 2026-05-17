@@ -112,47 +112,11 @@ class GameService
             do {
                 $posX = mt_rand(1, self::WORLD_X_SIZE);
                 $posY = mt_rand(1, self::WORLD_Y_SIZE);
-            } while (!$this->areCoordinatesOfCityCorrect($cities, $posX, $posY));
+            } while (!$this->cityService->areCoordinatesOfCityCorrect($cities, $posX, $posY));
             $cities[$key]['position']['x'] = $posX;
             $cities[$key]['position']['y'] = $posY;
         }
         return $cities;
-    }
-
-    /**
-     * Check if coordinates of new city are correct.
-     * Cities must be at least 3 hexes apart.
-     */
-    private function areCoordinatesOfCityCorrect(array $cities, int $x, int $y): bool
-    {
-        // candidate city → axial
-        [$q1, $r1] = GridService::offsetToAxial($x, $y);
-
-        foreach ($cities as $city) {
-            // pomiń miasta bez pozycji
-            if (
-                !isset($city['position']['x']) ||
-                !isset($city['position']['y']) ||
-                $city['position']['x'] === null ||
-                $city['position']['y'] === null
-            ) {
-                continue;
-            }
-
-            // existing city → axial
-            [$q2, $r2] = GridService::offsetToAxial(
-                $city['position']['x'],
-                $city['position']['y']
-            );
-
-            $distance = GridService::hexDistance($q1, $r1, $q2, $r2);
-
-            if ($distance < 3) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     public function loadPredefinedMap(string $map): array
