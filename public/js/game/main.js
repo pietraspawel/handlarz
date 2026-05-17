@@ -14,11 +14,7 @@ $().ready(() => {
 
     world.refreshAll(player, aiPlayers);
 
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl)
-    });
-    handleTooltips();
+    let tooltipsView = new TooltipsView();
 
     $("#cities").on("click", ".city-group", (e) => {
         let target = $(e.currentTarget);
@@ -45,25 +41,6 @@ $().ready(() => {
     })
 
     $(".menu-container").on("change", "#checkShowTooltips", () => {
-        handleTooltips();
+        tooltipsView.handleTooltips();
     });
-
-    function handleTooltips() {
-        let checkbox = $(".menu-container #checkShowTooltips");
-        let data = new Date();
-        data.setTime(data.getTime() + (365 * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + data.toUTCString();                
-
-        if (checkbox.prop("checked")) {
-            for (let i = 0; i < tooltipList.length; i++) {
-                tooltipList[i].enable();
-                document.cookie = `tooltips=1; ${expires}; path=/`;
-            }
-        } else {
-            for (let i = 0; i < tooltipList.length; i++) {
-                tooltipList[i].disable();
-                document.cookie = `tooltips=0; ${expires}; path=/`;
-            }
-        }
-    }
 });
