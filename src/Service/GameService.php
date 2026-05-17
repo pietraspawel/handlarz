@@ -65,16 +65,16 @@ class GameService
 
         $this->gridService = new GridService($this->hexWidth, $this->hexHeight);
 
+        $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
+        $goods = file($filepath);
+        $this->goodService = new GoodService($goods);
+
         $filepath = $this->projectDir . self::CITY_NAMES_FILEPATH;
         $cityNamesList = file($filepath);
         foreach ($cityNamesList as $key => $value) {
             $cityNamesList[$key] = trim($value);
         }
-        $this->cityService = new CityService(self::CITIES_AMOUNT, $cityNamesList);
-
-        $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
-        $goods = file($filepath);
-        $this->goodService = new GoodService($goods);
+        $this->cityService = new CityService($this->goodService, self::CITIES_AMOUNT, $cityNamesList);
     }
 
     public function generateRandomMap(string $map): array
@@ -86,18 +86,10 @@ class GameService
                 'ySize' => self::WORLD_Y_SIZE,
                 'startGold' => self::START_GOLD,
                 'turnsAmount' => self::TURNS_AMOUNT,
-                'cities' => $this->generateRandomCities(),
+                'cities' => $this->cityService->generateRandomCities(self::WORLD_X_SIZE, self::WORLD_Y_SIZE),
             ]
         ];
         return $this->generateTwigData($config);
-    }
-
-    private function generateRandomCities(): array
-    {
-        $cities = $this->cityService->randomCityNames();
-        $cities = $this->cityService->randomCityPositionIndexes($cities, self::WORLD_X_SIZE, self::WORLD_Y_SIZE);
-        $cities = $this->goodService->randomGoodsPrices($cities);
-        return $cities;
     }
 
     public function loadPredefinedMap(string $map): array

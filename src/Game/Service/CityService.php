@@ -2,18 +2,32 @@
 
 namespace App\Game\Service;
 
+use App\Game\Service\GoodService;
+
 class CityService
 {
     private $citiesAmount;
     private $cityNamesList;
 
-    public function __construct(int $citiesAmount, array $cityNamesList)
+    private GoodService $goodService;
+
+    public function __construct(GoodService $goodService, int $citiesAmount, array $cityNamesList)
     {
+        $this->goodService = $goodService;
+
         $this->citiesAmount = $citiesAmount;
         $this->cityNamesList = $cityNamesList;
     }
 
-    public function randomCityNames(): array
+    public function generateRandomCities(int $worldXSize, int $worldYSize): array
+    {
+        $cities = $this->randomCityNames();
+        $cities = $this->randomCityPositionIndexes($cities, $worldXSize, $worldYSize);
+        $cities = $this->goodService->randomGoodsPrices($cities);
+        return $cities;
+    }
+
+    private function randomCityNames(): array
     {
         $cities = array();
         while (count($cities) < $this->citiesAmount) {
@@ -32,7 +46,7 @@ class CityService
     /**
      * Random cities position indexes.
      */
-    public function randomCityPositionIndexes(array $cities, int $worldXSize, int $worldYSize): array
+    private function randomCityPositionIndexes(array $cities, int $worldXSize, int $worldYSize): array
     {
         foreach ($cities as $key => $value) {
             $cities[$key]['position']['x'] = null;
