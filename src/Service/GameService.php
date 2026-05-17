@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Game\UI\UIService;
+use App\Game\Service\CityService;
+use App\Game\Service\GoodService;
 use App\Game\Service\GridService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -29,6 +31,8 @@ class GameService
     private float $hexWidth;
     private float $hexHeight;
     private GridService $gridService;
+    private CityService $cityService;
+    private GoodService $goodService;
 
     public function __construct(ContainerInterface $container)
     {
@@ -60,6 +64,11 @@ class GameService
         }
 
         $this->gridService = new GridService($this->hexWidth, $this->hexHeight);
+        $this->cityService = new CityService();
+
+        $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
+        $goods = file($filepath);
+        $this->goodService = new GoodService($goods);
     }
 
     public function generateRandomMap(string $map): array
@@ -81,7 +90,7 @@ class GameService
     {
         $cities = $this->randomCityNames();
         $cities = $this->randomCityPositionIndexes($cities);
-        $cities = $this->randomGoodsPrices($cities);
+        $cities = $this->goodService->randomGoodsPrices($cities);
         return $cities;
     }
 
@@ -161,29 +170,6 @@ class GameService
         }
 
         return true;
-    }
-
-    /**
-     * Random goods prices.
-     */
-    private function randomGoodsPrices($cities): array
-    {
-        $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
-
-        $goods = file($filepath);
-        foreach ($goods as $key => $value) {
-            $goods[$key] = trim($value);
-        }
-
-        foreach ($cities as $key => $city) {
-            foreach ($goods as $goodKey => $good) {
-                $cities[$key]['goods'][] = [
-                    'name' => $good,
-                    'price' => mt_rand(1, 100),
-                ];
-            }
-        }
-        return $cities;
     }
 
     public function loadPredefinedMap(string $map): array
