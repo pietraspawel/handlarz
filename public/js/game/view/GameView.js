@@ -1,12 +1,21 @@
 class GameView {
-    static refreshAll(world, player, aiPlayersArray) {
-        GameView.refreshView(world.highscore, world.turnsLeft, world.cities, player);
-        TraderView.refreshView(player);
-        for (let i = 0; i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length; i++) {
-            aiPlayersArray[i].refreshPosition();
-        }
-        aiPlayersArray.forEach(ai => ai.refreshInfo());
-    }
+	static refreshAll(world, player, aiPlayersArray) {
+		GameView.refreshView(
+			world.highscore,
+			world.turnsLeft,
+			world.cities,
+			player,
+		);
+		TraderView.refreshView(player);
+		for (
+			let i = 0;
+			i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length;
+			i++
+		) {
+			aiPlayersArray[i].refreshPosition();
+		}
+		aiPlayersArray.forEach((ai) => ai.refreshInfo());
+	}
 
 	static refreshView(highscore, turnsLeft, cities, player) {
 		GameView.refreshMapRecordView(highscore);
