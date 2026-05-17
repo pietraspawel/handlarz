@@ -3,17 +3,17 @@
 {% block title %}Handlarz{% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/popper.min.js') }}" defer></script>
+    <script src="{{ asset('js/popper.min.js') }}" defer></script>
     {{ parent() }}
-    <script src="{{ asset('assets/js/src/City.js') }}" defer></script>
-    <script src="{{ asset('assets/js/src/Good.js') }}" defer></script>
-    <script src="{{ asset('assets/js/src/Library.js') }}" defer></script>
-    <script src="{{ asset('assets/js/src/Trader.js') }}" defer></script>
-    <script src="{{ asset('assets/js/src/World.js') }}" defer></script>
-    <script src="{{ asset('assets/js/src/AIStrategy.js') }}" defer></script>
-    <script src="{{ asset('assets/js/src/GreedyStrategy.js') }}" defer></script>
-    <script src="{{ asset('assets/js/src/TraderAI.js') }}" defer></script>
-    <script src="{{ asset('assets/js/game/main.js') }}" defer></script>
+    <script src="{{ asset('js/game/library.js') }}" defer></script>
+    <script src="{{ asset('js/game/model/City.js') }}" defer></script>
+    <script src="{{ asset('js/game/model/Good.js') }}" defer></script>
+    <script src="{{ asset('js/game/model/Trader.js') }}" defer></script>
+    <script src="{{ asset('js/game/model/World.js') }}" defer></script>
+    <script src="{{ asset('js/game/ai/AIStrategy.js') }}" defer></script>
+    <script src="{{ asset('js/game/ai/GreedyStrategy.js') }}" defer></script>
+    <script src="{{ asset('js/game/model/TraderAI.js') }}" defer></script>
+    <script src="{{ asset('js/game/main.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
