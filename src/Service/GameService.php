@@ -134,7 +134,7 @@ class GameService
     private function areCoordinatesOfCityCorrect(array $cities, int $x, int $y): bool
     {
         // candidate city → axial
-        [$q1, $r1] = $this->offsetToAxial($x, $y);
+        [$q1, $r1] = $this->gridService->offsetToAxial($x, $y);
 
         foreach ($cities as $city) {
             // pomiń miasta bez pozycji
@@ -148,12 +148,12 @@ class GameService
             }
 
             // existing city → axial
-            [$q2, $r2] = $this->offsetToAxial(
+            [$q2, $r2] = $this->gridService->offsetToAxial(
                 $city['position']['x'],
                 $city['position']['y']
             );
 
-            $distance = $this->hexDistance($q1, $r1, $q2, $r2);
+            $distance = $this->gridService->hexDistance($q1, $r1, $q2, $r2);
 
             if ($distance < 3) {
                 return false;
@@ -233,27 +233,5 @@ class GameService
             'config' => $config,
             'data' => $data,
         ];
-    }
-
-    /**
-     * Convert odd-q offset coordinates (x,y) to axial (q,r)
-     * Flat-top hex grid.
-     */
-    private function offsetToAxial(int $x, int $y): array
-    {
-        $q = $x - 1;
-        $r = ($y - 1) - intdiv($q - ($q & 1), 2);
-
-        return [$q, $r];
-    }
-
-    /**
-     * Hex distance in axial coordinates.
-     */
-    private function hexDistance(int $q1, int $r1, int $q2, int $r2): int
-    {
-        return (abs($q1 - $q2)
-            + abs($r1 - $r2)
-            + abs(($q1 + $r1) - ($q2 + $r2))) / 2;
     }
 }
