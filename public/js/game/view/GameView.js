@@ -14,4 +14,14 @@ class GameView {
 		let string = Library.separateThousands(highscore) + " $";
 		$(".player-info .map-record").text(string);
 	}
+
+	static refreshPlayer(world, player) {
+		GameView.refreshView(
+			world.highscore,
+			world.turnsLeft,
+			world.cities,
+			player,
+		);
+		player.refreshView();
+	}
 }

@@ -33,11 +33,6 @@ class World
         aiPlayersArray.forEach(ai => ai.refreshInfo());
     }
 
-    refreshPlayer(player) {
-        GameView.refreshView(this.highscore, this.turnsLeft, this.cities, player);
-        player.refreshView();
-    }
-
     getCity(id) {
         return this.cities[id];
     }
