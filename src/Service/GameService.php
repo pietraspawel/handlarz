@@ -126,7 +126,7 @@ class GameService
     private function areCoordinatesOfCityCorrect(array $cities, int $x, int $y): bool
     {
         // candidate city → axial
-        [$q1, $r1] = $this->gridService->offsetToAxial($x, $y);
+        [$q1, $r1] = GridService::offsetToAxial($x, $y);
 
         foreach ($cities as $city) {
             // pomiń miasta bez pozycji
@@ -140,12 +140,12 @@ class GameService
             }
 
             // existing city → axial
-            [$q2, $r2] = $this->gridService->offsetToAxial(
+            [$q2, $r2] = GridService::offsetToAxial(
                 $city['position']['x'],
                 $city['position']['y']
             );
 
-            $distance = $this->gridService->hexDistance($q1, $r1, $q2, $r2);
+            $distance = GridService::hexDistance($q1, $r1, $q2, $r2);
 
             if ($distance < 3) {
                 return false;

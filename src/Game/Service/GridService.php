@@ -15,7 +15,29 @@ class GridService
         $this->hexHeight = $hexHeight;
     }
 
-        /**
+    /**
+     * Convert odd-q offset coordinates (x,y) to axial (q,r)
+     * Flat-top hex grid.
+     */
+    public static function offsetToAxial(int $x, int $y): array
+    {
+        $q = $x - 1;
+        $r = ($y - 1) - intdiv($q - ($q & 1), 2);
+
+        return [$q, $r];
+    }
+
+    /**
+     * Hex distance in axial coordinates.
+     */
+    public static function hexDistance(int $q1, int $r1, int $q2, int $r2): int
+    {
+        return (abs($q1 - $q2)
+            + abs($r1 - $r2)
+            + abs(($q1 + $r1) - ($q2 + $r2))) / 2;
+    }
+
+    /**
      * Build full grid
      */
     public function build(int $width, int $height): array
@@ -69,27 +91,5 @@ class GridService
             $blue = mt_rand(0, 150);
         }
         return "$red, $green, $blue";
-    }
-
-    /**
-     * Convert odd-q offset coordinates (x,y) to axial (q,r)
-     * Flat-top hex grid.
-     */
-    public function offsetToAxial(int $x, int $y): array
-    {
-        $q = $x - 1;
-        $r = ($y - 1) - intdiv($q - ($q & 1), 2);
-
-        return [$q, $r];
-    }
-
-    /**
-     * Hex distance in axial coordinates.
-     */
-    public function hexDistance(int $q1, int $r1, int $q2, int $r2): int
-    {
-        return (abs($q1 - $q2)
-            + abs($r1 - $r2)
-            + abs(($q1 + $r1) - ($q2 + $r2))) / 2;
     }
 }
