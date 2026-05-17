@@ -12,7 +12,7 @@ $().ready(() => {
         new TraderAI(world, 5, 'AITrader5', world.getRandomCity(), aiPlayerStrategy),
     ];
 
-    world.refreshAll(player, aiPlayers);
+    GameView.refreshAll(world, player, aiPlayers);
 
     let tooltipsView = new TooltipsView();
     let gameEventsHandler = new GameEventsHandler(aiPlayers, player, world, tooltipsView);

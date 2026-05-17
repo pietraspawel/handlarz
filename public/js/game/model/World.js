@@ -24,15 +24,6 @@ class World
         }
     }
 
-    refreshAll(player, aiPlayersArray) {
-        GameView.refreshView(this.highscore, this.turnsLeft, this.cities, player);
-        player.refreshView();
-        for (let i = 0; i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length; i++) {
-            aiPlayersArray[i].refreshPosition();
-        }
-        aiPlayersArray.forEach(ai => ai.refreshInfo());
-    }
-
     getCity(id) {
         return this.cities[id];
     }
@@ -48,7 +39,7 @@ class World
         }
 
         this.turnsLeft--;
-        this.refreshAll(player, aiPlayersArray);
+        GameView.refreshAll(this, player, aiPlayersArray);
 
         if (this.turnsLeft <= 0) {
             this.gameOver(player, aiPlayersArray);
