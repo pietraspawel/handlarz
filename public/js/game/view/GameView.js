@@ -1,7 +1,7 @@
 class GameView {
     static refreshAll(world, player, aiPlayersArray) {
         GameView.refreshView(world.highscore, world.turnsLeft, world.cities, player);
-        player.refreshView();
+        TraderView.refreshView(player);
         for (let i = 0; i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length; i++) {
             aiPlayersArray[i].refreshPosition();
         }
@@ -31,6 +31,6 @@ class GameView {
 			world.cities,
 			player,
 		);
-		player.refreshView();
+		TraderView.refreshView(player);
 	}
 }

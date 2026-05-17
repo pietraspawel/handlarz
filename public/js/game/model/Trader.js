@@ -14,14 +14,6 @@ class Trader
         }
     }
 
-    refreshView() {
-        TraderView.refreshWealth(this);
-        TraderView.refreshPosition(this);
-        TraderView.refreshCargo(this);
-        TraderView.refreshBuyButtons(this);
-        TraderView.refreshSellButtons(this);
-    }
-
     getPosition() {
         return this.city.position;
     }

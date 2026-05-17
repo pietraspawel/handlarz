@@ -1,4 +1,12 @@
 class TraderView {
+	static refreshView(trader) {
+		TraderView.refreshWealth(trader);
+		TraderView.refreshPosition(trader);
+		TraderView.refreshCargo(trader);
+		TraderView.refreshBuyButtons(trader);
+		TraderView.refreshSellButtons(trader);
+	}
+
 	static refreshSellButtons(trader) {
 		let container = $(".city-info .sell");
 		container.find("td").remove();
