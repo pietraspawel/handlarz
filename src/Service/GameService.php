@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Game\UIService;
 use App\Game\Map\GridService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -221,7 +222,7 @@ class GameService
 
         $data = base64_encode(json_encode($config));
 
-        $this->calculateCityNamePosition($config);
+        UIService::calculateCityNamePosition($config);
 
         $config['world']['grid'] = $this->gridService->build(
             $config['world']['xSize'],
@@ -232,34 +233,6 @@ class GameService
             'config' => $config,
             'data' => $data,
         ];
-    }
-
-    /**
-     * Calculate city name position depends on city position.
-     */
-    private function calculateCityNamePosition(&$config)
-    {
-        foreach ($config['world']['cities'] as $key => $city) {
-            $dx = 0;
-            $dy = 0;
-            $anchor = 'middle';
-            if ($city['position']['x'] >= $config['world']['xSize'] - 2) {
-                $dx = 20;
-                $anchor = 'end';
-            }
-            if ($city['position']['x'] <= 3) {
-                $dx = -20;
-                $anchor = 'start';
-            }
-            if ($city['position']['y'] >= $config['world']['ySize']) {
-                $dy = -20 - 34;
-            }
-            $config['world']['cities'][$key]['name_position'] = [
-                'dx' => $dx,
-                'dy' => $dy,
-                'anchor' => $anchor,
-            ];
-        }
     }
 
     /**
