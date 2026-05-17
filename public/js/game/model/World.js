@@ -42,7 +42,7 @@ class World
         this.refreshMapRecordView();
         this.refreshTurnsLeftView();
         this.refreshCityCursors(player);
-        this.refreshCityPrices();
+        CityView.refreshCityPrices(this.cities);
     }
 
     refreshMapRecordView() {
@@ -80,22 +80,6 @@ class World
             } else {
                 cityElement.classList.add("city-active");
             }
-        }
-    }
-
-    refreshCityPrices() {
-        let container = $(".city-info .prices");
-        $(".city-info .city-prices").remove();
-
-        for (let i = this.cities.length - 1; i >= 0; i--) {
-            let element = `<tr class="city-prices">`;
-            element += `<th>${this.cities[i].name}</th>`;
-            for (let j in this.cities[i].goods) {
-                let string = Library.separateThousands(this.cities[i].goods[j].price);
-                element += `<td>${string} $</td>`;
-            }
-            element += `</tr>`;
-            container.after(element);
         }
     }
 
