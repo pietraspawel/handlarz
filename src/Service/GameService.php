@@ -11,7 +11,6 @@ use Symfony\Component\Yaml\Yaml;
 
 class GameService
 {
-    private const CITIES_AMOUNT = 3;
     private const CITY_NAMES_FILEPATH = '/config/game/city-names.txt';
     private const GOODS_NAMES_FILEPATH = '/config/game/goods-names.txt';
     public const HIGHSCORES_PATH = '/config/game/maps/';
@@ -64,7 +63,13 @@ class GameService
         }
 
         $this->gridService = new GridService($this->hexWidth, $this->hexHeight);
-        $this->cityService = new CityService();
+
+        $filepath = $this->projectDir . self::CITY_NAMES_FILEPATH;
+        $cityNamesList = file($filepath);
+        foreach ($cityNamesList as $key => $value) {
+            $cityNamesList[$key] = trim($value);
+        }
+        $this->cityService = new CityService($cityNamesList);
 
         $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
         $goods = file($filepath);
@@ -88,31 +93,9 @@ class GameService
 
     private function generateRandomCities(): array
     {
-        $cities = $this->randomCityNames();
+        $cities = $this->cityService->randomCityNames();
         $cities = $this->randomCityPositionIndexes($cities);
         $cities = $this->goodService->randomGoodsPrices($cities);
-        return $cities;
-    }
-
-    private function randomCityNames(): array
-    {
-        $filepath = $this->projectDir . self::CITY_NAMES_FILEPATH;
-
-        $cities = array();
-        $list = file($filepath);
-        foreach ($list as $key => $value) {
-            $list[$key] = trim($value);
-        }
-        while (count($cities) < self::CITIES_AMOUNT) {
-            $randomName = $list[mt_rand(0, count($list) - 1)];
-            if (!in_array($randomName, $cities)) {
-                $cities[] = $randomName;
-            }
-        }
-        foreach ($cities as $key => $value) {
-            $cities[$key] = [ 'name' => $value ];
-        }
-
         return $cities;
     }
 
