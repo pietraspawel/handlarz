@@ -8,4 +8,16 @@ class TraderView {
 			container.append(element);
 		}
 	}
+
+	static refreshBuyButtons(trader) {
+		let container = $(".city-info .buy");
+		container.find("td").remove();
+		for (let i in trader.goods) {
+			let string = Library.separateThousands(
+				Math.floor(trader.gold / trader.city.goods[i].price),
+			);
+			let element = `<td><button class="btn btn-info" data-id="${i}">${string}</button></td>`;
+			container.append(element);
+		}
+	}
 }
