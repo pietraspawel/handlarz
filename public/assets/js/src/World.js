@@ -1,7 +1,3 @@
-// do usunięcia:
-// refreshCityCursors(player)
-// getTileElementByCoords
-
 class World
 {
     static MAX_NON_HIDDEN_AI = 3;
@@ -26,11 +22,6 @@ class World
             }
             this.cities.push(new City(name, position, goods));
         }
-    }
-
-    static getTileElementByCoords(x, y) {
-        let tileSelector = `.map .tile[data-x='${x}'][data-y='${y}']`;
-        return $(tileSelector);
     }
 
     static getHexElementByCoords(x, y) {
