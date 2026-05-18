@@ -32,17 +32,28 @@ class HexMath {
 	}
 
 	// tablica najlepszych kolejnych kroków na drodze z pos -> dest
-	static getBestSteps(pos, dest) {
+	static getBestSteps(pos, dest, worldXSize, worldYSize) {
 		const current = HexMath.offsetToAxial(pos.x, pos.y);
 		const target = HexMath.offsetToAxial(dest.x, dest.y);
 
 		const candidates = [];
-
 		let bestDist = Infinity;
 
-		for (const d of this.directions) {
+		for (const d of HexMath.directions) {
 			const neighborQ = current.q + d.dq;
 			const neighborR = current.r + d.dr;
+
+			const offset = HexMath.axialToOffset(neighborQ, neighborR);
+
+			// 🔥 filtr mapy (offset space)
+			if (
+				offset.x < 1 ||
+				offset.x > worldXSize ||
+				offset.y < 1 ||
+				offset.y > worldYSize
+			) {
+				continue;
+			}
 
 			const dist = HexMath.distance(
 				neighborQ,
@@ -53,16 +64,13 @@ class HexMath {
 
 			if (dist < bestDist) {
 				bestDist = dist;
-				candidates.length = 0; // reset
-				candidates.push(d);
+				candidates.length = 0;
+				candidates.push(offset);
 			} else if (dist === bestDist) {
-				candidates.push(d);
+				candidates.push(offset);
 			}
 		}
 
-		// mapujemy do offset
-		return candidates.map((d) =>
-			HexMath.axialToOffset(current.q + d.dq, current.r + d.dr),
-		);
+		return candidates;
 	}
 }
