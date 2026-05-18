@@ -1,4 +1,35 @@
 class TraderAIView {
+	static refreshPosition(trader) {
+		const tile = WorldView.getHexElementByCoords(
+			trader.city.position.x,
+			trader.city.position.y,
+		);
+		const cx = parseFloat(tile.dataset.cx);
+		const cy = parseFloat(tile.dataset.cy);
+		const aiId = trader.id;
+		const offsets = [
+			{ x: 10, y: -10 },
+			{ x: 10, y: 10 },
+			{ x: -10, y: 10 },
+		];
+		const offset = offsets[aiId] || { x: 0, y: 0 };
+		let aiPlayer = document.getElementById(`ai-player-${aiId}`);
+
+		if (!aiPlayer) {
+			aiPlayer = document
+				.getElementById("ai-player-template")
+				.cloneNode(true);
+			aiPlayer.setAttribute("id", `ai-player-${aiId}`);
+			aiPlayer.querySelector("text").textContent = aiId;
+			document.getElementById("ai-layer").appendChild(aiPlayer);
+		}
+
+		aiPlayer.setAttribute(
+			"transform",
+			`translate(${cx + offset.x}, ${cy + offset.y})`,
+		);
+	}
+
 	static refreshInfo(trader) {
 		let transitText = trader.city.name;
 		if (trader.lastTurnInfo.lastCity !== null) {

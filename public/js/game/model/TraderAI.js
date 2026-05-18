@@ -20,31 +20,8 @@ class TraderAI extends Trader {
     }
 
     refreshView() {
-        this.refreshPosition();
+        TraderAIView.refreshPosition();
         TraderAIView.refreshInfo();
-    }
-
-    refreshPosition() {
-        const tile = WorldView.getHexElementByCoords(this.city.position.x, this.city.position.y);
-        const cx = parseFloat(tile.dataset.cx);
-        const cy = parseFloat(tile.dataset.cy);
-        const aiId = this.id;
-        const offsets = [
-            { x:  10, y: -10 },
-            { x:  10, y:  10 },
-            { x: -10, y:  10 },
-        ];
-        const offset = offsets[aiId] || { x: 0, y: 0 };
-        let aiPlayer = document.getElementById(`ai-player-${aiId}`);
-
-        if (!aiPlayer) {
-            aiPlayer = document.getElementById("ai-player-template").cloneNode(true);
-            aiPlayer.setAttribute("id", `ai-player-${aiId}`);
-            aiPlayer.querySelector("text").textContent = aiId;
-            document.getElementById("ai-layer").appendChild(aiPlayer);
-        }
-
-        aiPlayer.setAttribute("transform", `translate(${cx + offset.x}, ${cy + offset.y})`);
     }
 
     turn(world) {

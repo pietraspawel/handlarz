@@ -12,7 +12,7 @@ class GameView {
 			i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length;
 			i++
 		) {
-			aiPlayersArray[i].refreshPosition();
+			TraderAIView.refreshPosition(aiPlayersArray[i]);
 		}
 		aiPlayersArray.forEach((ai) => TraderAIView.refreshInfo(ai));
 	}
