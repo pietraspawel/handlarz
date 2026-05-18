@@ -17,7 +17,7 @@ class GameService
     public const HIGHSCORES_PATH = '/config/game/maps/';
     public const MAPS_PATH = '/config/game/maps/';
     private const START_GOLD = 100;
-    private const TURNS_AMOUNT = 10;
+    private const TURNS_AMOUNT = 120;
     private const WORLD_X_SIZE = 20;
     private const WORLD_Y_SIZE = 10;
     /**
