@@ -50,6 +50,7 @@ class Trader {
     }
 
     turn(world) {
+        console.log('Player', this);
         if (
             this.position.x == this.destination.x &&
             this.position.y == this.destination.y
@@ -59,13 +60,13 @@ class Trader {
                 this.position.x,
                 this.position.y,
             );
+            this.destination = null;
         } else {
             // w drodze
             const steps = HexMath.getBestSteps(this.position, this.destination, world.xSize, world.ySize);
             const next = steps[Math.floor(Math.random() * steps.length)];
             this.position.x = next.x;
             this.position.y = next.y;
-            this.destination = null;
         }
     }
 }

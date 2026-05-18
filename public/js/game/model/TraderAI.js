@@ -17,6 +17,7 @@ class TraderAI extends Trader {
             'lastCity': null,
             'wealth': this.gold
         };
+        this.position = this.city.position;
     }
 
     refreshView() {
@@ -25,6 +26,7 @@ class TraderAI extends Trader {
     }
 
     turn(world) {
+        console.log('AI', this);
         let lastCity = this.city;
 
         let decision = this.strategy.decide(world, this);
