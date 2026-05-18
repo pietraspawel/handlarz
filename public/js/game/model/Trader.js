@@ -48,4 +48,24 @@ class Trader {
     setDestination(city) {
         this.destination = city.position;
     }
+
+    turn(world) {
+        if (
+            this.position.x == this.destination.x &&
+            this.position.y == this.destination.y
+        ) {
+            // w mieście
+            this.city = world.getCityByPositionXY(
+                this.position.x,
+                this.position.y,
+            );
+        } else {
+            // w drodze
+            const steps = HexMath.getBestSteps(this.position, this.destination, world.xSize, world.ySize);
+            const next = steps[Math.floor(Math.random() * steps.length)];
+            this.position.x = next.x;
+            this.position.y = next.y;
+            this.destination = null;
+        }
+    }
 }

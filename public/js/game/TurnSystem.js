@@ -16,7 +16,7 @@ class TurnSystem {
 		for (const aiPlayer of aiPlayersArray) {
 			aiPlayer.turn(world);
 		}
-
+		player.turn(world);
 		world.turnsLeft--;
 		GameView.refreshAll(world, player, aiPlayersArray);
 
