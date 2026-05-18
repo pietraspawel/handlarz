@@ -35,4 +35,12 @@ class World {
         const index = Math.floor(Math.random() * this.cities.length);
         return this.cities[index];
     }
+
+    getCityByPositionXY(x, y) {
+        return (
+            this.cities.find(
+                (city) => city.position.x === x && city.position.y === y,
+            ) || null
+        );
+    }
 }
