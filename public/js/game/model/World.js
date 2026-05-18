@@ -2,6 +2,8 @@ class World {
     static MAX_NON_HIDDEN_AI = 3;
 
     constructor(data) {
+        this.xSize = data.world.xSize;
+        this.ySize = data.world.ySize;
         this.map = data.world.map;
         this.highscore = parseInt(data.world.highscore);
         this.turnsLeft = data.world.turnsAmount;
