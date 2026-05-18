@@ -1,3 +1,6 @@
+// note: do zmiany:
+// refreshcitycursors
+
 class GameView {
 	static refreshAll(world, player, aiPlayersArray) {
 		GameView.refreshView(
