@@ -1,3 +1,4 @@
+// position - {x:,y:}
 class City
 {
     constructor(name, position, goods) {

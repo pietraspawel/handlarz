@@ -39,4 +39,6 @@ $().ready(() => {
     );
 
     GameView.refreshAll(world, player, aiPlayers);
+
+    console.log(world);
 });

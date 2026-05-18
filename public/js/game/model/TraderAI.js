@@ -1,3 +1,6 @@
+// do usunięcia:
+// city
+
 class TraderAI extends Trader {
     name;
     lastTurnInfo;
