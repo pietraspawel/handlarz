@@ -29,7 +29,7 @@ class TraderAI extends Trader {
 
         let decision = this.strategy.decide(world, this);
         this.buy(decision.goodId);
-        this.goTo(decision.city);
+        this.setDestination(decision.city);
         this.sellAll();
 
         this.lastTurnInfo = {

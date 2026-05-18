@@ -1,7 +1,5 @@
 // do usunięcia:
 // city
-// do przerobienia:
-// goTo
 
 // position - obecna pozycja {x:,y:}
 // destination - pozycja celu {x:,y:}
@@ -47,8 +45,7 @@ class Trader {
         }
     }
 
-    goTo(city) {
-        this.city = city;
-        this.position = city.position;
+    setDestination(city) {
+        this.destination = city.position;
     }
 }
