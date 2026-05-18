@@ -18,8 +18,8 @@ class CityView {
 	}
 
 	static refreshCityCursors(cities, player) {
-		const playerX = player.getPosition().x;
-		const playerY = player.getPosition().y;
+		const playerX = player.position.x;
+		const playerY = player.position.y;
 
 		for (let i in cities) {
 			const city = cities[i];

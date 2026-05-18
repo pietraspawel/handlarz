@@ -1,7 +1,6 @@
 // do usunięcia:
 // city
 // do przerobienia:
-// getPosition
 // goTo
 
 // position - obecna pozycja {x:,y:}
@@ -23,10 +22,6 @@ class Trader {
         }
         this.position = world.cities[0].position;
         this.destination = undefined;
-    }
-
-    getPosition() {
-        return this.city.position;
     }
 
     buy(goodId) {
