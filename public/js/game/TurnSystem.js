@@ -1,3 +1,16 @@
+// Podczas swojej tury Gracz może:
+// kupować/sprzedawać
+// wyznaczyć cel - to kończy turę i rozgrywa się część automatyczna
+
+// Część automatyczna:
+// Wykonywanie są działania AI.
+// Jeśli Gracz jest u celu to koniec części automatycznej.
+// Jeśli nie, to Gracz przesuwa się o jedno pole do celu.
+
+// Tura AI:
+// Jeśli Gracz jest u celu to sprzedaj wszystko, kup towar, wyznacz nowy cel.
+// Jeśli nie, to Gracz przesuwa się o jedno pole do celu.
+
 class TurnSystem {
 	static nextTurn(world, player, aiPlayersArray) {
 		for (const aiPlayer of aiPlayersArray) {
