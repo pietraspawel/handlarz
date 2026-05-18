@@ -1,3 +1,6 @@
+// Dodać:
+// wygaszanie UI jeśli osiągnięto koniec gry (disable all)
+
 class GameEventsHandler {
 	aiPlayers;
 	player;
