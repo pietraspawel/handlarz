@@ -13,11 +13,11 @@ class TraderAI extends Trader {
         this.name = name;
         this.city = city;
         this.lastTurnInfo = {
-            'transaction': '-',
-            'lastCity': null,
-            'wealth': this.gold
+            transaction: "-",
+            lastCity: null,
+            wealth: this.gold,
         };
-        this.position = this.city.position;
+        this.position = { ...this.city.position };
     }
 
     refreshView() {
@@ -26,7 +26,6 @@ class TraderAI extends Trader {
     }
 
     turn(world) {
-        console.log('AI', this);
         let lastCity = this.city;
 
         let decision = this.strategy.decide(world, this);
@@ -35,9 +34,9 @@ class TraderAI extends Trader {
         this.sellAll();
 
         this.lastTurnInfo = {
-            'transaction': this.goods[decision.goodId].name,
-            'lastCity': lastCity,
-            'wealth': this.gold
+            transaction: this.goods[decision.goodId].name,
+            lastCity: lastCity,
+            wealth: this.gold,
         };
     }
 }

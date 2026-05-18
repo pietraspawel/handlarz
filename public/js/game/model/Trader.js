@@ -18,7 +18,7 @@ class Trader {
             let good = world.goods[goodKey];
             this.goods.push(Good.createForTrader(good));
         }
-        this.position = world.cities[0].position;
+        this.position = { ...world.cities[0].position };
         this.destination = undefined;
     }
 
@@ -46,27 +46,31 @@ class Trader {
     }
 
     setDestination(city) {
-        this.destination = city.position;
+        this.destination = { ...city.position };
     }
 
     turn(world) {
-        console.log('Player', this);
+        const steps = HexMath.getBestSteps(
+            this.position,
+            this.destination,
+            world.xSize,
+            world.ySize,
+        );
+        const next = steps[Math.floor(Math.random() * steps.length)];
+        this.position.x = next.x;
+        this.position.y = next.y;
+        // this.city = null;
+
         if (
             this.position.x == this.destination.x &&
             this.position.y == this.destination.y
         ) {
             // w mieście
+            this.destination = null;
             this.city = world.getCityByPositionXY(
                 this.position.x,
                 this.position.y,
             );
-            this.destination = null;
-        } else {
-            // w drodze
-            const steps = HexMath.getBestSteps(this.position, this.destination, world.xSize, world.ySize);
-            const next = steps[Math.floor(Math.random() * steps.length)];
-            this.position.x = next.x;
-            this.position.y = next.y;
         }
     }
 }

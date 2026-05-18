@@ -1,8 +1,8 @@
 class TraderAIView {
 	static refreshPosition(trader) {
 		const tile = WorldView.getHexElementByCoords(
-			trader.city.position.x,
-			trader.city.position.y,
+			trader.position.x,
+			trader.position.y,
 		);
 		const cx = parseFloat(tile.dataset.cx);
 		const cy = parseFloat(tile.dataset.cy);
