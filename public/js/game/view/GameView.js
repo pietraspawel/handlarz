@@ -14,7 +14,7 @@ class GameView {
 		) {
 			aiPlayersArray[i].refreshPosition();
 		}
-		aiPlayersArray.forEach((ai) => ai.refreshInfo());
+		aiPlayersArray.forEach((ai) => TraderAIView.refreshInfo(ai));
 	}
 
 	static refreshView(highscore, turnsLeft, cities, player) {

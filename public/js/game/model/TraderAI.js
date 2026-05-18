@@ -21,7 +21,7 @@ class TraderAI extends Trader {
 
     refreshView() {
         this.refreshPosition();
-        this.refreshInfo();
+        TraderAIView.refreshInfo();
     }
 
     refreshPosition() {
@@ -45,41 +45,6 @@ class TraderAI extends Trader {
         }
 
         aiPlayer.setAttribute("transform", `translate(${cx + offset.x}, ${cy + offset.y})`);
-    }
-
-    refreshInfo() {
-        let transitText = this.city.name;
-        if (this.lastTurnInfo.lastCity !== null) {
-            transitText = `${this.lastTurnInfo.lastCity.name} -> ${this.city.name}`;
-        }
-        let wealth = Library.separateThousands(this.lastTurnInfo.wealth) + " $";
-        const tbody = document.querySelector(".ai-player-info tbody");
-        let row = tbody.querySelector(`tr[data-id="${this.id}"]`);
-
-        if (!row) {
-            row = document.createElement("tr");
-            row.dataset.id = this.id;
-            row.classList.add(`aiPlayer${this.id}`);
-
-            row.append(
-                this._createCell("ai-name"),
-                this._createCell("ai-transaction"),
-                this._createCell("ai-transit"),
-                this._createCell("ai-wealth")
-            );
-            tbody.appendChild(row);
-        }
-
-        row.querySelector(".ai-name").textContent = this.name;
-        row.querySelector(".ai-transaction").textContent = this.lastTurnInfo.transaction;
-        row.querySelector(".ai-transit").textContent = transitText;
-        row.querySelector(".ai-wealth").textContent = wealth;
-    }
-
-    _createCell(className) {
-        const td = document.createElement("td");
-        td.className = className;
-        return td;
     }
 
     turn(world) {
