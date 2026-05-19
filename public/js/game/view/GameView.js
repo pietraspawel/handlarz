@@ -22,6 +22,11 @@ class GameView {
 		aiPlayersArray.forEach((ai) => TraderAIView.refreshInfo(ai));
 	}
 
+	static refreshElementsAfterTrade(trader) {
+		CityView.refreshElementsAfterTrade(trader);
+		TraderView.refreshElementsAfterTrade(trader);
+	}
+
 	static refreshTurnsLeftView(turnsLeft) {
 		$(".player-info .turns-left").text(turnsLeft);
 	}

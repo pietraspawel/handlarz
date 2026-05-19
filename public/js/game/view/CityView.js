@@ -1,4 +1,9 @@
 class CityView {
+	static refreshElementsAfterTrade(trader) {
+		CityView.refreshBuyButtons(trader);
+		CityView.refreshSellButtons(trader);
+	}
+
 	static refreshCityPrices(cities) {
 		let container = $(".city-info .prices");
 		$(".city-info .city-prices").remove();

@@ -33,16 +33,14 @@ class GameEventsHandler {
 			let target = $(e.target);
 			let id = target.data("id");
 			this.trader.buy(this.world, id);
-			TraderView.refreshElementsAfterTrade(this.trader);
-			TraderView.refreshView(this.trader);
+			GameView.refreshElementsAfterTrade(this.trader);
 		});
 
 		$(".city-info .sell").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
 			this.trader.sell(this.world, id);
-			TraderView.refreshElementsAfterTrade(this.trader);
-			TraderView.refreshView(this.trader);
+			GameView.refreshElementsAfterTrade(this.trader);
 		});
 
 		$(".menu-container").on("change", "#checkShowTooltips", () => {
