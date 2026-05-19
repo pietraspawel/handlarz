@@ -2,14 +2,14 @@
 // refreshcitycursors
 
 class GameView {
-	static refreshAll(world, player, aiPlayersArray) {
+	static refreshAll(world, trader, aiPlayersArray) {
 		GameView.refreshView(
 			world.highscore,
 			world.turnsLeft,
 			world.cities,
-			player,
+			trader,
 		);
-		TraderView.refreshView(player);
+		TraderView.refreshView(trader);
 		for (
 			let i = 0;
 			i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length;
@@ -20,10 +20,10 @@ class GameView {
 		aiPlayersArray.forEach((ai) => TraderAIView.refreshInfo(ai));
 	}
 
-	static refreshView(highscore, turnsLeft, cities, player) {
+	static refreshView(highscore, turnsLeft, cities, trader) {
 		GameView.refreshMapRecordView(highscore);
 		GameView.refreshTurnsLeftView(turnsLeft);
-		CityView.refreshCityCursors(cities, player);
+		CityView.refreshCityCursors(cities, trader);
 		CityView.refreshCityPrices(cities);
 	}
 
@@ -36,13 +36,13 @@ class GameView {
 		$(".player-info .map-record").text(string);
 	}
 
-	static refreshPlayer(world, player) {
+	static refreshPlayer(world, trader) {
 		GameView.refreshView(
 			world.highscore,
 			world.turnsLeft,
 			world.cities,
-			player,
+			trader,
 		);
-		TraderView.refreshView(player);
+		TraderView.refreshView(trader);
 	}
 }
