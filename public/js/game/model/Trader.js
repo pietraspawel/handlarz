@@ -69,7 +69,7 @@ class Trader {
         this.position.y = next.y;
         // this.city = null;
 
-        if (this.isInCity()) {
+        if (this.isInDestination()) {
             this.destination = null;
             this.city = world.getCityByPositionXY(
                 this.position.x,
@@ -78,7 +78,7 @@ class Trader {
         }
     }
 
-    isInCity() {
+    isInDestination() {
         if (
             this.position &&
             this.destination &&
