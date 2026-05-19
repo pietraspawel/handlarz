@@ -26,17 +26,20 @@ class TraderAI extends Trader {
     }
 
     turn(world) {
-        let lastCity = this.city;
+        if (this.isInCity) {
+            let lastCity = this.city;
+            let decision = this.strategy.decide(world, this);
 
-        let decision = this.strategy.decide(world, this);
-        this.buy(decision.goodId);
-        this.setDestination(decision.city);
-        this.sellAll();
+            this.sellAll();
+            this.buy(decision.goodId);
+            this.setDestination({ ...decision.city.position });
 
-        this.lastTurnInfo = {
-            transaction: this.goods[decision.goodId].name,
-            lastCity: lastCity,
-            wealth: this.gold,
-        };
+            this.lastTurnInfo = {
+                transaction: this.goods[decision.goodId].name,
+                lastCity: lastCity,
+                wealth: this.gold,
+            };
+        } else {
+        }
     }
 }
