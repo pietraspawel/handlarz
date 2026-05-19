@@ -1,4 +1,15 @@
 class TraderAIView {
+	static refreshElementsAfterTurn(aiTraders) {
+		for (
+			let i = 0;
+			i < World.MAX_NON_HIDDEN_AI && i < aiTraders.length;
+			i++
+		) {
+			TraderAIView.refreshPosition(aiTraders[i]);
+		}
+		aiTraders.forEach((aiTrader) => TraderAIView.refreshInfo(aiTrader));
+	}
+
 	static refreshPosition(trader) {
 		const tile = WorldView.getHexElementByCoords(
 			trader.position.x,

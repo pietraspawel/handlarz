@@ -13,14 +13,7 @@ class GameView {
 		GameView.refreshTurnsLeftView(world.turnsLeft);
 		CityView.refreshElementsAfterTurn(world.cities, trader);
 		TraderView.refreshElementsAfterTurn(trader);
-		for (
-			let i = 0;
-			i < World.MAX_NON_HIDDEN_AI && i < aiTraders.length;
-			i++
-		) {
-			TraderAIView.refreshPosition(aiTraders[i]);
-		}
-		aiTraders.forEach((ai) => TraderAIView.refreshInfo(ai));
+		TraderAIView.refreshElementsAfterTurn(aiTraders);
 		if (trader.isInCity()) {
 			CityView.refreshElementsAfterEnterCity(trader);
 		}
