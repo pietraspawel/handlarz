@@ -61,16 +61,22 @@ class Trader {
         this.position.y = next.y;
         // this.city = null;
 
-        if (
-            this.position.x == this.destination.x &&
-            this.position.y == this.destination.y
-        ) {
-            // w mieście
+        if (this.isInCity()) {
             this.destination = null;
             this.city = world.getCityByPositionXY(
                 this.position.x,
                 this.position.y,
             );
         }
+    }
+
+    isInCity() {
+        if (
+            this.position.x == this.destination.x &&
+            this.position.y == this.destination.y
+        ) {
+            return true;
+        }
+        return false;
     }
 }
