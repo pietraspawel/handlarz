@@ -1,12 +1,6 @@
 class TraderView {
-	static refreshView(trader) {
+	static refreshElementsAfterTurn(trader) {
 		TraderView.refreshPosition(trader);
-		TraderView.refreshCargo(trader);
-		if (trader.isInCity()) {
-			TraderView.refreshWealth(trader);
-			CityView.refreshBuyButtons(trader);
-			CityView.refreshSellButtons(trader);
-		}
 	}
 
 	static refreshElementsAfterTrade(trader) {

@@ -5,13 +5,14 @@ class GameView {
 	static refreshAll(world, trader, aiPlayersArray) {
 		GameView.refreshMapRecordView(world.highscore);
 		this.refreshElementsAfterTurn(world, trader, aiPlayersArray);
+		this.refreshElementsAfterTrade(trader);
 	}
 
 	static refreshElementsAfterTurn(world, trader, aiPlayersArray) {
 		GameView.refreshTurnsLeftView(world.turnsLeft);
 		CityView.refreshCityCursors(world.cities, trader);
 		CityView.refreshCityPrices(world.cities);
-		TraderView.refreshView(trader);
+		TraderView.refreshElementsAfterTurn(trader);
 		for (
 			let i = 0;
 			i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length;
