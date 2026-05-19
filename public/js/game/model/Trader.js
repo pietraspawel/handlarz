@@ -45,8 +45,16 @@ class Trader {
         }
     }
 
-    setDestination(city) {
-        this.destination = { ...city.position };
+    setDestination(position) {
+        if (
+            !position ||
+            typeof position.x !== "number" ||
+            typeof position.y !== "number"
+        ) {
+            throw new Error("setDestination expects {x, y}");
+        }
+
+        this.destination = { ...position };
     }
 
     turn(world) {
@@ -72,11 +80,22 @@ class Trader {
 
     isInCity() {
         if (
+            this.position &&
+            this.destination &&
             this.position.x == this.destination.x &&
             this.position.y == this.destination.y
         ) {
             return true;
         }
         return false;
+    }
+
+    isDestinationEmpty() {
+        return (
+            this.destination &&
+            typeof this.destination === "object" &&
+            !Array.isArray(this.destination) &&
+            Object.keys(this.destination).length === 0
+        );
     }
 }

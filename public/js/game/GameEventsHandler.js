@@ -21,7 +21,7 @@ class GameEventsHandler {
 			let id = target.data("id");
 			let city = this.world.getCity(id);
 			if (city.name != this.player.city.name) {
-				this.player.setDestination(city);
+				this.player.setDestination({ ...city.position });
 				TurnSystem.nextTurn(this.world, this.player, this.aiPlayers);
 			}
 		});
