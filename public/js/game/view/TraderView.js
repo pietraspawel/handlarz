@@ -26,16 +26,16 @@ class TraderView {
 		const cx = tile.dataset.cx;
 		const cy = tile.dataset.cy;
 
-		let playerIcon = document.getElementById("player");
-		if (!playerIcon) {
-			playerIcon = document
+		let traderIcon = document.getElementById("player");
+		if (!traderIcon) {
+			traderIcon = document
 				.getElementById("player-template")
 				.cloneNode(true);
-			playerIcon.setAttribute("id", "player");
-			document.getElementById("player-layer").appendChild(playerIcon);
+			traderIcon.setAttribute("id", "player");
+			document.getElementById("player-layer").appendChild(traderIcon);
 		}
 
-		playerIcon.setAttribute(
+		traderIcon.setAttribute(
 			"transform",
 			`translate(${cx - 10}, ${cy - 10})`,
 		);
