@@ -120,4 +120,11 @@ class Trader {
         }
         return false;
     }
+
+    getCityName() {
+        if (this.city) {
+            return this.city.name;
+        }
+        return "w trasie";
+    }
 }

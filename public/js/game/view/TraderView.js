@@ -63,10 +63,7 @@ class TraderView {
 			`translate(${cx - 10}, ${cy - 10})`,
 		);
 
-		let cityName = "w trasie";
-		if (trader.city) {
-			cityName = trader.city.name;
-		}
+		let cityName = trader.getCityName();
 		$(".city-info .player-position").text(`Jesteś w: ${cityName}`);
 	}
 
