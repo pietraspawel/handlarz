@@ -18,7 +18,7 @@ class TurnSystem {
 		}
 		player.turn(world);
 		world.turnsLeft--;
-		GameView.refreshAll(world, player, aiPlayersArray);
+		GameView.refreshElementsAfterTurn(world, player, aiPlayersArray);
 
 		if (world.turnsLeft <= 0) {
 			GameOverService.gameOver(world, player, aiPlayersArray);
