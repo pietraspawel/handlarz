@@ -3,8 +3,10 @@ class TraderView {
 		TraderView.refreshWealth(trader);
 		TraderView.refreshPosition(trader);
 		TraderView.refreshCargo(trader);
-		TraderView.refreshBuyButtons(trader);
-		TraderView.refreshSellButtons(trader);
+		if (trader.isInCity()) {
+			TraderView.refreshBuyButtons(trader);
+			TraderView.refreshSellButtons(trader);
+		}
 	}
 
 	static refreshSellButtons(trader) {
@@ -61,7 +63,7 @@ class TraderView {
 			`translate(${cx - 10}, ${cy - 10})`,
 		);
 
-		let cityName = 'w trasie';
+		let cityName = "w trasie";
 		if (trader.city) {
 			cityName = trader.city.name;
 		}

@@ -113,4 +113,11 @@ class Trader {
     getCurrentCity(world) {
         return world.getCityByPositionXY(this.position.x, this.position.y);
     }
+
+    isInCity() {
+        if (this.city) {
+            return true;
+        }
+        return false;
+    }
 }
