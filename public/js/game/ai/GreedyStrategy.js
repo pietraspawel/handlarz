@@ -1,12 +1,12 @@
 class GreedyStrategy extends AIStrategy {
-
     decide(world, trader) {
-        let bestGoodId = this.getCheapestGood(trader.city);
+        const city = trader.getCurrentCity(world);
+        let bestGoodId = this.getCheapestGood(city);
         let bestCity = this.getBestCity(world, bestGoodId);
 
         return {
             goodId: bestGoodId,
-            city: bestCity
+            city: bestCity,
         };
     }
 
