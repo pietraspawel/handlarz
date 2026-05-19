@@ -26,7 +26,7 @@ class TraderAI extends Trader {
     }
 
     turn(world) {
-        if (!this.isDestinationSelected() ) {
+        if (!this.isDestinationSelected()) {
             let decision = this.strategy.decide(world, this);
             this.setDestination({ ...decision.city.position });
         }
@@ -45,6 +45,7 @@ class TraderAI extends Trader {
                 wealth: this.gold,
             };
         } else {
+            this.moveOneStepToDestination(world);
         }
     }
 }

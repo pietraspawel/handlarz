@@ -58,6 +58,18 @@ class Trader {
     }
 
     turn(world) {
+        this.moveOneStepToDestination(world);
+
+        if (this.isInDestination()) {
+            this.destination = null;
+            this.city = world.getCityByPositionXY(
+                this.position.x,
+                this.position.y,
+            );
+        }
+    }
+
+    moveOneStepToDestination(world) {
         const steps = HexMath.getBestSteps(
             this.position,
             this.destination,
@@ -68,14 +80,6 @@ class Trader {
         this.position.x = next.x;
         this.position.y = next.y;
         // this.city = null;
-
-        if (this.isInDestination()) {
-            this.destination = null;
-            this.city = world.getCityByPositionXY(
-                this.position.x,
-                this.position.y,
-            );
-        }
     }
 
     isInDestination() {
