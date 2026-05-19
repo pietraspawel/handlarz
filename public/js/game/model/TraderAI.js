@@ -18,6 +18,9 @@ class TraderAI extends Trader {
             wealth: this.gold,
         };
         this.position = { ...this.city.position };
+        let decision = this.strategy.decide(world, this);
+        this.buy(decision.goodId);
+        this.setDestination({ ...decision.city.position });
     }
 
     refreshView() {
@@ -26,10 +29,7 @@ class TraderAI extends Trader {
     }
 
     turn(world) {
-        if (!this.isDestinationSelected()) {
-            let decision = this.strategy.decide(world, this);
-            this.setDestination({ ...decision.city.position });
-        }
+        this.moveOneStepToDestination(world);
 
         if (this.isInDestination()) {
             this.destinationReached(world);
@@ -38,6 +38,8 @@ class TraderAI extends Trader {
             let decision = this.strategy.decide(world, this);
 
             this.sellAll();
+            console.log(this.gold);
+
             this.buy(decision.goodId);
             this.setDestination({ ...decision.city.position });
 
@@ -46,8 +48,6 @@ class TraderAI extends Trader {
                 lastCity: lastCity,
                 wealth: this.gold,
             };
-        } else {
-            this.moveOneStepToDestination(world);
         }
     }
 }
