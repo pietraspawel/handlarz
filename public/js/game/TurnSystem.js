@@ -8,8 +8,8 @@
 // Jeśli nie, to Gracz przesuwa się o jedno pole do celu.
 
 // Tura AI:
+// Przesuń Gracza o jedno pole.
 // Jeśli Gracz jest u celu to sprzedaj wszystko, kup towar, wyznacz nowy cel.
-// Jeśli nie, to Gracz przesuwa się o jedno pole do celu.
 
 class TurnSystem {
 	static nextTurn(world, player, aiPlayersArray) {
