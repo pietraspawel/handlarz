@@ -29,14 +29,14 @@ class GameEventsHandler {
 		$(".city-info .buy").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
-			this.player.buy(id);
+			this.player.buy(this.world, id);
 			GameView.refreshPlayer(this.world, this.player);
 		});
 
 		$(".city-info .sell").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
-			this.player.sell(id);
+			this.player.sell(this.world, id);
 			GameView.refreshPlayer(this.world, this.player);
 		});
 

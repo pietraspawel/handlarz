@@ -22,23 +22,26 @@ class Trader {
         this.destination = undefined;
     }
 
-    buy(goodId) {
-        let price = this.city.goods[goodId].price;
+    buy(world, goodId) {
+        let city = this.getCurrentCity(world);
+        let price = city.goods[goodId].price;
         let amount = Math.floor(this.gold / price);
         this.gold -= price * amount;
         this.goods[goodId].quantity += amount;
     }
 
-    sell(goodId) {
-        let price = this.city.goods[goodId].price;
+    sell(world, goodId) {
+        let city = this.getCurrentCity(world);
+        let price = city.goods[goodId].price;
         let amount = this.goods[goodId].quantity;
         this.gold += price * amount;
         this.goods[goodId].quantity = 0;
     }
 
-    sellAll() {
-        for (let goodId in this.city.goods) {
-            let price = this.city.goods[goodId].price;
+    sellAll(world) {
+        let city = this.getCurrentCity(world);
+        for (let goodId in city.goods) {
+            let price = city.goods[goodId].price;
             let amount = this.goods[goodId].quantity;
             this.gold += price * amount;
             this.goods[goodId].quantity = 0;
@@ -75,7 +78,6 @@ class Trader {
         const next = steps[Math.floor(Math.random() * steps.length)];
         this.position.x = next.x;
         this.position.y = next.y;
-        // this.city = null;
     }
 
     destinationReached(world) {
@@ -108,5 +110,9 @@ class Trader {
         }
 
         return true;
+    }
+
+    getCurrentCity(world) {
+        return world.getCityByPositionXY(this.position.x, this.position.y);
     }
 }
