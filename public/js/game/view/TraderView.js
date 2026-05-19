@@ -1,9 +1,9 @@
 class TraderView {
 	static refreshView(trader) {
-		TraderView.refreshWealth(trader);
 		TraderView.refreshPosition(trader);
 		TraderView.refreshCargo(trader);
 		if (trader.isInCity()) {
+			TraderView.refreshWealth(trader);
 			TraderView.refreshBuyButtons(trader);
 			TraderView.refreshSellButtons(trader);
 		}
