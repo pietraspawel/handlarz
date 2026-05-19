@@ -2,25 +2,25 @@
 // refreshcitycursors
 
 class GameView {
-	static refreshAll(world, trader, aiPlayersArray) {
+	static refreshAll(world, trader, aiTraders) {
 		GameView.refreshMapRecordView(world.highscore);
 		CityView.refreshCityPrices(world.cities);
-		this.refreshElementsAfterTurn(world, trader, aiPlayersArray);
+		this.refreshElementsAfterTurn(world, trader, aiTraders);
 		this.refreshElementsAfterTrade(trader);
 	}
 
-	static refreshElementsAfterTurn(world, trader, aiPlayersArray) {
+	static refreshElementsAfterTurn(world, trader, aiTraders) {
 		GameView.refreshTurnsLeftView(world.turnsLeft);
 		CityView.refreshElementsAfterTurn(world.cities, trader);
 		TraderView.refreshElementsAfterTurn(trader);
 		for (
 			let i = 0;
-			i < World.MAX_NON_HIDDEN_AI && i < aiPlayersArray.length;
+			i < World.MAX_NON_HIDDEN_AI && i < aiTraders.length;
 			i++
 		) {
-			TraderAIView.refreshPosition(aiPlayersArray[i]);
+			TraderAIView.refreshPosition(aiTraders[i]);
 		}
-		aiPlayersArray.forEach((ai) => TraderAIView.refreshInfo(ai));
+		aiTraders.forEach((ai) => TraderAIView.refreshInfo(ai));
 		if (trader.isInCity()) {
 			CityView.refreshElementsAfterEnterCity(trader);
 		}
