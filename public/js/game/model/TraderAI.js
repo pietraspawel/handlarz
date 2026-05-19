@@ -26,11 +26,9 @@ class TraderAI extends Trader {
     }
 
     turn(world) {
-        if (this.isDestinationEmpty()) {
-            console.log("empty");
+        if (!this.isDestinationSelected()) {
             let decision = this.strategy.decide(world, this);
             this.setDestination({ ...decision.city.position });
-            console.log(decision.city.position);
         }
 
         if (this.isInCity()) {
@@ -48,7 +46,5 @@ class TraderAI extends Trader {
             };
         } else {
         }
-
-        console.log(this.destination);
     }
 }

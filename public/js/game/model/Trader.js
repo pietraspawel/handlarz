@@ -90,12 +90,18 @@ class Trader {
         return false;
     }
 
-    isDestinationEmpty() {
-        return (
-            this.destination &&
+    isDestinationSelected() {
+        if (this.destination == null) {
+            return false;
+        }
+        if (
             typeof this.destination === "object" &&
             !Array.isArray(this.destination) &&
             Object.keys(this.destination).length === 0
-        );
+        ) {
+            return false;
+        }
+
+        return true;
     }
 }
