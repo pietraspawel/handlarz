@@ -58,7 +58,7 @@ class TraderAIView {
 
 			row.append(
 				TraderAIView._createCell("ai-name"),
-				TraderAIView._createCell("ai-transaction"),
+				TraderAIView._createCell("ai-good"),
 				TraderAIView._createCell("ai-lastCity"),
 				TraderAIView._createCell("ai-wealth"),
 			);
@@ -66,8 +66,8 @@ class TraderAIView {
 		}
 
 		row.querySelector(".ai-name").textContent = trader.name;
-		row.querySelector(".ai-transaction").textContent =
-			trader.lastTurnInfo.transaction;
+		row.querySelector(".ai-good").textContent =
+			trader.lastTurnInfo.goodName;
 		row.querySelector(".ai-lastCity").textContent = lastCityName;
 		row.querySelector(".ai-wealth").textContent = wealth;
 	}

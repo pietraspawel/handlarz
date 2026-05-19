@@ -10,7 +10,7 @@ class TraderAI extends Trader {
         this.name = name;
         this.city = city;
         this.lastTurnInfo = {
-            transaction: "-",
+            goodName: "-",
             lastCity: city,
             wealth: this.gold,
         };
@@ -41,7 +41,7 @@ class TraderAI extends Trader {
             this.setDestination({ ...decision.city.position });
 
             this.lastTurnInfo = {
-                transaction: this.goods[decision.goodId].name,
+                goodName: this.goods[decision.goodId].name,
                 lastCity: lastCity,
                 wealth: this.gold,
             };
