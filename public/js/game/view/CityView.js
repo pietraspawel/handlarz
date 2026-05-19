@@ -1,5 +1,14 @@
 class CityView {
+	static refreshElementsAfterTurn(cities, trader) {
+		CityView.refreshCityCursors(cities, trader);
+	}
+
 	static refreshElementsAfterTrade(trader) {
+		CityView.refreshBuyButtons(trader);
+		CityView.refreshSellButtons(trader);
+	}
+
+	static refreshElementsAfterEnterCity(trader) {
 		CityView.refreshBuyButtons(trader);
 		CityView.refreshSellButtons(trader);
 	}
