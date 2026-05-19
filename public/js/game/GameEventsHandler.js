@@ -2,14 +2,14 @@
 // wygaszanie UI jeśli osiągnięto koniec gry (disable all)
 
 class GameEventsHandler {
-	aiPlayers;
-	player;
+	aiTraders;
+	trader;
 	world;
 	tooltipsView;
 
-	constructor(aiPlayers, player, world, tooltipsView) {
-		this.aiPlayers = aiPlayers;
-		this.player = player;
+	constructor(aiTraders, trader, world, tooltipsView) {
+		this.aiTraders = aiTraders;
+		this.trader = trader;
 		this.world = world;
 		this.tooltipsView = tooltipsView;
 		this.bind();
@@ -21,26 +21,26 @@ class GameEventsHandler {
 			let id = target.data("id");
 			let city = this.world.getCity(id);
 			if (
-				this.player.position.x !== city.position.x ||
-				this.player.position.y !== city.position.y
+				this.trader.position.x !== city.position.x ||
+				this.trader.position.y !== city.position.y
 			) {
-				this.player.setDestination({ ...city.position });
-				TurnSystem.nextTurn(this.world, this.player, this.aiPlayers);
+				this.trader.setDestination({ ...city.position });
+				TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
 			}
 		});
 
 		$(".city-info .buy").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
-			this.player.buy(this.world, id);
-			TraderView.refreshView(this.player);
+			this.trader.buy(this.world, id);
+			TraderView.refreshView(this.trader);
 		});
 
 		$(".city-info .sell").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
-			this.player.sell(this.world, id);
-			TraderView.refreshView(this.player);
+			this.trader.sell(this.world, id);
+			TraderView.refreshView(this.trader);
 		});
 
 		$(".menu-container").on("change", "#checkShowTooltips", () => {
