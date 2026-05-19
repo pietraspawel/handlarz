@@ -12,16 +12,16 @@
 // Jeśli Gracz jest u celu to sprzedaj wszystko, kup towar, wyznacz nowy cel.
 
 class TurnSystem {
-	static nextTurn(world, player, aiPlayersArray) {
-		for (const aiPlayer of aiPlayersArray) {
+	static nextTurn(world, trader, aiTraders) {
+		for (const aiPlayer of aiTraders) {
 			aiPlayer.turn(world);
 		}
-		player.turn(world);
+		trader.turn(world);
 		world.turnsLeft--;
-		GameView.refreshElementsAfterTurn(world, player, aiPlayersArray);
+		GameView.refreshElementsAfterTurn(world, trader, aiTraders);
 
 		if (world.turnsLeft <= 0) {
-			GameOverService.gameOver(world, player, aiPlayersArray);
+			GameOverService.gameOver(world, trader, aiTraders);
 		}
 	}
 }
