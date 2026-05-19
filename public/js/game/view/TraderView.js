@@ -9,6 +9,11 @@ class TraderView {
 		}
 	}
 
+	static refreshElementsAfterTrade(trader) {
+		TraderView.refreshCargo(trader);
+		TraderView.refreshWealth(trader);
+	}
+
 	static refreshSellButtons(trader) {
 		let container = $(".city-info .sell");
 		container.find("td").remove();
