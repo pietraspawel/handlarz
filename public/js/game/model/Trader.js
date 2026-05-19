@@ -61,11 +61,7 @@ class Trader {
         this.moveOneStepToDestination(world);
 
         if (this.isInDestination()) {
-            this.destination = null;
-            this.city = world.getCityByPositionXY(
-                this.position.x,
-                this.position.y,
-            );
+            this.destinationReached(world);
         }
     }
 
@@ -80,6 +76,11 @@ class Trader {
         this.position.x = next.x;
         this.position.y = next.y;
         // this.city = null;
+    }
+
+    destinationReached(world) {
+        this.destination = null;
+        this.city = world.getCityByPositionXY(this.position.x, this.position.y);
     }
 
     isInDestination() {

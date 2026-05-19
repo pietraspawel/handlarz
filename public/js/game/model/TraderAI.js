@@ -32,6 +32,8 @@ class TraderAI extends Trader {
         }
 
         if (this.isInDestination()) {
+            this.destinationReached(world);
+
             let lastCity = this.city;
             let decision = this.strategy.decide(world, this);
 
