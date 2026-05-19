@@ -20,12 +20,6 @@ class TurnSystem {
 		world.turnsLeft--;
 		GameView.refreshAll(world, player, aiPlayersArray);
 
-
-    console.log(world);
-    console.log(player);
-    console.log(aiPlayersArray);
-
-
 		if (world.turnsLeft <= 0) {
 			GameOverService.gameOver(world, player, aiPlayersArray);
 		}
