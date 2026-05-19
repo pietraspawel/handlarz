@@ -31,9 +31,9 @@ class CityView {
 		}
 	}
 
-	static refreshCityCursors(cities, player) {
-		const playerX = player.position.x;
-		const playerY = player.position.y;
+	static refreshCityCursors(cities, trader) {
+		const traderX = trader.position.x;
+		const traderY = trader.position.y;
 
 		for (let i in cities) {
 			const city = cities[i];
@@ -49,7 +49,7 @@ class CityView {
 			cityElement.classList.remove("city-active");
 			cityElement.classList.remove("city-current");
 
-			if (city.position.x === playerX && city.position.y === playerY) {
+			if (city.position.x === traderX && city.position.y === traderY) {
 				cityElement.classList.add("city-current");
 			} else {
 				cityElement.classList.add("city-active");
