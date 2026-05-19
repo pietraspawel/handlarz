@@ -33,14 +33,14 @@ class GameEventsHandler {
 			let target = $(e.target);
 			let id = target.data("id");
 			this.player.buy(this.world, id);
-			GameView.refreshPlayer(this.world, this.player);
+			TraderView.refreshView(this.player);
 		});
 
 		$(".city-info .sell").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
 			this.player.sell(this.world, id);
-			GameView.refreshPlayer(this.world, this.player);
+			TraderView.refreshView(this.player);
 		});
 
 		$(".menu-container").on("change", "#checkShowTooltips", () => {

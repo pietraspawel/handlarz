@@ -22,12 +22,6 @@ class GameView {
 		aiPlayersArray.forEach((ai) => TraderAIView.refreshInfo(ai));
 	}
 
-	static refreshView(highscore, turnsLeft, cities, trader) {
-		GameView.refreshTurnsLeftView(turnsLeft);
-		CityView.refreshCityCursors(cities, trader);
-		CityView.refreshCityPrices(cities);
-	}
-
 	static refreshTurnsLeftView(turnsLeft) {
 		$(".player-info .turns-left").text(turnsLeft);
 	}
@@ -35,15 +29,5 @@ class GameView {
 	static refreshMapRecordView(highscore) {
 		let string = Library.separateThousands(highscore) + " $";
 		$(".player-info .map-record").text(string);
-	}
-
-	static refreshPlayer(world, trader) {
-		GameView.refreshView(
-			world.highscore,
-			world.turnsLeft,
-			world.cities,
-			trader,
-		);
-		TraderView.refreshView(trader);
 	}
 }
