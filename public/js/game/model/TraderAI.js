@@ -11,7 +11,7 @@ class TraderAI extends Trader {
         this.city = city;
         this.lastTurnInfo = {
             transaction: "-",
-            lastCity: null,
+            lastCity: city,
             wealth: this.gold,
         };
         this.position = { ...this.city.position };

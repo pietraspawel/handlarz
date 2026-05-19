@@ -31,9 +31,9 @@ class TraderAIView {
 	}
 
 	static refreshInfo(trader) {
-		let transitText = trader.city.name;
+		let lastCityName = trader.getCityName();
 		if (trader.lastTurnInfo.lastCity !== null) {
-			transitText = `${trader.lastTurnInfo.lastCity.name} -> ${trader.city.name}`;
+			lastCityName = `${trader.lastTurnInfo.lastCity.name}`;
 		}
 		let wealth =
 			Library.separateThousands(trader.lastTurnInfo.wealth) + " $";
@@ -48,7 +48,7 @@ class TraderAIView {
 			row.append(
 				TraderAIView._createCell("ai-name"),
 				TraderAIView._createCell("ai-transaction"),
-				TraderAIView._createCell("ai-transit"),
+				TraderAIView._createCell("ai-lastCity"),
 				TraderAIView._createCell("ai-wealth"),
 			);
 			tbody.appendChild(row);
@@ -57,7 +57,7 @@ class TraderAIView {
 		row.querySelector(".ai-name").textContent = trader.name;
 		row.querySelector(".ai-transaction").textContent =
 			trader.lastTurnInfo.transaction;
-		row.querySelector(".ai-transit").textContent = transitText;
+		row.querySelector(".ai-lastCity").textContent = lastCityName;
 		row.querySelector(".ai-wealth").textContent = wealth;
 	}
 
