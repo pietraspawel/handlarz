@@ -60,7 +60,12 @@ class TraderView {
 			"transform",
 			`translate(${cx - 10}, ${cy - 10})`,
 		);
-		$(".city-info .player-position").text(`Jesteś w: ${trader.city.name}`);
+
+		let cityName = 'w trasie';
+		if (trader.city) {
+			cityName = trader.city.name;
+		}
+		$(".city-info .player-position").text(`Jesteś w: ${cityName}`);
 	}
 
 	static refreshWealth(trader) {

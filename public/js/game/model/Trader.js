@@ -75,7 +75,7 @@ class Trader {
         const next = steps[Math.floor(Math.random() * steps.length)];
         this.position.x = next.x;
         this.position.y = next.y;
-        // this.city = null;
+        this.city = null;
     }
 
     destinationReached(world) {
