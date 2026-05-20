@@ -32,7 +32,6 @@ $().ready(() => {
             aiTraderStrategy,
         ),
     ];
-    aiTraders.forEach(trader => trader.init(world));
 
     let tooltipsView = new TooltipsView();
     let gameEventsHandler = new GameEventsHandler(
