@@ -28,18 +28,12 @@ class TurnSystem {
 	}
 
 	static autoTurns(world, trader, aiTraders) {
-		if (!trader.isTravelling()) {
-			return;
-		}
-	}
-
-	static autoTurns(world, trader, aiTraders) {
 		if (this.autoTurnTimeout) {
 			return;
 		}
 
 		const loop = () => {
-			if (!trader.isTravelling()) {
+			if (trader.isInCity()) {
 				TurnSystem.stopAutoTurns();
 				return;
 			}
