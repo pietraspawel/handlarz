@@ -1,6 +1,3 @@
-// note: do zmiany:
-// refreshcitycursors
-
 class GameView {
 	static refreshAll(world, trader, aiTraders) {
 		GameView.refreshMapRecordView(world.highscore);
