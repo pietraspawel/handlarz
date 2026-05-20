@@ -67,7 +67,9 @@ class Trader {
     }
 
     turn(world) {
-        this.moveOneStepToDestination(world);
+        if (this.destination) {
+            this.moveOneStepToDestination(world);
+        }
 
         if (this.isInDestination()) {
             this.destinationReached(world);
