@@ -20,6 +20,9 @@ class Trader {
     }
 
     buy(world, goodId) {
+        if (this.isTravelling()) {
+            return false;
+        }
         let city = this.getCurrentCity(world);
         let price = city.goods[goodId].price;
         let amount = Math.floor(this.gold / price);
@@ -28,6 +31,9 @@ class Trader {
     }
 
     sell(world, goodId) {
+        if (this.isTravelling()) {
+            return false;
+        }
         let city = this.getCurrentCity(world);
         let price = city.goods[goodId].price;
         let amount = this.goods[goodId].quantity;
@@ -36,6 +42,9 @@ class Trader {
     }
 
     sellAll(world) {
+        if (this.isTravelling()) {
+            return false;
+        }
         let city = this.getCurrentCity(world);
         for (let goodId in city.goods) {
             let price = city.goods[goodId].price;

@@ -16,6 +16,9 @@ class GameView {
 		TraderAIView.refreshElementsAfterTurn(aiTraders);
 		if (trader.isInCity()) {
 			CityView.refreshElementsAfterEnterCity(trader);
+			CityView.enableTrade();
+		} else {
+			CityView.disableTrade();
 		}
 	}
 
