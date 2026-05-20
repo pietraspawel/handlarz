@@ -13,6 +13,18 @@ class GameEventsHandler {
 	}
 
 	bind() {
+		$("#map").on("click", "#terrain", (e) => {
+			if (this.world.gameMode === World.GAME_MODE.MANUAL) {
+				if (this.trader.isTravelling()) {
+					TurnSystem.nextTurn(
+						this.world,
+						this.trader,
+						this.aiTraders,
+					);
+				}
+			}
+		});
+
 		$("#cities").on("click", ".city-group", (e) => {
 			let target = $(e.currentTarget);
 			let id = target.data("id");
