@@ -10,7 +10,7 @@ class GreedyStrategy extends AIStrategy {
             bestCity.position.x,
             bestCity.position.y,
         );
-        const remainingTurns = world.turnsLeft;
+        const remainingTurns = world.turnsLeft - 1;
 
         if (distance > remainingTurns) {
             return {
