@@ -39,10 +39,14 @@ class TraderAI extends Trader {
         const lastCity = this.city;
         const decision = this.strategy.decide(world, this);
         const gold = this.gold;
-        this.buy(world, decision.goodId);
+        let goodName = "-";
+        if (decision.goodId !== null) {
+            this.buy(world, decision.goodId);
+            goodName = this.goods[decision.goodId].name;
+        }
         this.setDestination({ ...decision.city.position });
         this.lastTurnInfo = {
-            goodName: this.goods[decision.goodId].name,
+            goodName: goodName,
             lastCity: lastCity,
             wealth: gold,
         };
