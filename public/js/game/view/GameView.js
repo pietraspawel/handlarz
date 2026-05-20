@@ -1,3 +1,5 @@
+// nie zaznaczalne miasta i nazwy miast
+
 class GameView {
 	static refreshAll(world, trader, aiTraders) {
 		GameView.refreshMapRecordView(world.highscore);
