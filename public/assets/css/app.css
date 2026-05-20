@@ -39,7 +39,7 @@
     cursor: default;
 }
 
-#map.travel-mode, .city-group.travel-mode {
+#map.travel-mode, .city-group.travel-mode, #player.travel-mode, #ai-player-0.travel-mode, #ai-player-1.travel-mode, #ai-player-2.travel-mode {
     filter: grayscale(60%) brightness(0.85);
     transition: filter 0.2s ease;
     cursor: progress;

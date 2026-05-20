@@ -13,5 +13,9 @@ class WorldView {
 
 	static setTravelMode(isTraveling) {
 		$("#map").toggleClass("travel-mode", isTraveling);
+		$("#player").toggleClass("travel-mode", isTraveling);
+		$("#ai-player-0").toggleClass("travel-mode", isTraveling);
+		$("#ai-player-1").toggleClass("travel-mode", isTraveling);
+		$("#ai-player-2").toggleClass("travel-mode", isTraveling);
 	}
 }
