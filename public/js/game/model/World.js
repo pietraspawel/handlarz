@@ -56,4 +56,10 @@ class World {
             ) || null
         );
     }
+
+    hexDistance(x1, y1, x2, y2) {
+        const qr1 = HexMath.offsetToAxial(x1, y1);
+        const qr2 = HexMath.offsetToAxial(x2, y2);
+        return HexMath.distance(qr1.q, qr1.r, qr2.q, qr2.r);
+    }
 }
