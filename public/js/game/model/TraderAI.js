@@ -9,13 +9,14 @@ class TraderAI extends Trader {
         this.id = index;
         this.name = name;
         this.city = city;
+        this.position = { ...this.city.position };
+        const gold = this.gold;
+        this.buySetDestinationAndSaveInfo(world);
         this.lastTurnInfo = {
             goodName: "-",
             lastCity: city,
-            wealth: this.gold,
+            wealth: gold,
         };
-        this.position = { ...this.city.position };
-        this.buySetDestinationAndSaveInfo(world);
     }
 
     refreshView() {
@@ -25,6 +26,7 @@ class TraderAI extends Trader {
 
     turn(world) {
         this.moveOneStepToDestination(world);
+        this.lastTurnInfo.goodName = this.findOwnedGood().name;
 
         if (this.isInDestination()) {
             this.destinationReached(world);
@@ -44,5 +46,9 @@ class TraderAI extends Trader {
             lastCity: lastCity,
             wealth: gold,
         };
+    }
+
+    findOwnedGood() {
+        return this.goods.find((good) => good.quantity > 0);
     }
 }
