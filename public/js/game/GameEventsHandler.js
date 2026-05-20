@@ -23,6 +23,17 @@ class GameEventsHandler {
 					);
 				}
 			}
+			if (this.world.gameMode === World.GAME_MODE.AUTO_TURNS) {
+				if (this.trader.isTravelling()) {
+					TurnSystem.finishAutoTurns(
+						this.world,
+						this.trader,
+						this.aiTraders,
+					);
+
+					return;
+				}
+			}
 		});
 
 		$("#cities").on("click", ".city-group", (e) => {

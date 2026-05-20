@@ -12,6 +12,8 @@
 // Jeśli Gracz jest u celu to sprzedaj wszystko, kup towar, wyznacz nowy cel.
 
 class TurnSystem {
+	static autoTurnTimeout = null;
+
 	static nextTurn(world, trader, aiTraders) {
 		for (const aiPlayer of aiTraders) {
 			aiPlayer.turn(world);
@@ -26,12 +28,44 @@ class TurnSystem {
 	}
 
 	static autoTurns(world, trader, aiTraders) {
-		const interval = setInterval(() => {
-			TurnSystem.nextTurn(world, trader, aiTraders);
+		if (!trader.isTravelling()) {
+			return;
+		}
+	}
 
-			if (trader.isInCity()) {
-				clearInterval(interval);
+	static autoTurns(world, trader, aiTraders) {
+		if (this.autoTurnTimeout) {
+			return;
+		}
+
+		const loop = () => {
+			if (!trader.isTravelling()) {
+				TurnSystem.stopAutoTurns();
+				return;
 			}
-		}, 200);
+
+			TurnSystem.nextTurn(world, trader, aiTraders);
+			this.autoTurnTimeout = setTimeout(loop, 200);
+		};
+
+		this.autoTurnTimeout = setTimeout(loop, 200);
+	}
+
+	static stopAutoTurns() {
+		if (this.autoTurnTimeout) {
+			clearTimeout(this.autoTurnTimeout);
+			this.autoTurnTimeout = null;
+		}
+	}
+
+	static finishAutoTurns(world, trader, aiTraders) {
+		TurnSystem.stopAutoTurns();
+
+		while (trader.isTravelling()) {
+			TurnSystem.nextTurn(world, trader, aiTraders);
+			if (world.turnsLeft <= 0) {
+				break;
+			}
+		}
 	}
 }
