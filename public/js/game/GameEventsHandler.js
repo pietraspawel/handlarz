@@ -13,7 +13,7 @@ class GameEventsHandler {
 	}
 
 	bind() {
-		$("#map").on("click", "#terrain", (e) => {
+		$(".map-container").on("click", "#map", (e) => {
 			if (this.world.gameMode === World.GAME_MODE.MANUAL) {
 				if (this.trader.isTravelling()) {
 					TurnSystem.nextTurn(
