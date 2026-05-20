@@ -10,4 +10,8 @@ class WorldView {
 			`#cities .city-group[data-x="${x}"][data-y="${y}"]`,
 		);
 	}
+
+	static setTravelMode(isTraveling) {
+		$("#map").toggleClass("travel-mode", isTraveling);
+	}
 }
