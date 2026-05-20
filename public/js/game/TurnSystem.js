@@ -15,8 +15,8 @@ class TurnSystem {
 	static autoTurnTimeout = null;
 
 	static nextTurn(world, trader, aiTraders) {
-		for (const aiPlayer of aiTraders) {
-			aiPlayer.turn(world);
+		for (const aiTrader of aiTraders) {
+			aiTrader.turn(world);
 		}
 		trader.turn(world);
 		world.turnsLeft--;
