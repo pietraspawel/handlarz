@@ -26,6 +26,7 @@ class GameEventsHandler {
 		});
 
 		$("#cities").on("click", ".city-group", (e) => {
+			e.stopPropagation();
 			let target = $(e.currentTarget);
 			let id = target.data("id");
 			let clickedCity = this.world.getCity(id);
@@ -39,7 +40,6 @@ class GameEventsHandler {
 				this.trader.setDestination({ ...clickedCity.position });
 			}
 			if (this.world.gameMode === World.GAME_MODE.MANUAL) {
-				console.log('nextTurn', this.world.gameMode, World.GAME_MODE.MANUAL);
 				TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
 			}
 			if (this.world.gameMode === World.GAME_MODE.AUTO_TURNS) {

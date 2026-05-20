@@ -1,7 +1,7 @@
 $().ready(() => {
     const GAME_MODE = { MANUAL: "manual", AUTO_TRAVEL: "autoTurns" };
 
-    const gameMode = GAME_MODE.MANUAL;
+    const gameMode = GAME_MODE.AUTO_TRAVEL;
     let data = JSON.parse(atob($(".js-data").data("json")));
     let world = new World(gameMode, data);
     let player = new Trader(world);
