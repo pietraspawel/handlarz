@@ -1,7 +1,13 @@
 class World {
     static MAX_NON_HIDDEN_AI = 3;
+    static GAME_MODE = { MANUAL: "manual", AUTO_TURNS: "autoTurns" };
 
-    constructor(data) {
+    constructor(gameMode, data) {
+        this.gameMode = World.GAME_MODE.MANUAL;
+        if (gameMode == "autoTurns") {
+            this.gameMode = World.GAME_MODE.AUTO_TURNS;
+        }
+        this.gameMode = gameMode;
         this.xSize = data.world.xSize;
         this.ySize = data.world.ySize;
         this.map = data.world.map;

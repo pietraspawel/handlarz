@@ -1,6 +1,8 @@
 $().ready(() => {
+    const GAME_MODE = { MANUAL: "manual", AUTO_TRAVEL: "autoTravel" };
+    const gameMode = GAME_MODE.MANUAL;
     let data = JSON.parse(atob($(".js-data").data("json")));
-    let world = new World(data);
+    let world = new World(gameMode, data);
     let player = new Trader(world);
     let aiPlayerStrategy = new GreedyStrategy();
     const aiPlayers = [
