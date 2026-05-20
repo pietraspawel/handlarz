@@ -57,31 +57,8 @@ class GameEventsHandler {
 				TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
 			}
 			// Dla auto mode.
-			// Jeśli klika w miasto, w którym jest, to przewiń kolejkę.
-			// Jeśli klika w inne miasto, to włącz auto-tury lub przewiń auto-tury.
 			if (this.world.gameMode === World.GAME_MODE.AUTO_TURNS) {
-				if (this.trader.isInThatCity(clickedCity)) {
-					TurnSystem.nextTurn(
-						this.world,
-						this.trader,
-						this.aiTraders,
-					);
-				} else {
-					if (TurnSystem.autoTurnTimeout) {
-						TurnSystem.fastForwardAutoTurns(
-							this.world,
-							this.trader,
-							this.aiTraders,
-						);
-						return;
-					} else {
-						TurnSystem.autoTurns(
-							this.world,
-							this.trader,
-							this.aiTraders,
-						);
-					}
-				}
+				this.handleCityClickForAutoMode(clickedCity);
 			}
 		});
 
@@ -102,5 +79,25 @@ class GameEventsHandler {
 		$(".menu-container").on("change", "#checkShowTooltips", () => {
 			this.tooltipsView.handleTooltips();
 		});
+	}
+
+	// Dla kliknięcia w miasto. Wykonuje tylko jeden if.
+	// Jeśli klika w miasto, w którym jest, to następna kolejka.
+	// Jeśli jest w trybie auto, to przewiń kolejki do końca.
+	// Lub po prostu włącz tryb auto.
+	handleCityClickForAutoMode(clickedCity) {
+		if (this.trader.isInThatCity(clickedCity)) {
+			TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
+			return;
+		}
+		if (TurnSystem.autoTurnTimeout) {
+			TurnSystem.fastForwardAutoTurns(
+				this.world,
+				this.trader,
+				this.aiTraders,
+			);
+			return;
+		}
+		TurnSystem.autoTurns(this.world, this.trader, this.aiTraders);
 	}
 }
