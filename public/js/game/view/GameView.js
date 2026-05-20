@@ -11,6 +11,7 @@ class GameView {
 
 	static refreshElementsAfterTurn(world, trader, aiTraders) {
 		GameView.refreshTurnsLeftView(world.turnsLeft);
+		CityView.refreshElementsAfterTurn(world.cities, trader);
 		TraderView.refreshElementsAfterTurn(trader);
 		TraderAIView.refreshElementsAfterTurn(aiTraders);
 		if (trader.isInCity()) {
