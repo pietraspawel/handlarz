@@ -33,7 +33,7 @@ class TurnSystem {
 		}
 
 		const loop = () => {
-			if (trader.isInCity()) {
+			if (trader.isInCity() || world.turnsLeft <= 0) {
 				TurnSystem.stopAutoTurns();
 				return;
 			}
@@ -55,7 +55,7 @@ class TurnSystem {
 	static fastForwardAutoTurns(world, trader, aiTraders) {
 		TurnSystem.stopAutoTurns();
 
-		while (trader.isTravelling()) {
+		while (trader.isTravelling() && world.turnsLeft > 0) {
 			TurnSystem.nextTurn(world, trader, aiTraders);
 			if (world.turnsLeft <= 0) {
 				break;
