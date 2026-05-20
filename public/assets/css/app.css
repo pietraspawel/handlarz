@@ -31,20 +31,16 @@
     top: 500px;
 }
 
-#map.travel-mode {
-    filter: grayscale(60%) brightness(0.85);
-    transition: filter 0.2s ease;
-    cursor: progress;
-}
-
-.city-active {
+.city-group {
     cursor: pointer;
-}
-
-.city-current {
-    cursor: default;
 }
 
 #player, #ai-player-0, #ai-player-1, #ai-player-2 {
     cursor: default;
+}
+
+#map.travel-mode, .city-group.travel-mode {
+    filter: grayscale(60%) brightness(0.85);
+    transition: filter 0.2s ease;
+    cursor: progress;
 }

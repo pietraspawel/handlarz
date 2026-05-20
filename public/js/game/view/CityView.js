@@ -3,6 +3,10 @@ class CityView {
 		CityView.refreshCityCursors(cities, trader);
 	}
 
+	static setTravelMode(isTraveling) {
+		$(".city-group").toggleClass("travel-mode", isTraveling);
+	}
+
 	static refreshElementsAfterTrade(trader) {
 		CityView.refreshBuyButtons(trader);
 		CityView.refreshSellButtons(trader);
