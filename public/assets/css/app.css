@@ -37,10 +37,12 @@
 
 #player, #ai-player-0, #ai-player-1, #ai-player-2 {
     cursor: default;
+    transition: all 0.2s ease;
 }
 
 #map.travel-mode, .city-group.travel-mode, #player.travel-mode, #ai-player-0.travel-mode, #ai-player-1.travel-mode, #ai-player-2.travel-mode {
-    filter: grayscale(60%) brightness(0.85);
-    transition: filter 0.2s ease;
-    cursor: progress;
+    filter: saturate(0.6) brightness(0.9);
+    opacity: 0.95;
+    transition: all 0.2s ease;
+    cursor: wait;
 }
