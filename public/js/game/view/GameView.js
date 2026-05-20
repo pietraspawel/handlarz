@@ -12,13 +12,10 @@ class GameView {
 		TraderAIView.refreshElementsAfterTurn(aiTraders);
 		if (trader.isInCity()) {
 			WorldView.setTravelMode(false);
-			CityView.setTravelMode(false);
-			CityView.refreshElementsAfterEnterCity(trader);
-			CityView.enableTrade();
+			CityView.setTravelMode(false, trader);
 		} else {
 			WorldView.setTravelMode(true);
-			CityView.setTravelMode(true);
-			CityView.disableTrade();
+			CityView.setTravelMode(true, trader);
 		}
 	}
 

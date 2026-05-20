@@ -1,6 +1,12 @@
 class CityView {
-	static setTravelMode(isTraveling) {
+	static setTravelMode(isTraveling, trader) {
 		$(".city-group").toggleClass("travel-mode", isTraveling);
+		if (isTraveling) {
+			CityView.disableTrade();
+		} else {
+			CityView.refreshElementsAfterEnterCity(trader);
+			CityView.enableTrade();
+		}
 	}
 
 	static refreshElementsAfterTrade(trader) {
