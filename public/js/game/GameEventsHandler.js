@@ -16,12 +16,11 @@ class GameEventsHandler {
 		$("#cities").on("click", ".city-group", (e) => {
 			let target = $(e.currentTarget);
 			let id = target.data("id");
-			let city = this.world.getCity(id);
-			if (
-				this.trader.position.x !== city.position.x ||
-				this.trader.position.y !== city.position.y
-			) {
-				this.trader.setDestination({ ...city.position });
+			let clickedCity = this.world.getCity(id);
+			if (this.world.gameMode === World.GAME_MODE.MANUAL) {
+				if (this.trader.isInCity()) {
+					this.trader.setDestination({ ...clickedCity.position });
+				}
 				TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
 			}
 		});
