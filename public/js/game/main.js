@@ -4,42 +4,43 @@ $().ready(() => {
     const gameMode = GAME_MODE.AUTO_TRAVEL;
     let data = JSON.parse(atob($(".js-data").data("json")));
     let world = new World(gameMode, data);
-    let player = new Trader(world);
-    let aiPlayerStrategy = new GreedyStrategy();
-    const aiPlayers = [
-        new TraderAI(world, 0, "AITrader0", world.cities[0], aiPlayerStrategy),
-        new TraderAI(world, 1, "AITrader1", world.cities[1], aiPlayerStrategy),
-        new TraderAI(world, 2, "AITrader2", world.cities[2], aiPlayerStrategy),
+    let trader = new Trader(world);
+    let aiTraderStrategy = new GreedyStrategy();
+    const aiTraders = [
+        new TraderAI(world, 0, "AITrader0", world.cities[0], aiTraderStrategy),
+        new TraderAI(world, 1, "AITrader1", world.cities[1], aiTraderStrategy),
+        new TraderAI(world, 2, "AITrader2", world.cities[2], aiTraderStrategy),
         new TraderAI(
             world,
             3,
             "AITrader3",
             world.getRandomCity(),
-            aiPlayerStrategy,
+            aiTraderStrategy,
         ),
         new TraderAI(
             world,
             4,
             "AITrader4",
             world.getRandomCity(),
-            aiPlayerStrategy,
+            aiTraderStrategy,
         ),
         new TraderAI(
             world,
             5,
             "AITrader5",
             world.getRandomCity(),
-            aiPlayerStrategy,
+            aiTraderStrategy,
         ),
     ];
+    aiTraders.forEach(trader => trader.init(world));
 
     let tooltipsView = new TooltipsView();
     let gameEventsHandler = new GameEventsHandler(
-        aiPlayers,
-        player,
+        aiTraders,
+        trader,
         world,
         tooltipsView,
     );
 
-    GameView.refreshAll(world, player, aiPlayers);
+    GameView.refreshAll(world, trader, aiTraders);
 });
