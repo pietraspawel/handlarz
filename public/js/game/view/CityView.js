@@ -78,4 +78,14 @@ class CityView {
 			container.append(element);
 		}
 	}
+
+	static disableTrade() {
+		$(".city-info .buy button").prop("disabled", true);
+		$(".city-info .sell button").prop("disabled", true);
+	}
+
+	static enableTrade() {
+		$(".city-info .buy button").prop("disabled", false);
+		$(".city-info .sell button").prop("disabled", false);
+	}
 }
