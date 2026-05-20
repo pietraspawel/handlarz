@@ -15,9 +15,7 @@ class TraderAI extends Trader {
             wealth: this.gold,
         };
         this.position = { ...this.city.position };
-        let decision = this.strategy.decide(world, this);
-        this.buy(world, decision.goodId);
-        this.setDestination({ ...decision.city.position });
+        this.buySetDestinationAndSaveInfo(world);
     }
 
     refreshView() {
@@ -30,21 +28,21 @@ class TraderAI extends Trader {
 
         if (this.isInDestination()) {
             this.destinationReached(world);
-
-            let lastCity = this.city;
-            let decision = this.strategy.decide(world, this);
-
             this.sellAll(world);
-            console.log(this.gold);
-
-            this.buy(world, decision.goodId);
-            this.setDestination({ ...decision.city.position });
-
-            this.lastTurnInfo = {
-                goodName: this.goods[decision.goodId].name,
-                lastCity: lastCity,
-                wealth: this.gold,
-            };
+            this.buySetDestinationAndSaveInfo(world);
         }
+    }
+
+    buySetDestinationAndSaveInfo(world) {
+        const lastCity = this.city;
+        const decision = this.strategy.decide(world, this);
+        const gold = this.gold;
+        this.buy(world, decision.goodId);
+        this.setDestination({ ...decision.city.position });
+        this.lastTurnInfo = {
+            goodName: this.goods[decision.goodId].name,
+            lastCity: lastCity,
+            wealth: gold,
+        };
     }
 }
