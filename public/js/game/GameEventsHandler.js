@@ -25,7 +25,7 @@ class GameEventsHandler {
 			}
 			if (this.world.gameMode === World.GAME_MODE.AUTO_TURNS) {
 				if (this.trader.isTravelling()) {
-					TurnSystem.finishAutoTurns(
+					TurnSystem.fastForwardAutoTurns(
 						this.world,
 						this.trader,
 						this.aiTraders,
@@ -68,7 +68,7 @@ class GameEventsHandler {
 					);
 				} else {
 					if (TurnSystem.autoTurnTimeout) {
-						TurnSystem.finishAutoTurns(
+						TurnSystem.fastForwardAutoTurns(
 							this.world,
 							this.trader,
 							this.aiTraders,

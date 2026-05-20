@@ -52,7 +52,7 @@ class TurnSystem {
 		}
 	}
 
-	static finishAutoTurns(world, trader, aiTraders) {
+	static fastForwardAutoTurns(world, trader, aiTraders) {
 		TurnSystem.stopAutoTurns();
 
 		while (trader.isTravelling()) {
