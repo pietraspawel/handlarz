@@ -115,10 +115,11 @@ class Trader {
     }
 
     isInCity() {
-        if (this.city) {
-            return true;
-        }
-        return false;
+        return this.destination == null;
+    }
+
+    isTravelling() {
+        return this.destination != null;
     }
 
     getCityName() {
