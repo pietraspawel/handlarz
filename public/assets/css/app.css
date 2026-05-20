@@ -31,6 +31,14 @@
     top: 500px;
 }
 
+#map,
+#map * {
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none;     /* IE/Edge legacy */
+    -webkit-user-drag: none;
+}
+
 .city-group {
     cursor: pointer;
 }
