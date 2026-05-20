@@ -54,7 +54,19 @@ class GameEventsHandler {
 				TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
 			}
 			if (this.world.gameMode === World.GAME_MODE.AUTO_TURNS) {
-				TurnSystem.autoTurns(this.world, this.trader, this.aiTraders);
+				if (this.trader.isInThatCity(clickedCity)) {
+					TurnSystem.nextTurn(
+						this.world,
+						this.trader,
+						this.aiTraders,
+					);
+				} else {
+					TurnSystem.autoTurns(
+						this.world,
+						this.trader,
+						this.aiTraders,
+					);
+				}
 			}
 		});
 

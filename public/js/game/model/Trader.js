@@ -129,6 +129,13 @@ class Trader {
         return this.destination == null;
     }
 
+    isInThatCity(city) {
+        return (
+            this.isInCity() &&
+            World.positionsEqual(this.position, city.position)
+        );
+    }
+
     isTravelling() {
         return this.destination != null;
     }
