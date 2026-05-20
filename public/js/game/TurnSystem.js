@@ -24,4 +24,14 @@ class TurnSystem {
 			GameOverService.gameOver(world, trader, aiTraders);
 		}
 	}
+
+	static autoTurns(world, trader, aiTraders) {
+		const interval = setInterval(() => {
+			TurnSystem.nextTurn(world, trader, aiTraders);
+
+			if (trader.isInCity()) {
+				clearInterval(interval);
+			}
+		}, 200);
+	}
 }

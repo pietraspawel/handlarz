@@ -1,5 +1,6 @@
 $().ready(() => {
-    const GAME_MODE = { MANUAL: "manual", AUTO_TRAVEL: "autoTravel" };
+    const GAME_MODE = { MANUAL: "manual", AUTO_TRAVEL: "autoTurns" };
+
     const gameMode = GAME_MODE.MANUAL;
     let data = JSON.parse(atob($(".js-data").data("json")));
     let world = new World(gameMode, data);
