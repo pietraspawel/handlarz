@@ -1,8 +1,4 @@
 class CityView {
-	static refreshElementsAfterTurn(cities, trader) {
-		CityView.refreshCityCursors(cities, trader);
-	}
-
 	static refreshElementsAfterTrade(trader) {
 		CityView.refreshBuyButtons(trader);
 		CityView.refreshSellButtons(trader);
@@ -28,32 +24,6 @@ class CityView {
 			}
 			element += `</tr>`;
 			container.after(element);
-		}
-	}
-
-	static refreshCityCursors(cities, trader) {
-		const traderX = trader.position.x;
-		const traderY = trader.position.y;
-
-		for (let i in cities) {
-			const city = cities[i];
-			const cityElement = WorldView.getCityElementByCoords(
-				city.position.x,
-				city.position.y,
-			);
-
-			if (!cityElement) {
-				continue;
-			}
-
-			cityElement.classList.remove("city-active");
-			cityElement.classList.remove("city-current");
-
-			if (city.position.x === traderX && city.position.y === traderY) {
-				cityElement.classList.add("city-current");
-			} else {
-				cityElement.classList.add("city-active");
-			}
 		}
 	}
 
