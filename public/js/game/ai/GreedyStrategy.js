@@ -4,6 +4,11 @@ class GreedyStrategy extends AIStrategy {
         let bestGoodId = this.getCheapestGood(city);
         let bestCity = this.getBestCity(world, bestGoodId);
 
+        if (bestCity === city) {
+            bestGoodId = null;
+            bestCity = world.getRandomCity();
+        }
+
         const distance = world.hexDistance(
             city.position.x,
             city.position.y,
