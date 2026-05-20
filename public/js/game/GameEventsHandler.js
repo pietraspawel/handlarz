@@ -30,7 +30,13 @@ class GameEventsHandler {
 			let id = target.data("id");
 			let clickedCity = this.world.getCity(id);
 			if (this.world.gameMode === World.GAME_MODE.MANUAL) {
-				if (this.trader.isInCity()) {
+				if (
+					this.trader.isInCity() &&
+					!World.positionsEqual(
+						this.trader.position,
+						clickedCity.position,
+					)
+				) {
 					this.trader.setDestination({ ...clickedCity.position });
 				}
 				TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
