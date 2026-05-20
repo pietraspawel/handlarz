@@ -1,8 +1,4 @@
 class CityView {
-	static refreshElementsAfterTurn(cities, trader) {
-		CityView.refreshCityCursors(cities, trader);
-	}
-
 	static setTravelMode(isTraveling) {
 		$(".city-group").toggleClass("travel-mode", isTraveling);
 	}
@@ -65,28 +61,5 @@ class CityView {
 	static enableTrade() {
 		$(".city-info .buy button").prop("disabled", false);
 		$(".city-info .sell button").prop("disabled", false);
-	}
-
-	static refreshCityCursors(cities, trader) {
-		for (let i in cities) {
-			const city = cities[i];
-			const cityElement = WorldView.getCityElementByCoords(
-				city.position.x,
-				city.position.y,
-			);
-
-			if (!cityElement) {
-				continue;
-			}
-
-			cityElement.classList.remove("city-active");
-			cityElement.classList.remove("city-current");
-
-			if (trader.isInCity()) {
-				cityElement.classList.add("city-active");
-			} else {
-				cityElement.classList.add("city-current");
-			}
-		}
 	}
 }
