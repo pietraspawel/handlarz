@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\FormatterService;
 use App\Service\GameService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +43,7 @@ class GameController extends AbstractController
     /**
      * @Route("/game-over", name="app_game_over", methods={"GET"})
      */
-    public function gameOver(Request $request): Response
+    public function gameOver(Request $request, FormatterService $formatterService): Response
     {
         $data = $request->getSession()->get('game_over_data');
 
@@ -65,7 +66,7 @@ class GameController extends AbstractController
                 'type' => 'ai',
                 'name' => $aiTrader['name'],
                 'gold' => $aiTrader['gold'],
-                'goldFormatted' => $this->_formatGold($aiTrader['gold']),
+                'goldFormatted' => $formatterService->formatGold($aiTrader['gold']),
             ];
         }
 
@@ -75,12 +76,12 @@ class GameController extends AbstractController
 
         if (!empty($aiTraders)) {
             $result = $this->_calculateResult($scores, $score);
-            $scores = $this->_calculateScores($scores, $score);
+            $scores = $this->_calculateScores($formatterService, $scores, $score);
         }
 
         return $this->render('game/game_over.html.twig', [
             'score' => $score,
-            'scoreFormatted' => $this->_formatGold($score),
+            'scoreFormatted' => $formatterService->formatGold($score),
             'oldHighscore' => $oldHighscore,
             'result' => $result,
             'scores' => $scores,
@@ -112,41 +113,18 @@ class GameController extends AbstractController
         return 'winner';
     }
 
-    private function _calculateScores(array $results, int $score): array
+    private function _calculateScores(FormatterService $formatterService, array $results, int $score): array
     {
         $results[] = [
             'type' => 'player',
             'name' => null,
             'gold' => $score,
-            'goldFormatted' => $this->_formatGold($score),
+            'goldFormatted' => $formatterService->formatGold($score),
         ];
 
         usort($results, function ($a, $b) {
             return $b['gold'] <=> $a['gold'];
         });
         return $results;
-    }
-
-    private function _formatGold(int $gold): string
-    {
-        if ($gold < 1_000_000) {
-            return number_format($gold, 0, ',', ' ');
-        }
-
-        if ($gold < 1_000_000_000) {
-            $value = floor(($gold / 1_000_000) * 1000) / 1000;
-
-            return str_replace('.', ',', number_format($value, 3, '.', '')) . 'mln';
-        }
-
-        if ($gold < 1_000_000_000_000) {
-            $value = floor(($gold / 1_000_000_000) * 1000) / 1000;
-
-            return str_replace('.', ',', number_format($value, 3, '.', '')) . 'mld';
-        }
-
-        $value = floor(($gold / 1_000_000_000_000) * 1000) / 1000;
-
-        return str_replace('.', ',', number_format($value, 3, '.', '')) . 'bln';
     }
 }
