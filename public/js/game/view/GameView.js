@@ -29,7 +29,7 @@ class GameView {
 	}
 
 	static refreshMapRecordView(highscore) {
-		let string = Library.separateThousands(highscore) + " $";
+		let string = Library.formatNumber(highscore) + " $";
 		$(".player-info .map-record").text(string);
 	}
 }

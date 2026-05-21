@@ -12,7 +12,7 @@ class TraderView {
 		let container = $(".city-info .cargo-quantity");
 		container.find("td").remove();
 		for (let i in trader.goods) {
-			let string = Library.separateThousands(trader.goods[i].quantity);
+			let string = Library.formatNumber(trader.goods[i].quantity);
 			let element = `<td>${string}</td>`;
 			container.append(element);
 		}
@@ -45,7 +45,7 @@ class TraderView {
 	}
 
 	static refreshWealth(trader) {
-		let goldString = Library.separateThousands(trader.gold) + " $";
+		let goldString = Library.formatNumber(trader.gold) + " $";
 		$(".player-info .wealth").text(goldString);
 	}
 }

@@ -1,4 +1,12 @@
 class Library {
+    static formatNumber(integerNumber) {
+        if (integerNumber < 1_000_000) {
+            return Library.separateThousands(integerNumber);
+        } else {
+            return Library.describeBigNumber(integerNumber);
+        }
+    }
+
     /**
      * For 1234567890 returns 1 234 567 890.
      */
@@ -15,5 +23,28 @@ class Library {
             ret += subn[i];
         }
         return ret;
+    }
+
+    /**
+     * For 1234567890 returns 1,234mld.
+     * Describe numbers over 999 999.
+     */
+    static describeBigNumber(integerNumber) {
+        let divisor;
+        let suffix;
+
+        if (integerNumber < 1_000_000_000) {
+            divisor = 1_000_000;
+            suffix = "mln";
+        } else if (integerNumber < 1_000_000_000_000) {
+            divisor = 1_000_000_000;
+            suffix = "mld";
+        } else {
+            divisor = 1_000_000_000_000;
+            suffix = "bln";
+        }
+
+        const value = Math.floor((integerNumber / divisor) * 1000) / 1000;
+        return value.toFixed(3).replace(".", ",") + suffix;
     }
 }
