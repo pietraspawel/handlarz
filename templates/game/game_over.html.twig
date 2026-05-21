@@ -12,57 +12,57 @@
         {% if score < oldHighscore %}
             <img src="{{ asset('assets/gfx/winner.png') }}"><br>
             Jesteś najbogatszy!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score == oldHighscore %}
             <img src="{{ asset('assets/gfx/winner.png') }}"><br>
             Brawo! Pokonałeś konkurentów i powtórzyłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score > oldHighscore %}
             <img src="{{ asset('assets/gfx/record.png') }}"><br>
             Gratulacje! Pokonałeś konkurentów i pobiłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% endif %}
     {% elseif result == 'remis' %}
         {% if score < oldHighscore %}
             <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
             Jesteś jednym z najlepszych, ale Twój czas minął.<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score == oldHighscore %}
             <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
             Brawo! Powtórzyłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score > oldHighscore %}
             <img src="{{ asset('assets/gfx/record.png') }}"><br>
             Gratulacje! Pobiłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% endif %}
     {% elseif result == 'loser' %}
         {% if score < oldHighscore %}
             <img src="{{ asset('assets/gfx/poor.png') }}"><br>
             Ale bieda! Twój czas minął.<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score == oldHighscore %}
             <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
             Brawo! Nie pokonałeś konkurentów, ale powtórzyłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score > oldHighscore %}
             <img src="{{ asset('assets/gfx/record.png') }}"><br>
             Gratulacje! Nie pokonałeś konkurentów, ale pobiłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% endif %}
     {% elseif result == 'solo' %}
         {% if score < oldHighscore %}
             <img src="{{ asset('assets/gfx/game_over.jpg') }}"><br>
             Twój czas minął.<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score == oldHighscore %}
             <img src="{{ asset('assets/gfx/thumb.jpg') }}"><br>
             Brawo! Powtórzyłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% elseif score > oldHighscore %}
             <img src="{{ asset('assets/gfx/record.png') }}"><br>
             Gratulacje! Pobiłeś rekord!<br>
-            Zakończyłeś grę z majątkiem {{ score|number_format(0, '.', ' ') }} $
+            Zakończyłeś grę z majątkiem {{ scoreFormatted }} $
         {% endif %}
     {% endif %}
     </div>
@@ -74,7 +74,7 @@
                     <td>
                         {{ item.name ? item.name : 'Player' }}
                     </td>
-                    <td>{{ item.gold|number_format(0, '.', ' ') }} $</td>
+                    <td>{{ item.goldFormatted }} $</td>
                 </tr>
             {% endfor %}
             </tbody>

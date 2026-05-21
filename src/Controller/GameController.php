@@ -65,6 +65,7 @@ class GameController extends AbstractController
                 'type' => 'ai',
                 'name' => $aiTrader['name'],
                 'gold' => $aiTrader['gold'],
+                'goldFormatted' => $this->_formatGold($aiTrader['gold']),
             ];
         }
 
@@ -74,18 +75,20 @@ class GameController extends AbstractController
 
         if (!empty($aiTraders)) {
             $result = $this->_calculateResult($scores, $score);
-            $scores = $this->_calculateResults($scores, $score);
+            $scores = $this->_calculateScores($scores, $score);
         }
 
         return $this->render('game/game_over.html.twig', [
             'score' => $score,
+            'scoreFormatted' => $this->_formatGold($score),
             'oldHighscore' => $oldHighscore,
             'result' => $result,
             'scores' => $scores,
         ]);
     }
 
-    private function _handleHighscore(string $map, int $score): int {
+    private function _handleHighscore(string $map, int $score): int
+    {
         $projectDir = $this->getParameter('kernel.project_dir');
         $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
 
@@ -97,7 +100,8 @@ class GameController extends AbstractController
         return $highscore;
     }
 
-    private function _calculateResult(array $results, int $score): string {
+    private function _calculateResult(array $results, int $score): string
+    {
         $bestScore = $results[0]['gold'];
 
         if ($score == $bestScore) {
@@ -108,11 +112,13 @@ class GameController extends AbstractController
         return 'winner';
     }
 
-    private function _calculateResults(array $results, int $score): array {
+    private function _calculateScores(array $results, int $score): array
+    {
         $results[] = [
             'type' => 'player',
             'name' => null,
             'gold' => $score,
+            'goldFormatted' => $this->_formatGold($score),
         ];
 
         usort($results, function ($a, $b) {
@@ -121,4 +127,26 @@ class GameController extends AbstractController
         return $results;
     }
 
+    private function _formatGold(int $gold): string
+    {
+        if ($gold < 1_000_000) {
+            return number_format($gold, 0, ',', ' ');
+        }
+
+        if ($gold < 1_000_000_000) {
+            $value = floor(($gold / 1_000_000) * 1000) / 1000;
+
+            return str_replace('.', ',', number_format($value, 3, '.', '')) . 'mln';
+        }
+
+        if ($gold < 1_000_000_000_000) {
+            $value = floor(($gold / 1_000_000_000) * 1000) / 1000;
+
+            return str_replace('.', ',', number_format($value, 3, '.', '')) . 'mld';
+        }
+
+        $value = floor(($gold / 1_000_000_000_000) * 1000) / 1000;
+
+        return str_replace('.', ',', number_format($value, 3, '.', '')) . 'bln';
+    }
 }
