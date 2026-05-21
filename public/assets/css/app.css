@@ -9,6 +9,7 @@
 }
 
 .map-container {
+    display: inline-block;
     overflow: visible; 
     border: 10px solid green;
     border-radius: 5px;
