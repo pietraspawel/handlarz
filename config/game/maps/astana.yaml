@@ -1,8 +1,16 @@
+# loop(3):
+# Astana (bazylia)
+# Skopje (tymianek)
+# :endloop
+# Astana (bazylia)
+# Zagrzeb
+# 2 129 424 668
+
 world:
   xSize: 20
   ySize: 10
   startGold: 100
-  turnsAmount: 20
+  turnsAmount: 60
   cities:
   - name: Astana
     position:
@@ -28,7 +36,7 @@ world:
       price: 10
   - name: Zagrzeb
     position:
-      x: 9
+      x: 10
       y: 4
     goods:
     - name: bazylia

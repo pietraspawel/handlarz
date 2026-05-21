@@ -1,8 +1,15 @@
+# Luksemburg (bazylia)
+# loop:
+# Kiszyniów (oregano)
+# San Marino
+# :endloop
+# 8 945 665
+
 world:
   xSize: 20
   ySize: 10
   startGold: 100
-  turnsAmount: 120
+  turnsAmount: 60
   cities:
   - name: Luksemburg
     position:
