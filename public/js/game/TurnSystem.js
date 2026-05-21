@@ -22,6 +22,8 @@ class TurnSystem {
 		world.turnsLeft--;
 		GameView.refreshElementsAfterTurn(world, trader, aiTraders);
 
+		console.log(world);
+
 		if (world.turnsLeft <= 0) {
 			GameOverService.gameOver(world, trader, aiTraders);
 		}

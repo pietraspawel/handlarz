@@ -41,5 +41,7 @@ $().ready(() => {
         tooltipsView,
     );
 
+    const gameLog = new GameLog(world.map);
+
     GameView.refreshAll(world, trader, aiTraders);
 });

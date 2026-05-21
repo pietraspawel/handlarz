@@ -33,6 +33,7 @@ class World {
             }
             this.cities.push(new City(name, position, goods));
         }
+        this.gameLog = new GameLog(data.world.map);
     }
 
     static positionsEqual(a, b) {
