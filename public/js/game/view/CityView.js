@@ -27,7 +27,7 @@ class CityView {
 			let element = `<tr class="city-prices">`;
 			element += `<th>${cities[i].name}</th>`;
 			for (let j in cities[i].goods) {
-				let string = Library.formatNumber(
+				let string = MathLibrary.formatNumber(
 					cities[i].goods[j].price,
 				);
 				element += `<td>${string} $</td>`;
@@ -41,7 +41,7 @@ class CityView {
 		let container = $(".city-info .sell");
 		container.find("td").remove();
 		for (let i in trader.goods) {
-			let string = Library.formatNumber(trader.goods[i].quantity);
+			let string = MathLibrary.formatNumber(trader.goods[i].quantity);
 			let element = `<td><button class="btn btn-info" data-id="${i}">${string}</button></td>`;
 			container.append(element);
 		}
@@ -51,7 +51,7 @@ class CityView {
 		let container = $(".city-info .buy");
 		container.find("td").remove();
 		for (let i in trader.goods) {
-			let string = Library.formatNumber(
+			let string = MathLibrary.formatNumber(
 				Math.floor(trader.gold / trader.city.goods[i].price),
 			);
 			let element = `<td><button class="btn btn-info" data-id="${i}">${string}</button></td>`;

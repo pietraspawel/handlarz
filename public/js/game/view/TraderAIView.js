@@ -47,7 +47,7 @@ class TraderAIView {
 			lastCityName = `${trader.lastTurnInfo.lastCity.name}`;
 		}
 		let wealth =
-			Library.formatNumber(trader.lastTurnInfo.wealth) + " $";
+			MathLibrary.formatNumber(trader.lastTurnInfo.wealth) + " $";
 		const tbody = document.querySelector(".ai-player-info tbody");
 		let row = tbody.querySelector(`tr[data-id="${trader.id}"]`);
 

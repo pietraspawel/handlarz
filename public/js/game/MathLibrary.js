@@ -1,9 +1,9 @@
-class Library {
+class MathLibrary {
     static formatNumber(integerNumber) {
         if (integerNumber < 1_000_000) {
-            return Library.separateThousands(integerNumber);
+            return MathLibrary.separateThousands(integerNumber);
         } else {
-            return Library.describeBigNumber(integerNumber);
+            return MathLibrary.describeBigNumber(integerNumber);
         }
     }
 
