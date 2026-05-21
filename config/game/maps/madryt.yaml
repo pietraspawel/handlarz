@@ -1,0 +1,45 @@
+# case: trasa z jednego do drugiego
+# loop:
+# Madryt (bazylia)
+# Oslo (oregano)
+# :endloop
+
+world:
+  xSize: 20
+  ySize: 10
+  startGold: 100
+  turnsAmount: 60
+  cities:
+  - name: Madryt
+    position:
+      x: 9
+      y: 4
+    goods:
+    - name: bazylia
+      price: 6
+    - name: oregano
+      price: 94
+    - name: tymianek
+      price: 14
+  - name: Wiedeń
+    position:
+      x: 16
+      y: 5
+    goods:
+    - name: bazylia
+      price: 15
+    - name: oregano
+      price: 83
+    - name: tymianek
+      price: 24
+  - name: Oslo
+    position:
+      x: 8
+      y: 1
+    goods:
+    - name: bazylia
+      price: 91
+    - name: oregano
+      price: 57
+    - name: tymianek
+      price: 42
