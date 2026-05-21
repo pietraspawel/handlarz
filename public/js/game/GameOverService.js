@@ -1,8 +1,5 @@
 class GameOverService {
 	static async gameOver(world, player, aiPlayersArray) {
-		// player.sellAll(world);
-		// aiPlayersArray.forEach((ai) => ai.sellAll(world));
-
 		await fetch("/game-over/save", {
 			method: "POST",
 			headers: {
