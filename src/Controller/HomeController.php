@@ -25,20 +25,18 @@ class HomeController extends AbstractController
             $map = pathinfo($file, PATHINFO_FILENAME);
             $hsFile = $dir . $map . '.hs';
 
+            $highscore = '';
             if (file_exists($hsFile)) {
                 $score = (int) file_get_contents($hsFile);
                 if ($score > 0) {
-                    $highscores[$map] = ' (' . $formatterService->formatGold($score) . ')';
-                } else {
-                    $highscores[$map] = '';
+                    $highscore = ' ( ' . $formatterService->formatGold($score) . ' $ )';
                 }
-            } else {
-                $highscores[$map] = '';
             }
+            $highscores[$map] = $highscore;
         }
 
         return $this->render('home/main_menu.html.twig', [
-            'highscore' => $highscores,
+            'highscores' => $highscores,
         ]);
     }
 }
