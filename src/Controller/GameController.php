@@ -52,36 +52,36 @@ class GameController extends AbstractController
 
         $map = $data['map'];
         $score = $data['score'];
-        $aiPlayers = $data['aiPlayers'];
+        $aiTraders = $data['aiPlayers'];
 
         $oldHighscore = $this->_handleHighscore($map, $score);
 
         // Result
         $result = 'solo';
-        $results = [];
+        $scores = [];
 
-        foreach ($aiPlayers as $ai) {
-            $results[] = [
+        foreach ($aiTraders as $aiTrader) {
+            $scores[] = [
                 'type' => 'ai',
-                'name' => $ai['name'],
-                'gold' => $ai['gold'],
+                'name' => $aiTrader['name'],
+                'gold' => $aiTrader['gold'],
             ];
         }
 
-        usort($results, function ($a, $b) {
+        usort($scores, function ($a, $b) {
             return $b['gold'] <=> $a['gold'];
         });
 
-        if (!empty($aiPlayers)) {
-            $result = $this->_calculateResult($results, $score);
-            $results = $this->_calculateResults($results, $score);
+        if (!empty($aiTraders)) {
+            $result = $this->_calculateResult($scores, $score);
+            $scores = $this->_calculateResults($scores, $score);
         }
 
         return $this->render('game/game_over.html.twig', [
             'score' => $score,
             'oldHighscore' => $oldHighscore,
             'result' => $result,
-            'results' => $results,
+            'scores' => $scores,
         ]);
     }
 
