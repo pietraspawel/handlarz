@@ -1,0 +1,44 @@
+# trasa:
+# Vaduz -> Skopje (bazylia)
+# Skopje -> Tallin (pusto)
+# Tallin -> Vaduz (oregano)
+
+world:
+  xSize: 10
+  ySize: 10
+  startGold: 100
+  turnsAmount: 60
+  cities:
+  - name: Tallin
+    position:
+      x: 3
+      y: 9
+    goods:
+    - name: bazylia
+      price: 89
+    - name: oregano
+      price: 11
+    - name: tymianek
+      price: 81
+  - name: Skopje
+    position:
+      x: 7
+      y: 10
+    goods:
+    - name: bazylia
+      price: 94
+    - name: oregano
+      price: 53
+    - name: tymianek
+      price: 56
+  - name: Vaduz
+    position:
+      x: 2
+      y: 4
+    goods:
+    - name: bazylia
+      price: 3
+    - name: oregano
+      price: 45
+    - name: tymianek
+      price: 55
