@@ -1,0 +1,44 @@
+# loop:
+# Kopenhaga (bazylia)
+# San Marino
+# :endloop
+
+world:
+  xSize: 10
+  ySize: 10
+  startGold: 100
+  turnsAmount: 60
+  cities:
+  - name: Kopenhaga
+    position:
+      x: 7
+      y: 9
+    goods:
+    - name: bazylia
+      price: 25
+    - name: oregano
+      price: 76
+    - name: tymianek
+      price: 76
+  - name: Rzym
+    position:
+      x: 6
+      y: 3
+    goods:
+    - name: bazylia
+      price: 69
+    - name: oregano
+      price: 73
+    - name: tymianek
+      price: 77
+  - name: San Marino
+    position:
+      x: 5
+      y: 6
+    goods:
+    - name: bazylia
+      price: 68
+    - name: oregano
+      price: 76
+    - name: tymianek
+      price: 78
