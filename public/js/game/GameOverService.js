@@ -10,6 +10,7 @@ class GameOverService {
                 score: player.gold,
                 highscore: world.highscore,
                 aiPlayers: aiPlayersArray,
+                gameLog: world.gameLog,
             }),
         });
 
