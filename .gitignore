@@ -20,3 +20,5 @@
 ###< symfony/phpunit-bridge ###
 
 *.hs
+
+public/note.txt
