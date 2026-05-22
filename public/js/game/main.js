@@ -3,7 +3,7 @@ $().ready(() => {
 
     const gameMode = GAME_MODE.AUTO_TRAVEL;
     let data = JSON.parse(atob($(".js-data").data("json")));
-    let world = new World(gameMode, data);
+    let world = new World(data);
     let trader = new Trader(world);
     let aiTraderStrategy = new GreedyStrategy();
     const aiTraders = [
@@ -35,7 +35,7 @@ $().ready(() => {
 
     const gameLog = new GameLog(world.map);
     gameLog.startTurn();
-    const gameContext = new GameContext(world);
+    const gameContext = new GameContext(gameMode, world);
 
     let tooltipsView = new TooltipsView();
     let gameEventsHandler = new GameEventsHandler(

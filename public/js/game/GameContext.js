@@ -1,8 +1,16 @@
 class GameContext {
-	world;
-	gameLog;
+    static GAME_MODE = { MANUAL: "manual", AUTO_TURNS: "autoTurns" };
 
-	constructor(world) {
+    gameMode;
+	gameLog;
+	world;
+
+	constructor(gameMode, world) {
+        this.gameMode = GameContext.GAME_MODE.MANUAL;
+        if (gameMode == "autoTurns") {
+            this.gameMode = GameContext.GAME_MODE.AUTO_TURNS;
+        }
+        this.gameMode = gameMode;
 		this.world = world;
 		this.gameLog = new GameLog(world.map);
 	}
