@@ -85,6 +85,7 @@ class GameController extends AbstractController
             'oldHighscore' => $oldHighscore,
             'result' => $result,
             'scores' => $scores,
+            'logData' => $data['gameLog'],
         ]);
     }
 
