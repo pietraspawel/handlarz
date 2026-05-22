@@ -1,16 +1,22 @@
+// Przechowuje logi wszystkich tur.
 class GameLog {
     mapName;
-    turns;
+    turnsLogs;
 
     constructor(mapName) {
         this.mapName = mapName;
-        this.turns = [];
+        this.turnsLogs = [];
     }
 
-    startTurn() {
-        const turnAmount = this.turns.length;
-        const turn = new TurnLog(turnAmount + 1);
-        this.turns.push(turn);
-        return turn;
+    startTurn({ trader, aiTraders }) {
+        let turnNumber = this.turnsLogs.length;
+        turnNumber++;
+        const turnLog = new TurnLog({ turnNumber, trader, aiTraders });
+        this.turnsLogs.push(turnLog);
+    }
+
+    addSnapshot({ trader }) {
+        const currentTurnLog = this.turnsLogs[this.turnsLogs.length - 1];
+        currentTurnLog.addSnapshot({ trader });
     }
 }
