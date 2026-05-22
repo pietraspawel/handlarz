@@ -34,7 +34,9 @@ $().ready(() => {
     ];
 
     const gameLog = new GameLog(world.map);
-    gameLog.startTurn();
+    gameLog.startTurn({ trader, aiTraders });
+    console.log(gameLog);
+
     const gameContext = new GameContext(gameMode, world);
 
     let tooltipsView = new TooltipsView();
