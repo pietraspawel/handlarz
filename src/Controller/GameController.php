@@ -34,11 +34,11 @@ class GameController extends AbstractController
     /**
      * @Route("/game-over/save", name="app_game_over_save", methods={"POST"})
      */
-    public function saveGameOver(Request $request, LogService $logService, GameService $gameService): Response
+    public function saveGameOver(Request $request, LogService $logService): Response
     {
         $data = json_decode($request->getContent(), true);
         if (!empty($data['gameLog'])) {
-            $logService->save($gameService, $data['map'], $data['gameLog']);
+            $logService->save($data['map'], $data['gameLog']);
         }
         $this->get('session')->set('game_over_data', $data);
         return new Response('', 204);
