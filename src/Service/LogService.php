@@ -5,20 +5,31 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Service\GameService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LogService
 {
-    public function save(string $mapName, array $gameLog, GameService $gameService): string
+    private $projectDir;
+
+    public function __construct(ContainerInterface $container)
     {
-        $directory = __DIR__ . GameService::LOG_PATH;
+        $this->projectDir = $container->getParameter('kernel.project_dir');
+    }
+
+    public function save(GameService $gameService, string $mapName, array $gameLog): string
+    {
+        $directory = $this->projectDir . GameService::LOG_PATH;
+
         if (!is_dir($directory)) {
             mkdir($directory, 0777, true);
         }
-
         $fileName = sprintf('%s_%s.log', $this->sanitizeFileName($mapName), date('Y-m-d_H-i-s'));
-        $path = $directory . '/' . $fileName;
-
+        $path = $directory . $fileName;
         file_put_contents($path, $this->render($gameLog));
+
+        $fileName =  str_replace('.log', '.json', $fileName);
+        $path = $directory . $fileName;
+        file_put_contents($path, json_encode($gameLog, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         return $path;
     }
 
