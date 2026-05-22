@@ -1,13 +1,15 @@
 class GameEventsHandler {
+	gameContext;
 	aiTraders;
 	trader;
 	world;
 	tooltipsView;
 
-	constructor(aiTraders, trader, world, tooltipsView) {
+	constructor(aiTraders, trader, gameContext, tooltipsView) {
+		this.gameContext = gameContext;
 		this.aiTraders = aiTraders;
 		this.trader = trader;
-		this.world = world;
+		this.world = gameContext.world;
 		this.tooltipsView = tooltipsView;
 		this.bind();
 	}
@@ -17,7 +19,7 @@ class GameEventsHandler {
 			if (this.world.gameMode === World.GAME_MODE.MANUAL) {
 				if (this.trader.isTravelling() && this.world.turnsLeft > 0) {
 					TurnSystem.nextTurn(
-						this.world,
+						this.gameContext,
 						this.trader,
 						this.aiTraders,
 					);
@@ -26,7 +28,7 @@ class GameEventsHandler {
 			if (this.world.gameMode === World.GAME_MODE.AUTO_TURNS) {
 				if (this.trader.isTravelling()) {
 					TurnSystem.fastForwardAutoTurns(
-						this.world,
+						this.gameContext,
 						this.trader,
 						this.aiTraders,
 					);
@@ -57,7 +59,7 @@ class GameEventsHandler {
 				this.world.gameMode === World.GAME_MODE.MANUAL &&
 				this.world.turnsLeft > 0
 			) {
-				TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
+				TurnSystem.nextTurn(this.gameContext, this.trader, this.aiTraders);
 			}
 			// Dla auto mode.
 			if (this.world.gameMode === World.GAME_MODE.AUTO_TURNS) {
@@ -90,17 +92,17 @@ class GameEventsHandler {
 	// Lub po prostu włącz tryb auto.
 	handleCityClickForAutoMode(clickedCity) {
 		if (this.trader.isInThatCity(clickedCity) && this.world.turnsLeft > 0) {
-			TurnSystem.nextTurn(this.world, this.trader, this.aiTraders);
+			TurnSystem.nextTurn(this.gameContext, this.trader, this.aiTraders);
 			return;
 		}
 		if (TurnSystem.autoTurnTimeout) {
 			TurnSystem.fastForwardAutoTurns(
-				this.world,
+				this.gameContext,
 				this.trader,
 				this.aiTraders,
 			);
 			return;
 		}
-		TurnSystem.autoTurns(this.world, this.trader, this.aiTraders);
+		TurnSystem.autoTurns(this.gameContext, this.trader, this.aiTraders);
 	}
 }

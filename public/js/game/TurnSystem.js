@@ -14,7 +14,9 @@
 class TurnSystem {
 	static autoTurnTimeout = null;
 
-	static nextTurn(world, trader, aiTraders) {
+	static nextTurn(gameContext, trader, aiTraders) {
+		let world = gameContext.world;
+
 		for (const aiTrader of aiTraders) {
 			aiTrader.turn(world);
 		}
@@ -23,13 +25,14 @@ class TurnSystem {
 		GameView.refreshElementsAfterTurn(world, trader, aiTraders);
 
 		if (world.turnsLeft <= 0) {
-			GameOverService.gameOver(world, trader, aiTraders);
+			GameOverService.gameOver(gameContext, trader, aiTraders);
 		}
 
-		world.gameLog.startTurn();
+		gameContext.gameLog.startTurn();
 	}
 
-	static autoTurns(world, trader, aiTraders) {
+	static autoTurns(gameContext, trader, aiTraders) {
+		let world = gameContext.world;
 		if (this.autoTurnTimeout) {
 			return;
 		}
@@ -40,7 +43,7 @@ class TurnSystem {
 				return;
 			}
 
-			TurnSystem.nextTurn(world, trader, aiTraders);
+			TurnSystem.nextTurn(gameContext, trader, aiTraders);
 			this.autoTurnTimeout = setTimeout(loop, 200);
 		};
 
@@ -54,11 +57,12 @@ class TurnSystem {
 		}
 	}
 
-	static fastForwardAutoTurns(world, trader, aiTraders) {
+	static fastForwardAutoTurns(gameContext, trader, aiTraders) {
+		let world = gameContext.world;
 		TurnSystem.stopAutoTurns();
 
 		while (trader.isTravelling() && world.turnsLeft > 0) {
-			TurnSystem.nextTurn(world, trader, aiTraders);
+			TurnSystem.nextTurn(gameContext, trader, aiTraders);
 			if (world.turnsLeft <= 0) {
 				break;
 			}

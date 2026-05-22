@@ -33,17 +33,17 @@ $().ready(() => {
         ),
     ];
 
+    const gameLog = new GameLog(world.map);
+    gameLog.startTurn();
+    const gameContext = new GameContext(world);
+
     let tooltipsView = new TooltipsView();
     let gameEventsHandler = new GameEventsHandler(
         aiTraders,
         trader,
-        world,
+        gameContext,
         tooltipsView,
     );
-
-    const gameLog = new GameLog(world.map);
-    gameLog.startTurn();
-    const gameContext = new GameContext(world);
 
     GameView.refreshAll(world, trader, aiTraders);
 });
