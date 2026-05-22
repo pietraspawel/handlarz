@@ -28,7 +28,7 @@ class TurnSystem {
 			GameOverService.gameOver(gameContext, trader, aiTraders);
 		}
 
-		gameContext.gameLog.startTurn();
+		// gameContext.gameLog.startTurn({ trader, aiTraders });
 	}
 
 	static autoTurns(gameContext, trader, aiTraders) {

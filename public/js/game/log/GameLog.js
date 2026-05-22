@@ -13,6 +13,14 @@ class GameLog {
         turnNumber++;
         const turnLog = new TurnLog({ turnNumber, trader, aiTraders });
         this.turnsLogs.push(turnLog);
+        this.addSnapshots({ trader, aiTraders });
+    }
+
+    addSnapshots({ trader, aiTraders }) {
+        this.addSnapshot({ trader });
+        for (const aiTrader of aiTraders) {
+            this.addSnapshot({ trader: aiTrader });
+        }
     }
 
     addSnapshot({ trader }) {
