@@ -42,6 +42,8 @@ $().ready(() => {
     );
 
     const gameLog = new GameLog(world.map);
+    gameLog.startTurn();
+    const gameContext = new GameContext(world);
 
     GameView.refreshAll(world, trader, aiTraders);
 });
