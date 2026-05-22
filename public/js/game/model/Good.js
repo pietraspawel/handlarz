@@ -1,5 +1,6 @@
 class Good
 {
+    name;
     price;
     quantity;
     constructor(name) {
