@@ -16,7 +16,7 @@ class LogService
         $this->projectDir = $container->getParameter('kernel.project_dir');
     }
 
-    public function save(GameService $gameService, string $mapName, array $gameLog): string
+    public function save(string $mapName, array $gameLog): string
     {
         $directory = $this->projectDir . GameService::LOG_PATH;
 
