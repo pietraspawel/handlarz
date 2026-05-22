@@ -34,6 +34,7 @@ class World {
             this.cities.push(new City(name, position, goods));
         }
         this.gameLog = new GameLog(data.world.map);
+        this.gameLog.startTurn();
     }
 
     static positionsEqual(a, b) {

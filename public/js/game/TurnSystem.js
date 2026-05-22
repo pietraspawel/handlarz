@@ -25,6 +25,8 @@ class TurnSystem {
 		if (world.turnsLeft <= 0) {
 			GameOverService.gameOver(world, trader, aiTraders);
 		}
+
+		world.gameLog.startTurn();
 	}
 
 	static autoTurns(world, trader, aiTraders) {

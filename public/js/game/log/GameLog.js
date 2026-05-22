@@ -7,8 +7,9 @@ class GameLog {
         this.turns = [];
     }
 
-    startTurn(turnNumber) {
-        const turn = new TurnLog(turnNumber);
+    startTurn() {
+        const turnAmount = this.turns.length;
+        const turn = new TurnLog(turnAmount + 1);
         this.turns.push(turn);
         return turn;
     }
