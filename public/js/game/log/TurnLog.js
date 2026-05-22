@@ -1,13 +1,13 @@
 class TurnLog {
-  number;
-  traderLog;
+    number;
+    traderLog;
 
-  constructor(number) {
-    this.number = number;
-    this.traderLog = [];
-  }
+    constructor(number) {
+        this.number = number;
+        this.traderLog = [];
+    }
 
-  addTraderLog(traderLog) {
-    this.traderLog.push(traderLog);
-  }
+    addTraderLog(traderLog) {
+        this.traderLog.push(traderLog);
+    }
 }

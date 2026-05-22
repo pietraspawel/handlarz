@@ -1,15 +1,15 @@
 class GameLog {
-  mapName;
-  turns;
+    mapName;
+    turns;
 
-  constructor(mapName) {
-    this.mapName = mapName;
-    this.turns = [];
-  }
+    constructor(mapName) {
+        this.mapName = mapName;
+        this.turns = [];
+    }
 
-  startTurn(turnNumber) {
-    const turn = new TurnLog(turnNumber);
-    this.turns.push(turn);
-    return turn;
-  }
+    startTurn(turnNumber) {
+        const turn = new TurnLog(turnNumber);
+        this.turns.push(turn);
+        return turn;
+    }
 }
