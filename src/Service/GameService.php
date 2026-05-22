@@ -16,6 +16,7 @@ class GameService
     private const GOODS_NAMES_FILEPATH = '/config/game/goods-names.txt';
     public const HIGHSCORES_PATH = '/config/game/maps/';
     public const MAPS_PATH = '/config/game/maps/';
+    public const LOG_PATH = '/var/game_logs/';
     private const START_GOLD = 100;
     private const TURNS_AMOUNT = 120;
     private const WORLD_X_SIZE = 20;
