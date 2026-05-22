@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\FormatterService;
 use App\Service\GameService;
+use App\Service\LogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,9 +34,12 @@ class GameController extends AbstractController
     /**
      * @Route("/game-over/save", name="app_game_over_save", methods={"POST"})
      */
-    public function saveGameOver(Request $request): Response
+    public function saveGameOver(Request $request, LogService $logService, GameService $gameService): Response
     {
         $data = json_decode($request->getContent(), true);
+        if (!empty($data['gameLog'])) {
+            $logService->save($gameService, $data['map'], $data['gameLog']);
+        }
         $this->get('session')->set('game_over_data', $data);
         return new Response('', 204);
     }
