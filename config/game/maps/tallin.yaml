@@ -5,18 +5,6 @@
 # :endloop
 # 2 578 760 694
 
-# logowanie ruchów AI
-
-# zaprogramowany AI, jeździ wg zaplanowanej trasy i kupuje co ma kupować. język:
-# miasto1 (coTamKupić)
-# loop(3):
-# miasto2 (coTamKupić)
-# miasto3 (coTamKupić)
-# :endloop
-
-# potrzebuję takiej trasy, że A -> B -> C -> A i z jednego musisz jeździć na pusto
-# znajdywacz najlepszej trasy
-
 world:
   xSize: 10
   ySize: 10
