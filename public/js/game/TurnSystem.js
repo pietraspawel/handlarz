@@ -16,15 +16,16 @@ class TurnSystem {
 
     static nextTurn(gameContext, trader, aiTraders) {
         let world = gameContext.world;
+        let gameLog = gameContext.gameLog;
 
         for (const aiTrader of aiTraders) {
-            aiTrader.turn(world);
+            aiTrader.turn(gameContext, world);
         }
         trader.turn(world);
         world.turnsLeft--;
         GameView.refreshElementsAfterTurn(world, trader, aiTraders);
 
-        gameContext.gameLog.startTurn({ trader, aiTraders });
+        gameLog.startTurn({ trader, aiTraders });
 
         if (world.turnsLeft <= 0) {
             GameOverService.gameOver(gameContext, trader, aiTraders);

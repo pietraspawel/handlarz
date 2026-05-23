@@ -12,9 +12,9 @@ class TraderAI extends Trader {
         this.position = { ...this.city.position };
     }
 
-    initTurnZero(world) {
+    initTurnZero(gameContext, world) {
         const gold = this.gold;
-        this.buySetDestinationAndSaveInfo(world);
+        this.buySetDestinationAndSaveInfo(gameContext, world);
         this.lastTurnInfo = {
             goodName: "-",
             lastCity: this.city,
@@ -27,7 +27,7 @@ class TraderAI extends Trader {
         TraderAIView.refreshInfo();
     }
 
-    turn(world) {
+    turn(gameContext, world) {
         if (!this.isInDestination()) {
             this.moveOneStepToDestination(world);
         }
@@ -39,17 +39,17 @@ class TraderAI extends Trader {
         if (this.isInDestination()) {
             this.destinationReached(world);
             this.sellAll(world);
-            this.buySetDestinationAndSaveInfo(world);
+            this.buySetDestinationAndSaveInfo(gameContext, world);
         }
     }
 
-    buySetDestinationAndSaveInfo(world) {
+    buySetDestinationAndSaveInfo(gameContext, world) {
         const lastCity = this.city;
         const decision = this.strategy.decide(world, this);
         const gold = this.gold;
         let goodName = "-";
         if (decision.goodId !== null) {
-            this.buy(world, decision.goodId);
+            this.buy(gameContext, world, decision.goodId);
             goodName = this.goods[decision.goodId].name;
         }
         this.setDestination({ ...decision.city.position });

@@ -80,24 +80,14 @@ class GameEventsHandler {
         $(".city-info .buy").on("click", "button", (e) => {
             let target = $(e.target);
             let id = target.data("id");
-            const result = this.trader.buy(this.world, id);
-            this.gameLog.addAction({
-                trader: this.trader,
-                type: Action.type.BUY,
-                result,
-            });
+            this.trader.buy(this.gameContext, this.world, id);
             GameView.refreshElementsAfterTrade(this.trader);
         });
 
         $(".city-info .sell").on("click", "button", (e) => {
             let target = $(e.target);
             let id = target.data("id");
-            const result = this.trader.sell(this.world, id);
-            this.gameLog.addAction({
-                trader: this.trader,
-                type: Action.type.SELL,
-                result,
-            });
+            this.trader.sell(this.gameContext, this.world, id);
             GameView.refreshElementsAfterTrade(this.trader);
         });
 

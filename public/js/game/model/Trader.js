@@ -19,7 +19,7 @@ class Trader {
         this.destination = undefined;
     }
 
-    buy(world, goodId) {
+    buy(gameContext, world, goodId) {
         if (this.isTravelling()) {
             return false;
         }
@@ -28,13 +28,17 @@ class Trader {
         let amount = Math.floor(this.gold / price);
         this.gold -= price * amount;
         this.goods[goodId].quantity += amount;
-        return {
-            name: this.goods[goodId].name,
-            amount: amount,
-        }
+        gameContext.gameLog.addAction({
+            trader: this,
+            type: Action.type.BUY,
+            result: {
+                name: this.goods[goodId].name,
+                amount: amount,
+            },
+        });
     }
 
-    sell(world, goodId) {
+    sell(gameContext, world, goodId) {
         if (this.isTravelling()) {
             return false;
         }
@@ -43,10 +47,14 @@ class Trader {
         let amount = this.goods[goodId].quantity;
         this.gold += price * amount;
         this.goods[goodId].quantity = 0;
-        return {
-            name: this.goods[goodId].name,
-            amount: amount,
-        }
+        gameContext.gameLog.addAction({
+            trader: this,
+            type: Action.type.SELL,
+            result: {
+                name: this.goods[goodId].name,
+                amount: amount,
+            },
+        });
     }
 
     sellAll(world) {
