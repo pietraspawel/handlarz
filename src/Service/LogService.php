@@ -36,29 +36,25 @@ class LogService
     private function render(array $gameLog): string
     {
         $output = [];
-        foreach ($gameLog['turns'] ?? [] as $turn) {
-            $output[] = sprintf('%d.', $turn['number']);
-            foreach ($turn['playerLogs'] ?? [] as $playerLog) {
-                $output[] = sprintf('  %s:', $playerLog['name']);
-                $line = sprintf('    %d;%d', $playerLog['x'], $playerLog['y']);
 
-                if (!empty($playerLog['city'])) {
-                    $line .= ';(' . $playerLog['city'] . ')';
-                }
+        foreach ($gameLog['turnsLogs'] ?? [] as $turnLog) {
+            $output[] = sprintf('%d.', $turnLog['number']);
 
-                foreach ($playerLog['goods'] ?? [] as $goodName => $amount) {
-                    $line .= sprintf(' %s:%d', $goodName, $amount);
-                }
+            foreach ($turnLog['tradersLogs'] ?? [] as $traderLog) {
+                foreach ($traderLog['log'] ?? [] as $snapshot) {
+                    $output[] = sprintf('  %s:', $snapshot['name']);
+                    $line = sprintf('    %d;%d', $snapshot['position']['x'], $snapshot['position']['y']);
+                    if (!empty($snapshot['cityName'])) {
+                        $line .= sprintf(';%s', $snapshot['cityName']);
+                    }
 
-                $line .= sprintf(' %dgold', $playerLog['gold']);
-
-                $output[] = $line;
-
-                foreach ($playerLog['actions'] ?? [] as $action) {
-                    $output[] = sprintf('    %s', $action);
+                    foreach ($snapshot['goods'] ?? [] as $good) {
+                        $line .= sprintf(' %s:%d', $good['name'], $good['quantity']);
+                    }
+                    $line .= sprintf(' %dgold', $snapshot['gold']);
+                    $output[] = $line;
                 }
             }
-
             $output[] = '';
         }
 
