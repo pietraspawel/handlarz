@@ -1,5 +1,6 @@
 class GameEventsHandler {
 	gameContext;
+	gameLog;
 	aiTraders;
 	trader;
 	world;
@@ -7,6 +8,7 @@ class GameEventsHandler {
 
 	constructor(aiTraders, trader, gameContext, tooltipsView) {
 		this.gameContext = gameContext;
+		this.gameLog = this.gameContext.gameLog;
 		this.aiTraders = aiTraders;
 		this.trader = trader;
 		this.world = gameContext.world;
@@ -25,7 +27,9 @@ class GameEventsHandler {
 					);
 				}
 			}
-			if (this.gameContext.gameMode === GameContext.GAME_MODE.AUTO_TURNS) {
+			if (
+				this.gameContext.gameMode === GameContext.GAME_MODE.AUTO_TURNS
+			) {
 				if (this.trader.isTravelling()) {
 					TurnSystem.fastForwardAutoTurns(
 						this.gameContext,
@@ -59,10 +63,16 @@ class GameEventsHandler {
 				this.gameContext.gameMode === GameContext.GAME_MODE.MANUAL &&
 				this.world.turnsLeft > 0
 			) {
-				TurnSystem.nextTurn(this.gameContext, this.trader, this.aiTraders);
+				TurnSystem.nextTurn(
+					this.gameContext,
+					this.trader,
+					this.aiTraders,
+				);
 			}
 			// Dla auto mode.
-			if (this.gameContext.gameMode === GameContext.GAME_MODE.AUTO_TURNS) {
+			if (
+				this.gameContext.gameMode === GameContext.GAME_MODE.AUTO_TURNS
+			) {
 				this.handleCityClickForAutoMode(clickedCity);
 			}
 		});
@@ -70,14 +80,24 @@ class GameEventsHandler {
 		$(".city-info .buy").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
-			this.trader.buy(this.world, id);
+			const result = this.trader.buy(this.world, id);
+			this.gameLog.addAction({
+				trader: this.trader,
+				type: Action.type.BUY,
+				result,
+			});
 			GameView.refreshElementsAfterTrade(this.trader);
 		});
 
 		$(".city-info .sell").on("click", "button", (e) => {
 			let target = $(e.target);
 			let id = target.data("id");
-			this.trader.sell(this.world, id);
+			const result = this.trader.sell(this.world, id);
+			this.gameLog.addAction({
+				trader: this.trader,
+				type: Action.type.SELL,
+				result,
+			});
 			GameView.refreshElementsAfterTrade(this.trader);
 		});
 

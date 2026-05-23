@@ -23,13 +23,22 @@ class GameLog {
     }
 
     addSnapshot({ trader }) {
-        const currentTurnLog = this.turnsLogs[this.turnsLogs.length - 1];
+        const currentTurnLog = this.getCurrentTurnLog();
         currentTurnLog.addSnapshot({ trader });
+    }
+
+    addAction({ trader, type, result }) {
+        const currentTurnLog = this.getCurrentTurnLog();
+        currentTurnLog.addAction({ trader, type, result });
     }
 
     clean() {
         for (const turnLog of this.turnsLogs) {
             turnLog.clean();
         }
+    }
+
+    getCurrentTurnLog() {
+        return this.turnsLogs[this.turnsLogs.length - 1];
     }
 }

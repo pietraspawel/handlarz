@@ -1,9 +1,12 @@
 class Action {
-	type;
-	content;
+	static type = {
+		BUY: "buy",
+		SELL: "sell",
+	};
+	result;
 
-	constructor ({ type, content }) {
+	constructor({ type, result }) {
 		this.type = type;
-		this.content = content;
+		this.result = result;
 	}
 }

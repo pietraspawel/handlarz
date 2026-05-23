@@ -1,16 +1,23 @@
 // Przechowuje logi jednego Tradera.
 class TraderLogs {
 	trader;
-	log;
+	snapshot;
+	actions;
 
 	constructor({ trader }) {
 		this.trader = trader;
-		this.log = [];
+		this.snapshot = null;
+		this.actions = [];
 	}
 
 	addSnapshot({ trader }) {
-		const log = new Snapshot({ trader });
-		this.log.push(log);
+		const snapshot = new Snapshot({ trader });
+		this.snapshot = snapshot;
+	}
+
+	addAction({ type, result }) {
+		const action = new Action({ type, result });
+		this.actions.push(action);
 	}
 
 	clean() {

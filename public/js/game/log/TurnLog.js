@@ -22,6 +22,11 @@ class TurnLog {
         traderLogs.addSnapshot({ trader });
     }
 
+    addAction({ trader, type, result }) {
+        const traderLogs = this.findTradersLogsByTrader(trader);
+        traderLogs.addAction({ type, result });
+    }
+
     findTradersLogsByTrader(trader) {
         return this.tradersLogs.find((element) => element.trader === trader);
     }
