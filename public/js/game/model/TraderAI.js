@@ -29,7 +29,7 @@ class TraderAI extends Trader {
 
     turn(gameContext, world) {
         if (!this.isInDestination()) {
-            this.moveOneStepToDestination(world);
+            this.moveOneStepToDestination(gameContext, world);
         }
         this.lastTurnInfo.goodName = "-";
         if (this.findOwnedGood() !== undefined) {

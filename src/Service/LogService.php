@@ -78,6 +78,9 @@ class LogService
             case 'sell':
                 return sprintf('sprzedał: %s %d', $result['name'], $result['amount']);
 
+            case 'headed towards':
+                return sprintf('ruszył w kierunku: %s', $result['name']);
+
             default:
                 return $action['type'];
         }

@@ -2,6 +2,7 @@ class Action {
     static type = {
         BUY: "buy",
         SELL: "sell",
+        HEADED_TOWARDS: "headed towards",
     };
     result;
 

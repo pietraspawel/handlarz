@@ -82,9 +82,9 @@ class Trader {
         this.destination = { ...position };
     }
 
-    turn(world) {
+    turn(gameContext, world) {
         if (this.destination) {
-            this.moveOneStepToDestination(world);
+            this.moveOneStepToDestination(gameContext, world);
         }
 
         if (this.isInDestination()) {
@@ -92,7 +92,7 @@ class Trader {
         }
     }
 
-    moveOneStepToDestination(world) {
+    moveOneStepToDestination(gameContext, world) {
         const steps = HexMath.getBestSteps(
             this.position,
             this.destination,
@@ -103,6 +103,17 @@ class Trader {
         this.position.x = next.x;
         this.position.y = next.y;
         this.city = null;
+        const destinationCity = world.getCityByPositionXY(
+            this.destination.x,
+            this.destination.y,
+        );
+        gameContext.gameLog.addAction({
+            trader: this,
+            type: Action.type.HEADED_TOWARDS,
+            result: {
+                name: destinationCity.name,
+            },
+        });
     }
 
     destinationReached(world) {
