@@ -56,11 +56,31 @@ class LogService
                 }
                 $line .= sprintf(' %dgold', $snapshot['gold']);
                 $output[] = $line;
+
+                foreach ($traderLog['actions'] ?? [] as $action) {
+                    $output[] = '    ' . $this->renderAction($action);
+                }
             }
             $output[] = '';
         }
 
         return implode(PHP_EOL, $output);
+    }
+
+    private function renderAction(array $action): string
+    {
+        $result = $action['result'] ?? [];
+
+        switch ($action['type']) {
+            case 'buy':
+                return sprintf('zakupił: %s %d', $result['name'], $result['amount']);
+
+            case 'sell':
+                return sprintf('sprzedał: %s %d', $result['name'], $result['amount']);
+
+            default:
+                return $action['type'];
+        }
     }
 
     private function sanitizeFileName(string $name): string
