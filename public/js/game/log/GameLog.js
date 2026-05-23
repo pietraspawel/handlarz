@@ -10,7 +10,6 @@ class GameLog {
 
     startTurn({ trader, aiTraders }) {
         let turnNumber = this.turnsLogs.length;
-        turnNumber++;
         const turnLog = new TurnLog({ turnNumber, trader, aiTraders });
         this.turnsLogs.push(turnLog);
         this.addSnapshots({ trader, aiTraders });
