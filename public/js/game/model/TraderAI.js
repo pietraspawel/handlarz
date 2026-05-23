@@ -10,11 +10,14 @@ class TraderAI extends Trader {
         this.name = name;
         this.city = city;
         this.position = { ...this.city.position };
+    }
+
+    initTurnZero(world) {
         const gold = this.gold;
         this.buySetDestinationAndSaveInfo(world);
         this.lastTurnInfo = {
             goodName: "-",
-            lastCity: city,
+            lastCity: this.city,
             wealth: gold,
         };
     }

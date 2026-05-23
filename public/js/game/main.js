@@ -36,6 +36,10 @@ $().ready(() => {
     const gameContext = new GameContext(gameMode, world);
     gameContext.gameLog.startTurn({ trader, aiTraders });
 
+    for (const aiTrader of aiTraders) {
+        aiTrader.initTurnZero(world);
+    }
+
     let tooltipsView = new TooltipsView();
     let gameEventsHandler = new GameEventsHandler(
         aiTraders,
