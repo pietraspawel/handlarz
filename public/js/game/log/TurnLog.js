@@ -25,4 +25,10 @@ class TurnLog {
     findTradersLogsByTrader(trader) {
         return this.tradersLogs.find((element) => element.trader === trader);
     }
+
+    clean() {
+        for (const traderLogs of this.tradersLogs) {
+            traderLogs.clean();
+        }
+    }
 }

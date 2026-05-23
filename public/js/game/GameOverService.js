@@ -1,6 +1,8 @@
 class GameOverService {
     static async gameOver(gameContext, trader, aiTraders) {
-        let world = gameContext.world;
+        const world = gameContext.world;
+        const gameLog = gameContext.gameLog;
+        gameLog.clean();
 
         await fetch("/game-over/save", {
             method: "POST",
@@ -12,10 +14,10 @@ class GameOverService {
                 score: trader.gold,
                 highscore: world.highscore,
                 aiPlayers: aiTraders,
-                gameLog: gameContext.gameLog,
+                gameLog: gameLog,
             }),
         });
 
-        // location.replace("/game-over");
+        location.replace("/game-over");
     }
 }

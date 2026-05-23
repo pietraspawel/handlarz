@@ -12,4 +12,8 @@ class TraderLogs {
 		const log = new Snapshot({ trader });
 		this.log.push(log);
 	}
+
+	clean() {
+		delete this.trader;
+	}
 }

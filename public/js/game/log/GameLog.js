@@ -27,4 +27,10 @@ class GameLog {
         const currentTurnLog = this.turnsLogs[this.turnsLogs.length - 1];
         currentTurnLog.addSnapshot({ trader });
     }
+
+    clean() {
+        for (const turnLog of this.turnsLogs) {
+            turnLog.clean();
+        }
+    }
 }
