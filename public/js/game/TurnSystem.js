@@ -24,12 +24,11 @@ class TurnSystem {
         world.turnsLeft--;
         GameView.refreshElementsAfterTurn(world, trader, aiTraders);
 
+        gameContext.gameLog.startTurn({ trader, aiTraders });
+
         if (world.turnsLeft <= 0) {
             GameOverService.gameOver(gameContext, trader, aiTraders);
         }
-
-        gameContext.gameLog.startTurn({ trader, aiTraders });
-        console.log(gameContext.gameLog);
     }
 
     static autoTurns(gameContext, trader, aiTraders) {
