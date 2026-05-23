@@ -41,19 +41,21 @@ class LogService
             $output[] = sprintf('%d.', $turnLog['number']);
 
             foreach ($turnLog['tradersLogs'] ?? [] as $traderLog) {
-                foreach ($traderLog['log'] ?? [] as $snapshot) {
-                    $output[] = sprintf('  %s:', $snapshot['name']);
-                    $line = sprintf('    %d;%d', $snapshot['position']['x'], $snapshot['position']['y']);
-                    if (!empty($snapshot['cityName'])) {
-                        $line .= sprintf(';%s', $snapshot['cityName']);
-                    }
-
-                    foreach ($snapshot['goods'] ?? [] as $good) {
-                        $line .= sprintf(' %s:%d', $good['name'], $good['quantity']);
-                    }
-                    $line .= sprintf(' %dgold', $snapshot['gold']);
-                    $output[] = $line;
+                $snapshot = $traderLog['snapshot'] ?? null;
+                if ($snapshot === null) {
+                    continue;
                 }
+                $output[] = sprintf('  %s:', $snapshot['name']);
+                $line = sprintf('    %d;%d', $snapshot['position']['x'], $snapshot['position']['y']);
+                if (!empty($snapshot['cityName'])) {
+                    $line .= sprintf(';%s', $snapshot['cityName']);
+                }
+
+                foreach ($snapshot['goods'] ?? [] as $good) {
+                    $line .= sprintf(' %s:%d', $good['name'], $good['quantity']);
+                }
+                $line .= sprintf(' %dgold', $snapshot['gold']);
+                $output[] = $line;
             }
             $output[] = '';
         }
