@@ -1,4 +1,4 @@
 loop:
-Astana bazylia
-Skopje tymianek
+Astana (bazylia)
+Skopje (tymianek)
 :endloop
