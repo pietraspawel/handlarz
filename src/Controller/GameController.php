@@ -28,7 +28,20 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('game/index.html.twig', $args);
+        $puppetScripts = [];
+        $scriptsDir = $projectDir . '/config/game/maps/puppet_scripts/' . $map;
+
+        if (is_dir($scriptsDir)) {
+            foreach (glob($scriptsDir . '/*.txt') as $scriptFile) {
+                $puppetScripts[pathinfo($scriptFile, PATHINFO_FILENAME)]
+                = file_get_contents($scriptFile);
+            }
+        }
+
+        dump($puppetScripts);
+        die();
+
+            return $this->render('game/index.html.twig', $args);
     }
 
     /**
