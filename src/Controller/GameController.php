@@ -149,8 +149,16 @@ class GameController extends AbstractController
     private function parsePuppetScript(string $content): array
     {
         $lines = preg_split('/\R/', $content);
-        $program = [];
-        $currentLoop = null;
+
+        $commands = [];
+
+        $loopBuffer = [];
+        $loopMode = null; // null | finite | infinite
+        $loopCount = null;
+
+        $inLoop = false;
+
+        $infiniteLoop = null;
 
         foreach ($lines as $line) {
             $line = trim($line);
@@ -158,49 +166,59 @@ class GameController extends AbstractController
                 continue;
             }
 
-            if ($line === 'loop:') {
-                $currentLoop = [
-                    'type' => 'loop',
-                    'count' => null,
-                    'commands' => [],
-                ];
-                continue;
-            }
+            // START LOOP
+            if (preg_match('/^loop(?:\((\d+)\))?:$/', $line, $m)) {
+                $inLoop = true;
 
-            if (preg_match('/^loop\((\d+)\):$/', $line, $matches)) {
-                $currentLoop = [
-                    'type' => 'loop',
-                    'count' => (int) $matches[1],
-                    'commands' => [],
-                ];
-                continue;
-            }
-
-            if ($line === ':endloop') {
-                $program[] = $currentLoop;
-                $currentLoop = null;
-                continue;
-            }
-
-            if (preg_match('/^(.+?)(?:\s*\((.+)\))?$/u', $line, $matches)) {
-                $city = trim($matches[1]);
-                $good = isset($matches[2]) ? trim($matches[2]) : null;
-
-                $command = [
-                    'type' => 'move and buy',
-                    'city' => $city,
-                    'good' => $good,
-                ];
-
-                if ($currentLoop !== null) {
-                    $currentLoop['commands'][] = $command;
+                if (isset($m[1])) {
+                    $loopMode = 'finite';
+                    $loopCount = (int) $m[1];
                 } else {
-                    $program[] = $command;
+                    $loopMode = 'infinite';
+                    $loopBuffer = [];
                 }
+
                 continue;
+            }
+
+            // END LOOP
+            if ($line === ':endloop') {
+                if ($loopMode === 'finite') {
+                    for ($i = 0; $i < $loopCount; $i++) {
+                        foreach ($loopBuffer as $cmd) {
+                            $commands[] = $cmd;
+                        }
+                    }
+                } elseif ($loopMode === 'infinite') {
+                    $infiniteLoop = $loopBuffer;
+                }
+
+                $loopBuffer = [];
+                $loopMode = null;
+                $loopCount = null;
+                $inLoop = false;
+
+                continue;
+            }
+
+            // PARSE COMMAND
+            if (preg_match('/^(.+?)(?:\s*\((.+)\))?$/u', $line, $m)) {
+                $cmd = [
+                    'city' => trim($m[1]),
+                    'good' => $m[2] ?? null,
+                ];
+
+                if ($inLoop) {
+                    $loopBuffer[] = $cmd;
+                } else {
+                    $commands[] = $cmd;
+                }
             }
         }
 
-        return $program;
+        return [
+            'commands' => $commands,
+            'infiniteLoop' => $infiniteLoop ?? [],
+        ];
     }
 }
