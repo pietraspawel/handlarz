@@ -33,15 +33,15 @@ class GameController extends AbstractController
 
         if (is_dir($scriptsDir)) {
             foreach (glob($scriptsDir . '/*.txt') as $scriptFile) {
-                $puppetScripts[pathinfo($scriptFile, PATHINFO_FILENAME)]
-                = file_get_contents($scriptFile);
+                $name = pathinfo($scriptFile, PATHINFO_FILENAME);
+                $puppetScripts[$name] = $this->parsePuppetScript(file_get_contents($scriptFile));
             }
         }
 
         dump($puppetScripts);
         die();
 
-            return $this->render('game/index.html.twig', $args);
+        return $this->render('game/index.html.twig', $args);
     }
 
     /**
@@ -144,5 +144,63 @@ class GameController extends AbstractController
             return $b['gold'] <=> $a['gold'];
         });
         return $results;
+    }
+
+    private function parsePuppetScript(string $content): array
+    {
+        $lines = preg_split('/\R/', $content);
+        $program = [];
+        $currentLoop = null;
+
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if ($line === '') {
+                continue;
+            }
+
+            if ($line === 'loop:') {
+                $currentLoop = [
+                    'type' => 'loop',
+                    'count' => null,
+                    'commands' => [],
+                ];
+                continue;
+            }
+
+            if (preg_match('/^loop\((\d+)\):$/', $line, $matches)) {
+                $currentLoop = [
+                    'type' => 'loop',
+                    'count' => (int) $matches[1],
+                    'commands' => [],
+                ];
+                continue;
+            }
+
+            if ($line === ':endloop') {
+                $program[] = $currentLoop;
+                $currentLoop = null;
+                continue;
+            }
+
+            if (preg_match('/^(.+?)(?:\s*\((.+)\))?$/u', $line, $matches)) {
+                $city = trim($matches[1]);
+                $good = isset($matches[2]) ? trim($matches[2]) : null;
+
+                $command = [
+                    'type' => 'move and buy',
+                    'city' => $city,
+                    'good' => $good,
+                ];
+
+                if ($currentLoop !== null) {
+                    $currentLoop['commands'][] = $command;
+                } else {
+                    $program[] = $command;
+                }
+                continue;
+            }
+        }
+
+        return $program;
     }
 }
