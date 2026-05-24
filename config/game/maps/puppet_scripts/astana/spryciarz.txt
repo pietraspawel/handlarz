@@ -1,0 +1,6 @@
+loop(3):
+Astana (bazylia)
+Skopje (tymianek)
+:endloop
+Astana (bazylia)
+Zagrzeb
