@@ -33,6 +33,13 @@ $().ready(() => {
         ),
     ];
 
+    Object.entries(data.ai.puppetScripts ?? {}).forEach(([key, script], i) => {
+        const trader = aiTraders[i];
+        if (!trader) return;
+        trader.strategy = new AIPuppetStrategy(script);
+        trader.name = key;
+    });
+
     const gameContext = new GameContext(gameMode, world);
     gameContext.gameLog.startTurn({ trader, aiTraders });
 
