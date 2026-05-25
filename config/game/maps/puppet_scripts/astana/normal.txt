@@ -1,4 +1,5 @@
+start(Astana)
 loop:
-Astana (bazylia)
-Skopje (tymianek)
+	(bazylia) Skopje
+	(tymianek) Astana
 :endloop

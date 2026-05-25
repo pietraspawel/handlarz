@@ -1,6 +1,6 @@
-loop(3):
-    Astana (bazylia)
-	Skopje(tymianek)
+start(Astana)
+loop(4):
+	(bazylia) Skopje
+    (tymianek) Astana
 :endloop
-Astana (bazylia)
-Zagrzeb
+(bazylia) Zagrzeb
