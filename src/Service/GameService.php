@@ -220,7 +220,7 @@ class GameService
 
                 $cmd = [
                     'city' => $city,
-                    'good' => $good,
+                    'good' => $good !== '' ? $good : null,
                 ];
 
                 if ($inLoop) {
