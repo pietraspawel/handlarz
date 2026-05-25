@@ -63,7 +63,5 @@ $().ready(() => {
         tooltipsView,
     );
 
-    console.log(aiTraders[1]);
-
     GameView.refreshAll(world, trader, aiTraders);
 });
