@@ -38,7 +38,8 @@ class GameController extends AbstractController
             }
         }
 
-        dump($puppetScripts);
+        $args['ai']['puupetScripts'] = $puppetScripts;
+        dump($puppetScripts, $args);
         die();
 
         return $this->render('game/index.html.twig', $args);
