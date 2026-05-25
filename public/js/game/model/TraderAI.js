@@ -48,6 +48,20 @@ class TraderAI extends Trader {
         const decision = this.strategy.decide(world, this);
         const gold = this.gold;
         let goodName = "-";
+
+        if (this.city !== null && decision.city !== null) {
+            const distance = world.hexDistance(
+                this.city.position.x,
+                this.city.position.y,
+                decision.city.position.x,
+                decision.city.position.y,
+            );
+            if (distance > world.turnsLeft - 1) {
+                decision.goodId = null;
+                decision.city = this.city;
+            }
+        }
+
         if (decision.goodId !== null) {
             this.buy(gameContext, world, decision.goodId);
             goodName = this.goods[decision.goodId].name;

@@ -9,21 +9,6 @@ class GreedyStrategy extends AIStrategy {
             bestCity = world.getRandomCity();
         }
 
-        const distance = world.hexDistance(
-            city.position.x,
-            city.position.y,
-            bestCity.position.x,
-            bestCity.position.y,
-        );
-        const remainingTurns = world.turnsLeft - 1;
-
-        if (distance > remainingTurns) {
-            return {
-                goodId: null,
-                city: city,
-            };
-        }
-
         return {
             goodId: bestGoodId,
             city: bestCity,
