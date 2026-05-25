@@ -56,4 +56,16 @@ class World {
         const qr2 = HexMath.offsetToAxial(x2, y2);
         return HexMath.distance(qr1.q, qr1.r, qr2.q, qr2.r);
     }
+
+    findCityByName(cityName) {
+        return this.cities.find((city) => city.name === cityName);
+    }
+
+    findGoodIdByName(goodName) {
+        if (goodName === null) {
+            return null;
+        }
+
+        return this.goods.findIndex((good) => good.name === goodName);
+    }
 }
