@@ -33,16 +33,19 @@ $().ready(() => {
         ),
     ];
 
-    Object.entries(data.ai.puppetScripts ?? {}).forEach(([key, script], i) => {
-        const trader = aiTraders[i];
-        if (!trader) return;
-        trader.strategy = new AIPuppetStrategy(script);
-        trader.name = key;
+    Object.entries(data.ai.puppetScripts ?? {}).forEach(([name, script], i) => {
+        let city = world.getRandomCity();
         if (script.start !== null) {
-            const city = world.findCityByName(script.start);
-            trader.city = city;
-            trader.position = { ...city.position };
+            city = world.findCityByName(script.start);
         }
+        const trader = new TraderAI(
+            world,
+            aiTraders.length,
+            name,
+            city,
+            new AIPuppetStrategy(script),
+        );
+        aiTraders.push(trader);
     });
 
     const gameContext = new GameContext(gameMode, world);
@@ -59,6 +62,8 @@ $().ready(() => {
         gameContext,
         tooltipsView,
     );
+
+    console.log(aiTraders[1]);
 
     GameView.refreshAll(world, trader, aiTraders);
 });
