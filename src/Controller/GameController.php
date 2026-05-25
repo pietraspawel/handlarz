@@ -28,20 +28,6 @@ class GameController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $puppetScripts = [];
-        $scriptsDir = $projectDir . '/config/game/maps/puppet_scripts/' . $map;
-
-        if (is_dir($scriptsDir)) {
-            foreach (glob($scriptsDir . '/*.txt') as $scriptFile) {
-                $name = pathinfo($scriptFile, PATHINFO_FILENAME);
-                $puppetScripts[$name] = $this->parsePuppetScript(file_get_contents($scriptFile));
-            }
-        }
-
-        $args['ai']['puupetScripts'] = $puppetScripts;
-        dump($puppetScripts, $args);
-        die();
-
         return $this->render('game/index.html.twig', $args);
     }
 
@@ -145,81 +131,5 @@ class GameController extends AbstractController
             return $b['gold'] <=> $a['gold'];
         });
         return $results;
-    }
-
-    private function parsePuppetScript(string $content): array
-    {
-        $lines = preg_split('/\R/', $content);
-
-        $commands = [];
-
-        $loopBuffer = [];
-        $loopMode = null; // null | finite | infinite
-        $loopCount = null;
-
-        $inLoop = false;
-
-        $infiniteLoop = null;
-
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if ($line === '') {
-                continue;
-            }
-
-            // START LOOP
-            if (preg_match('/^loop(?:\((\d+)\))?:$/', $line, $m)) {
-                $inLoop = true;
-
-                if (isset($m[1])) {
-                    $loopMode = 'finite';
-                    $loopCount = (int) $m[1];
-                } else {
-                    $loopMode = 'infinite';
-                    $loopBuffer = [];
-                }
-
-                continue;
-            }
-
-            // END LOOP
-            if ($line === ':endloop') {
-                if ($loopMode === 'finite') {
-                    for ($i = 0; $i < $loopCount; $i++) {
-                        foreach ($loopBuffer as $cmd) {
-                            $commands[] = $cmd;
-                        }
-                    }
-                } elseif ($loopMode === 'infinite') {
-                    $infiniteLoop = $loopBuffer;
-                }
-
-                $loopBuffer = [];
-                $loopMode = null;
-                $loopCount = null;
-                $inLoop = false;
-
-                continue;
-            }
-
-            // PARSE COMMAND
-            if (preg_match('/^(.+?)(?:\s*\((.+)\))?$/u', $line, $m)) {
-                $cmd = [
-                    'city' => trim($m[1]),
-                    'good' => $m[2] ?? null,
-                ];
-
-                if ($inLoop) {
-                    $loopBuffer[] = $cmd;
-                } else {
-                    $commands[] = $cmd;
-                }
-            }
-        }
-
-        return [
-            'commands' => $commands,
-            'infiniteLoop' => $infiniteLoop ?? [],
-        ];
     }
 }
