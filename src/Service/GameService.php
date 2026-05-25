@@ -170,7 +170,6 @@ class GameService
         $loopCount = null;
 
         $inLoop = false;
-
         $infiniteLoop = null;
 
         foreach ($lines as $line) {
@@ -214,11 +213,14 @@ class GameService
                 continue;
             }
 
-            // PARSE COMMAND
-            if (preg_match('/^(.+?)(?:\s*\((.+)\))?$/u', $line, $m)) {
+            // PARSE COMMAND: (good) city OR city only
+            if (preg_match('/^(?:\(([^)]+)\)\s*)?(.+)$/u', $line, $m)) {
+                $good = isset($m[1]) ? trim($m[1]) : null;
+                $city = trim($m[2]);
+
                 $cmd = [
-                    'city' => trim($m[1]),
-                    'good' => $m[2] ?? null,
+                    'city' => $city,
+                    'good' => $good,
                 ];
 
                 if ($inLoop) {
