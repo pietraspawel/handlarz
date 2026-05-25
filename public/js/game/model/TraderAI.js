@@ -28,7 +28,7 @@ class TraderAI extends Trader {
     }
 
     turn(gameContext, world) {
-        if (!this.isInDestination()) {
+        if (!this.isInDestination() && this.destination !== null) {
             this.moveOneStepToDestination(gameContext, world);
         }
         this.lastTurnInfo.goodName = "-";
@@ -52,7 +52,9 @@ class TraderAI extends Trader {
             this.buy(gameContext, world, decision.goodId);
             goodName = this.goods[decision.goodId].name;
         }
-        this.setDestination({ ...decision.city.position });
+        if (decision.city !== null) {
+            this.setDestination({ ...decision.city.position });
+        }
         this.lastTurnInfo = {
             goodName: goodName,
             lastCity: lastCity,
