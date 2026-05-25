@@ -38,6 +38,11 @@ $().ready(() => {
         if (!trader) return;
         trader.strategy = new AIPuppetStrategy(script);
         trader.name = key;
+        if (script.start !== null) {
+            const city = world.findCityByName(script.start);
+            trader.city = city;
+            trader.position = { ...city.position };
+        }
     });
 
     const gameContext = new GameContext(gameMode, world);

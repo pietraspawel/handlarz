@@ -172,9 +172,17 @@ class GameService
         $inLoop = false;
         $infiniteLoop = null;
 
+        $start = null;
+
         foreach ($lines as $line) {
             $line = trim($line);
             if ($line === '') {
+                continue;
+            }
+
+            // START POSITION
+            if (preg_match('/^start\((.+)\)$/u', $line, $m)) {
+                $start = trim($m[1]);
                 continue;
             }
 
@@ -232,6 +240,7 @@ class GameService
         }
 
         return [
+            'start' => $start,
             'commands' => $commands,
             'infiniteLoop' => $infiniteLoop ?? [],
         ];
