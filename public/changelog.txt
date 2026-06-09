@@ -1,0 +1,12 @@
+konfigurowanie graczy ai w konfigu, osobno dla każdej mapy
+nazwa: nazwa (default: AITraderN)
+startegia: strategia (default: GreedyStrategy)
+	parametrA: wartośćA
+	parametrN: wartośćN 
+start: miasto startowe (default: miasta w kolejności, jeśli zabraknie random)
+każdy argument opcjonalny
+
+# potrzebuję takiej trasy, że A -> B -> C -> A i z jednego musisz jeździć na pusto
+#? znajdywacz najlepszej trasy
+
+# uporządkować World, przenieść do GameContext to co nie należy do świata
