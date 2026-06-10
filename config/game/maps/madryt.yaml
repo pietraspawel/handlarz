@@ -4,6 +4,8 @@
 # Oslo (oregano)
 # :endloop
 
+game:
+  turnsAmount: 60
 world:
   xSize: 20
   ySize: 10

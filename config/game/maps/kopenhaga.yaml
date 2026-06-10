@@ -4,6 +4,8 @@
 # San Marino
 # :endloop
 
+game:
+  turnsAmount: 60
 world:
   xSize: 10
   ySize: 10

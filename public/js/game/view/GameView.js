@@ -3,12 +3,12 @@ class GameView {
         const world = gameContext.world;
         GameView.refreshMapRecordView(gameContext.highscore);
         CityView.refreshCityPrices(world.cities);
-        this.refreshElementsAfterTurn(world, trader, aiTraders);
+        this.refreshElementsAfterTurn(gameContext, trader, aiTraders);
         this.refreshElementsAfterTrade(trader);
     }
 
-    static refreshElementsAfterTurn(world, trader, aiTraders) {
-        GameView.refreshTurnsLeftView(world.turnsLeft);
+    static refreshElementsAfterTurn(gameContext, trader, aiTraders) {
+        GameView.refreshTurnsLeftView(gameContext.turnsLeft);
         TraderView.refreshElementsAfterTurn(trader);
         TraderAIView.refreshElementsAfterTurn(aiTraders);
         if (trader.isInCity()) {

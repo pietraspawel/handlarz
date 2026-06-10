@@ -1,3 +1,5 @@
+game:
+  turnsAmount: 60
 ai:
   traders:
     - name: AITrader0

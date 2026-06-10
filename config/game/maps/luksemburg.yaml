@@ -5,6 +5,8 @@
 # :endloop
 # 8 945 665
 
+game:
+  turnsAmount: 60
 world:
   xSize: 20
   ySize: 10

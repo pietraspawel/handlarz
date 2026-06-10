@@ -6,6 +6,8 @@
 # Zagrzeb
 # 2 129 424 668
 
+game:
+  turnsAmount: 60
 world:
   xSize: 20
   ySize: 10

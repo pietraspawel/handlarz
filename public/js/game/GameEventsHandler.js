@@ -19,7 +19,7 @@ class GameEventsHandler {
     bind() {
         $(".map-container").on("click", "#map", (e) => {
             if (this.gameContext.gameMode === GameContext.GAME_MODE.MANUAL) {
-                if (this.trader.isTravelling() && this.world.turnsLeft > 0) {
+                if (this.trader.isTravelling() && this.gameContext.turnsLeft > 0) {
                     TurnSystem.nextTurn(
                         this.gameContext,
                         this.trader,
@@ -61,7 +61,7 @@ class GameEventsHandler {
             // Zrób następną kolejkę.
             if (
                 this.gameContext.gameMode === GameContext.GAME_MODE.MANUAL &&
-                this.world.turnsLeft > 0
+                this.gameContext.turnsLeft > 0
             ) {
                 TurnSystem.nextTurn(
                     this.gameContext,
@@ -101,7 +101,7 @@ class GameEventsHandler {
     // Jeśli jest w trybie auto, to przewiń kolejki do końca.
     // Lub po prostu włącz tryb auto.
     handleCityClickForAutoMode(clickedCity) {
-        if (this.trader.isInThatCity(clickedCity) && this.world.turnsLeft > 0) {
+        if (this.trader.isInThatCity(clickedCity) && this.gameContext.turnsLeft > 0) {
             TurnSystem.nextTurn(this.gameContext, this.trader, this.aiTraders);
             return;
         }

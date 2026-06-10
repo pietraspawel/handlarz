@@ -56,7 +56,7 @@ class TraderAI extends Trader {
                 decision.city.position.x,
                 decision.city.position.y,
             );
-            if (distance > world.turnsLeft - 1) {
+            if (distance > gameContext.turnsLeft - 1) {
                 decision.goodId = null;
                 decision.city = this.city;
             }
