@@ -1,3 +1,4 @@
+# case: greedy strategy jest słabe
 # loop:
 # Vaduz (bazylia)
 # Skopje (tymianek)
@@ -44,3 +45,12 @@ world:
       price: 45
     - name: tymianek
       price: 55
+ai:
+  traders:
+    - name: pacynka
+      strategy:
+        name: AIPuppetStrategy
+        script: pacynka
+    - name: AITrader0
+    - name: AITrader1
+    - name: AITrader2

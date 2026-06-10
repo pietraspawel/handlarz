@@ -1,0 +1,6 @@
+start (Vaduz)
+loop:
+	(bazylia) Skopje 
+	(tymianek) Tallin 
+	(oregano) Vaduz
+:endloop
