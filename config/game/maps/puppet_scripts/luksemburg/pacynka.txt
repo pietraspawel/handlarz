@@ -1,0 +1,6 @@
+start (Luksemburg) 
+(bazylia) Kiszyniów
+loop:
+	(oregano) San Marino
+	Kiszyniów
+:endloop
