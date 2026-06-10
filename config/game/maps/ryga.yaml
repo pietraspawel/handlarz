@@ -44,3 +44,12 @@ world:
       price: 41
     - name: tymianek
       price: 11
+ai:
+  traders:
+    - name: pacynka
+      strategy:
+        name: AIPuppetStrategy
+        script: pacynka
+    - name: AITrader0
+    - name: AITrader1
+    - name: AITrader2

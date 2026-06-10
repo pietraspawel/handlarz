@@ -1,0 +1,6 @@
+start(Ryga)
+loop:
+	(bazylia) Lizbona 
+	(tymianek) Praga 
+	(oregano) Ryga
+:endloop
