@@ -6,61 +6,10 @@ $().ready(() => {
     let world = new World(data);
     let trader = new Trader(world);
     let aiTraderStrategy = new GreedyStrategy();
-    const aiTraders = [
-        new TraderAI(
-            world,
-            0,
-            "AITrader0",
-            world.cities[0],
-            new AIPuppetStrategy({
-                script: data.ai.puppetScripts["spryciarz"],
-            }),
-        ),
-        new TraderAI(
-            world,
-            1,
-            "AITrader1",
-            world.cities[1],
-            new AIPuppetStrategy({ script: data.ai.puppetScripts["normal"] }),
-        ),
-        new TraderAI(world, 2, "AITrader2", world.cities[2], aiTraderStrategy),
-        new TraderAI(
-            world,
-            3,
-            "AITrader3",
-            world.getRandomCity(),
-            aiTraderStrategy,
-        ),
-        new TraderAI(
-            world,
-            4,
-            "AITrader4",
-            world.getRandomCity(),
-            aiTraderStrategy,
-        ),
-        new TraderAI(
-            world,
-            5,
-            "AITrader5",
-            world.getRandomCity(),
-            aiTraderStrategy,
-        ),
-    ];
 
-    Object.entries(data.ai.puppetScripts ?? {}).forEach(([name, script], i) => {
-        let city = world.getRandomCity();
-        if (script.start !== null) {
-            city = world.findCityByName(script.start);
-        }
-        const trader = new TraderAI(
-            world,
-            aiTraders.length,
-            name,
-            city,
-            new AIPuppetStrategy({ script }),
-        );
-        aiTraders.push(trader);
-    });
+    console.log(data);
+
+    const aiTraders = AIFactory.create(world, data);
 
     const gameContext = new GameContext(gameMode, world);
     gameContext.gameLog.startTurn({ trader, aiTraders });

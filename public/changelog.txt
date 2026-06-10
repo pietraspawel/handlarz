@@ -1,6 +1,6 @@
 konfigurowanie graczy ai w konfigu, osobno dla każdej mapy
-nazwa: nazwa (default: AITraderN)
-startegia: strategia (default: GreedyStrategy)
+name: nazwa (default: AITraderN)
+strategy: strategia (default: GreedyStrategy)
 	parametrA: wartośćA
 	parametrN: wartośćN 
 start: miasto startowe (default: miasta w kolejności, jeśli zabraknie random)
@@ -10,3 +10,26 @@ każdy argument opcjonalny
 #? znajdywacz najlepszej trasy
 
 # uporządkować World, przenieść do GameContext to co nie należy do świata
+
+ai:
+	name: AITrader0
+		strategy: AIPuppetStrategy
+			script: spryciarz
+		start: Astana
+	name: AITrader1
+		strategy: AIPuppetStrategy
+			script: normal
+		start: Astana
+	name: AITrader2
+	name: AITrader3
+	name: AITrader4
+	name: AITrader5
+	name: spryciarz
+		strategy: AIPuppetStrategy
+			script: spryciarz
+	name: normal
+		strategy: AIPuppetStrategy
+			script: normal
+
+2026.06.10
+	dodano konfigurowanie graczy ai w konfigu, osobno dla każdej mapy
