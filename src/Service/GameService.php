@@ -181,7 +181,7 @@ class GameService
             }
 
             // START POSITION
-            if (preg_match('/^start\((.+)\)$/u', $line, $m)) {
+            if (preg_match('/^start\s*\((.+)\)$/u', $line, $m)) {
                 $start = trim($m[1]);
                 continue;
             }
