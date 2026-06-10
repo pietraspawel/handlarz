@@ -12,7 +12,6 @@ world:
   xSize: 10
   ySize: 10
   startGold: 100
-  turnsAmount: 60
   cities:
   - name: Tallin
     position:

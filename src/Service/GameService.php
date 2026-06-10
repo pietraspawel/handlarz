@@ -18,7 +18,6 @@ class GameService
     public const MAPS_PATH = '/config/game/maps/';
     public const LOG_PATH = '/var/game_logs/';
     private const START_GOLD = 100;
-    private const TURNS_AMOUNT = 120;
     private const WORLD_X_SIZE = 20;
     private const WORLD_Y_SIZE = 10;
     /**
@@ -87,7 +86,6 @@ class GameService
             'xSize' => self::WORLD_X_SIZE,
             'ySize' => self::WORLD_Y_SIZE,
             'startGold' => self::START_GOLD,
-            'turnsAmount' => self::TURNS_AMOUNT,
             'cities' => $this->cityService->generateRandomCities(self::WORLD_X_SIZE, self::WORLD_Y_SIZE),
         ];
         return $this->generateTwigData($config);
