@@ -1,6 +1,4 @@
 class World {
-    static MAX_NON_HIDDEN_AI = 3;
-
     constructor(data) {
         this.xSize = data.world.xSize;
         this.ySize = data.world.ySize;
