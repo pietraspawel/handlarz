@@ -80,15 +80,15 @@ class GameService
 
     public function generateRandomMap(string $map): array
     {
-        $config = [
-            'world' => [
-                'map' => $map,
-                'xSize' => self::WORLD_X_SIZE,
-                'ySize' => self::WORLD_Y_SIZE,
-                'startGold' => self::START_GOLD,
-                'turnsAmount' => self::TURNS_AMOUNT,
-                'cities' => $this->cityService->generateRandomCities(self::WORLD_X_SIZE, self::WORLD_Y_SIZE),
-            ]
+        $filepath = $this->projectDir . self::MAPS_PATH . $map . '.yaml';
+        $config = Yaml::parseFile($filepath);
+        $config['world'] = [
+            'map' => $map,
+            'xSize' => self::WORLD_X_SIZE,
+            'ySize' => self::WORLD_Y_SIZE,
+            'startGold' => self::START_GOLD,
+            'turnsAmount' => self::TURNS_AMOUNT,
+            'cities' => $this->cityService->generateRandomCities(self::WORLD_X_SIZE, self::WORLD_Y_SIZE),
         ];
         return $this->generateTwigData($config);
     }

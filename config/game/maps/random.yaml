@@ -1,0 +1,5 @@
+ai:
+  traders:
+    - name: AITrader0
+    - name: AITrader1
+    - name: AITrader2
