@@ -1,0 +1,5 @@
+start (Madryt)
+loop:
+	(bazylia) Oslo 
+	(oregano) Madryt
+:endloop
