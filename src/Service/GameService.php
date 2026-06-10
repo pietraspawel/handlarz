@@ -161,7 +161,11 @@ class GameService
 
     private function parsePuppetScript(string $content): array
     {
-        $lines = preg_split('/\R/', $content);
+        if (!mb_check_encoding($content, 'UTF-8')) {
+            throw new \RuntimeException("Invalid UTF-8 in script file");
+        }
+
+        $lines = preg_split('/\R/u', $content);
 
         $commands = [];
 
