@@ -7,9 +7,10 @@ class Trader {
     position;
     destination;
 
-    constructor(world) {
+    constructor(gameContext) {
+        const world = gameContext.world;
         this.city = world.cities[0];
-        this.gold = world.startGold;
+        this.gold = gameContext.startGold;
         this.goods = [];
         for (let goodKey in world.goods) {
             let good = world.goods[goodKey];

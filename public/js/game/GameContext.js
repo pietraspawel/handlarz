@@ -7,6 +7,7 @@ class GameContext {
     world;
     highscore;
     turnsLeft;
+    startGold;
 
     constructor({ gameMode, data, world }) {
         this.gameMode = gameMode;
@@ -14,5 +15,6 @@ class GameContext {
         this.gameLog = new GameLog(world.map);
         this.highscore = parseInt(data.game.highscore);
         this.turnsLeft = data.game.turnsAmount;
+        this.startGold = data.game.startGold;
     }
 }

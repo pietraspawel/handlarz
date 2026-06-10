@@ -7,12 +7,12 @@ $().ready(() => {
     console.log(data);
 
     let world = new World(data);
-    let trader = new Trader(world);
+    const gameContext = new GameContext({ gameMode, data, world });
+    let trader = new Trader(gameContext);
     let aiTraderStrategy = new GreedyStrategy();
 
-    const aiTraders = AIFactory.create(world, data);
+    const aiTraders = AIFactory.create(gameContext, data);
 
-    const gameContext = new GameContext({ gameMode, data, world });
     gameContext.gameLog.startTurn({ trader, aiTraders });
 
     for (const aiTrader of aiTraders) {

@@ -3,8 +3,8 @@ class TraderAI extends Trader {
     lastTurnInfo;
     strategy;
 
-    constructor(world, index, name, city, strategy) {
-        super(world);
+    constructor(gameContext, index, name, city, strategy) {
+        super(gameContext);
         this.strategy = strategy;
         this.id = index;
         this.name = name;

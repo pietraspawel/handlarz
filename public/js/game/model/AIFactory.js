@@ -1,7 +1,7 @@
 class AIFactory {
     static defaultCityIndex;
 
-    static create(world, data) {
+    static create(gameContext, data) {
         const aiConfigs = data.ai.traders ?? [];
         const aiTraders = [];
 
@@ -9,9 +9,9 @@ class AIFactory {
 
         aiConfigs.forEach((config, index) => {
             const strategy = this.createStrategy(config, data);
-            let city = this.resolveStartCity(config, strategy, world);
+            let city = this.resolveStartCity(config, strategy, gameContext.world);
             aiTraders.push(
-                new TraderAI(world, index, config.name, city, strategy),
+                new TraderAI(gameContext, index, config.name, city, strategy),
             );
         });
 

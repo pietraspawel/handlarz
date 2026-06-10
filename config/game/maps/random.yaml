@@ -1,5 +1,6 @@
 game:
   turnsAmount: 60
+  startGold: 100
 ai:
   traders:
     - name: AITrader0

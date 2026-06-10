@@ -6,6 +6,7 @@
 
 game:
   turnsAmount: 60
+  startGold: 100
 world:
   xSize: 10
   ySize: 10
