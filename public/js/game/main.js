@@ -7,8 +7,22 @@ $().ready(() => {
     let trader = new Trader(world);
     let aiTraderStrategy = new GreedyStrategy();
     const aiTraders = [
-        new TraderAI(world, 0, "AITrader0", world.cities[0], aiTraderStrategy),
-        new TraderAI(world, 1, "AITrader1", world.cities[1], aiTraderStrategy),
+        new TraderAI(
+            world,
+            0,
+            "AITrader0",
+            world.cities[0],
+            new AIPuppetStrategy({
+                script: data.ai.puppetScripts["spryciarz"],
+            }),
+        ),
+        new TraderAI(
+            world,
+            1,
+            "AITrader1",
+            world.cities[1],
+            new AIPuppetStrategy({ script: data.ai.puppetScripts["normal"] }),
+        ),
         new TraderAI(world, 2, "AITrader2", world.cities[2], aiTraderStrategy),
         new TraderAI(
             world,
@@ -43,7 +57,7 @@ $().ready(() => {
             aiTraders.length,
             name,
             city,
-            new AIPuppetStrategy(script),
+            new AIPuppetStrategy({ script }),
         );
         aiTraders.push(trader);
     });

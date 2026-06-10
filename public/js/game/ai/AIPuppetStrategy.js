@@ -4,7 +4,7 @@ class AIPuppetStrategy extends AIStrategy {
     commandPointer;
     loopPointer;
 
-    constructor(script) {
+    constructor({ script }) {
         super();
         this.commands = script.commands ?? [];
         this.infiniteLoop = script.infiniteLoop ?? [];
