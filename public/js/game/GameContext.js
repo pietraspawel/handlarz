@@ -7,10 +7,6 @@ class GameContext {
 	world;
 
 	constructor(gameMode, world) {
-        this.gameMode = GameContext.GAME_MODE.MANUAL;
-        if (gameMode == "autoTurns") {
-            this.gameMode = GameContext.GAME_MODE.AUTO_TURNS;
-        }
         this.gameMode = gameMode;
 		this.world = world;
 		this.gameLog = new GameLog(world.map);
