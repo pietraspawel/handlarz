@@ -3,13 +3,16 @@ $().ready(() => {
 
     const gameMode = GAME_MODE.AUTO_TRAVEL;
     let data = JSON.parse(atob($(".js-data").data("json")));
+
+    console.log(data);
+
     let world = new World(data);
     let trader = new Trader(world);
     let aiTraderStrategy = new GreedyStrategy();
 
     const aiTraders = AIFactory.create(world, data);
 
-    const gameContext = new GameContext(gameMode, world);
+    const gameContext = new GameContext({ gameMode, data, world });
     gameContext.gameLog.startTurn({ trader, aiTraders });
 
     for (const aiTrader of aiTraders) {
@@ -24,5 +27,5 @@ $().ready(() => {
         tooltipsView,
     );
 
-    GameView.refreshAll(world, trader, aiTraders);
+    GameView.refreshAll(gameContext, trader, aiTraders);
 });

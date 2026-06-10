@@ -109,6 +109,7 @@ class GameService
         }
         $highscore = file_get_contents($filepath);
         $config['world']['highscore'] = $highscore;
+        $config['game']['highscore'] = $highscore;
 
         $filepath = $this->projectDir . self::GOODS_NAMES_FILEPATH;
         $goods = file($filepath);

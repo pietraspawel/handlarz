@@ -1,6 +1,7 @@
 class GameView {
-	static refreshAll(world, trader, aiTraders) {
-		GameView.refreshMapRecordView(world.highscore);
+	static refreshAll(gameContext, trader, aiTraders) {
+		const world = gameContext.world;
+		GameView.refreshMapRecordView(gameContext.highscore);
 		CityView.refreshCityPrices(world.cities);
 		this.refreshElementsAfterTurn(world, trader, aiTraders);
 		this.refreshElementsAfterTrade(trader);

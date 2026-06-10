@@ -12,7 +12,7 @@ class GameOverService {
             body: JSON.stringify({
                 map: world.map,
                 score: trader.gold,
-                highscore: world.highscore,
+                highscore: gameContext.highscore,
                 aiPlayers: aiTraders,
                 gameLog: gameLog,
             }),

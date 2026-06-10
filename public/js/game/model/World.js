@@ -1,4 +1,8 @@
 class World {
+    xSize;
+    ySize;
+    map;
+
     constructor(data) {
         this.xSize = data.world.xSize;
         this.ySize = data.world.ySize;
