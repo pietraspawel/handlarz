@@ -47,22 +47,6 @@ world:
       price: 88
 ai:
   traders:
-    - name: AITrader0
-      start: Astana
-      strategy: 
-        name: AIPuppetStrategy
-        script: spryciarz
-    - name: AITrader1
-      start: Astana
-      strategy: 
-        name: AIPuppetStrategy
-        script: normal
-    - name: AITrader2
-      start: random
-    - name: AITrader3
-    - name: AITrader4
-    - name: AITrader5
-    - name: AITrader6
     - name: spryciarz
       strategy: 
         name: AIPuppetStrategy
@@ -71,3 +55,6 @@ ai:
       strategy: 
         name: AIPuppetStrategy
         script: normal
+    - name: AITrader0
+    - name: AITrader1
+    - name: AITrader2
