@@ -1,0 +1,5 @@
+start (Kopenhaga)
+loop:
+	(bazylia) San Marino 
+	Kopenhaga
+:endloop

@@ -1,3 +1,4 @@
+# case: pusty przebieg
 # loop:
 # Kopenhaga (bazylia)
 # San Marino
@@ -42,3 +43,12 @@ world:
       price: 76
     - name: tymianek
       price: 78
+ai:
+  traders:
+    - name: pacynka
+      strategy:
+        name: AIPuppetStrategy
+        script: pacynka
+    - name: AITrader0
+    - name: AITrader1
+    - name: AITrader2
