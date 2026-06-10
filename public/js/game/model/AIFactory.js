@@ -1,30 +1,15 @@
 class AIFactory {
+    static defaultCityIndex;
+
     static create(world, data) {
         const aiConfigs = data.ai.traders ?? [];
         const aiTraders = [];
 
-        let defaultCityIndex = 0;
+        AIFactory.defaultCityIndex = 0;
 
         aiConfigs.forEach((config, index) => {
             const strategy = this.createStrategy(config, data);
-
-            let city = this.resolveStartCity(
-                config,
-                strategy,
-                world,
-                defaultCityIndex,
-            );
-
-            if (
-                !config.start &&
-                !(
-                    strategy instanceof AIPuppetStrategy &&
-                    strategy.start !== null
-                )
-            ) {
-                defaultCityIndex++;
-            }
-
+            let city = this.resolveStartCity(config, strategy, world);
             aiTraders.push(
                 new TraderAI(world, index, config.name, city, strategy),
             );
@@ -69,12 +54,9 @@ class AIFactory {
         }
     }
 
-    static resolveStartCity(config, strategy, world, defaultCityIndex) {
+    static resolveStartCity(config, strategy, world) {
         // 1. start ze skryptu nadpisuje wszystko
-        if (
-            strategy instanceof AIPuppetStrategy &&
-            strategy.start !== null
-        ) {
+        if (strategy instanceof AIPuppetStrategy && strategy.start !== null) {
             const city = world.findCityByName(strategy.start);
 
             if (!city) {
@@ -104,8 +86,10 @@ class AIFactory {
         }
 
         // 3. domyślne n-te miasto
-        if (defaultCityIndex < world.cities.length) {
-            return world.cities[defaultCityIndex];
+        if (AIFactory.defaultCityIndex < world.cities.length) {
+            const city = world.cities[AIFactory.defaultCityIndex];
+            AIFactory.defaultCityIndex++;
+            return city;
         }
 
         // 4. fallback
