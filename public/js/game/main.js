@@ -7,8 +7,6 @@ $().ready(() => {
     let trader = new Trader(world);
     let aiTraderStrategy = new GreedyStrategy();
 
-    console.log(data);
-
     const aiTraders = AIFactory.create(world, data);
 
     const gameContext = new GameContext(gameMode, world);
