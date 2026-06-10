@@ -2,6 +2,7 @@
 #? znajdywacz najlepszej trasy
 
 # uporządkować World, przenieść do GameContext to co nie należy do świata
+# stałe z GameService mogą lecieć do random.yaml
 
 2026.06.10
 	dodano konfigurowanie graczy ai w konfigu, osobno dla każdej mapy
