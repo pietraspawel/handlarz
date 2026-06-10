@@ -7,7 +7,6 @@ class World {
         this.xSize = data.world.xSize;
         this.ySize = data.world.ySize;
         this.map = data.world.map;
-        this.highscore = parseInt(data.world.highscore);
         this.turnsLeft = data.world.turnsAmount;
         this.startGold = data.world.startGold;
         this.goods = [];
