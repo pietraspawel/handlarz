@@ -17,7 +17,6 @@ class GameService
     public const HIGHSCORES_PATH = '/config/game/maps/';
     public const MAPS_PATH = '/config/game/maps/';
     public const LOG_PATH = '/var/game_logs/';
-    private const START_GOLD = 100;
     private const WORLD_X_SIZE = 20;
     private const WORLD_Y_SIZE = 10;
     /**
@@ -85,7 +84,6 @@ class GameService
             'map' => $map,
             'xSize' => self::WORLD_X_SIZE,
             'ySize' => self::WORLD_Y_SIZE,
-            'startGold' => self::START_GOLD,
             'cities' => $this->cityService->generateRandomCities(self::WORLD_X_SIZE, self::WORLD_Y_SIZE),
         ];
         return $this->generateTwigData($config);

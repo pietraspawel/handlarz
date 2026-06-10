@@ -7,7 +7,6 @@ class World {
         this.xSize = data.world.xSize;
         this.ySize = data.world.ySize;
         this.map = data.world.map;
-        this.startGold = data.world.startGold;
         this.goods = [];
         for (let key in data.world.cities[0].goods) {
             let goodName = data.world.cities[0].goods[key].name;

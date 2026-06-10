@@ -10,7 +10,6 @@ game:
 world:
   xSize: 20
   ySize: 10
-  startGold: 100
   cities:
   - name: Madryt
     position:
