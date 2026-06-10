@@ -160,7 +160,7 @@ class Trader {
     isInThatCity(city) {
         return (
             this.isInCity() &&
-            World.positionsEqual(this.position, city.position)
+            HexMath.positionsEqual(this.position, city.position)
         );
     }
 

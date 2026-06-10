@@ -50,7 +50,7 @@ class GameEventsHandler {
             // Jeśli jest w mieście i kliknięte inne miasto, wtedy tam się ustawia cel.
             if (
                 this.trader.isInCity() &&
-                !World.positionsEqual(
+                !HexMath.positionsEqual(
                     this.trader.position,
                     clickedCity.position,
                 )
