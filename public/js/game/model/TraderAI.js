@@ -28,7 +28,6 @@ class TraderAI extends Trader {
     }
 
     turn(gameContext) {
-        const world = gameContext.world;
         if (!this.isInDestination() && this.destination !== null) {
             this.moveOneStepToDestination(gameContext);
         }
@@ -38,8 +37,8 @@ class TraderAI extends Trader {
         }
 
         if (this.isInDestination()) {
-            this.destinationReached(world);
-            this.sellAll(world);
+            this.destinationReached(gameContext.world);
+            this.sellAll(gameContext);
             this.buySetDestinationAndSaveInfo(gameContext);
         }
     }

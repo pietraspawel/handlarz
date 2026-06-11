@@ -58,16 +58,13 @@ class Trader {
         });
     }
 
-    sellAll(world) {
+    sellAll(gameContext) {
         if (this.isTravelling()) {
             return false;
         }
-        let city = this.getCurrentCity(world);
+        let city = this.getCurrentCity(gameContext.world);
         for (let goodId in city.goods) {
-            let price = city.goods[goodId].price;
-            let amount = this.goods[goodId].quantity;
-            this.gold += price * amount;
-            this.goods[goodId].quantity = 0;
+            this.sell(gameContext, goodId);
         }
     }
 
