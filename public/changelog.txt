@@ -1,12 +1,12 @@
 # potrzebuję takiej trasy, że A -> B -> C -> A i z jednego musisz jeździć na pusto
 #? znajdywacz najlepszej trasy
 
-# metody z gameContext i world jednocześnie
 # pliki ai zmiana rozszerzenia na .ai
 # konfigi miast, .hs i ai do podfolderów
 
 2026.06.11
 	uporządkowano World, przeniesiono do GameContext to co nie należy do świata
 	stałe z GameService poszły do random.yaml
+	poprawiono metody z gameContext i world jednocześnie
 2026.06.10
 	dodano konfigurowanie graczy ai w konfigu, osobno dla każdej mapy
