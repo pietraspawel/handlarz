@@ -12,7 +12,7 @@ class TraderAI extends Trader {
         this.position = { ...this.city.position };
     }
 
-    initTurnZero(gameContext, world) {
+    initTurnZero(gameContext) {
         const gold = this.gold;
         this.buySetDestinationAndSaveInfo(gameContext);
         this.lastTurnInfo = {
