@@ -3,6 +3,8 @@
 
 # stałe z GameService mogą lecieć do random.yaml
 # metody z gameContext i world jednocześnie
+# pliki ai zmiana rozszerzenia na .ai
+# konfigi miast, .hs i ai do podfolderów
 
 2026.06.11
 	uporządkowano World, przeniesiono do GameContext to co nie należy do świata
