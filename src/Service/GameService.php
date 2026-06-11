@@ -11,7 +11,6 @@ use Symfony\Component\Yaml\Yaml;
 
 class GameService
 {
-    private const CITIES_AMOUNT = 3;
     private const CITY_NAMES_FILEPATH = '/config/game/city-names.txt';
     private const GOODS_NAMES_FILEPATH = '/config/game/goods-names.txt';
     public const HIGHSCORES_PATH = '/config/game/maps/';
@@ -73,7 +72,7 @@ class GameService
         foreach ($cityNamesList as $key => $value) {
             $cityNamesList[$key] = trim($value);
         }
-        $this->cityService = new CityService($this->goodService, self::CITIES_AMOUNT, $cityNamesList);
+        $this->cityService = new CityService($this->goodService, $cityNamesList);
     }
 
     public function generateRandomMap(string $map): array

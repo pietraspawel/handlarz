@@ -6,16 +6,17 @@ use App\Game\Service\GoodService;
 
 class CityService
 {
+    private const CITIES_AMOUNT = 4;
     private $citiesAmount;
     private $cityNamesList;
 
     private GoodService $goodService;
 
-    public function __construct(GoodService $goodService, int $citiesAmount, array $cityNamesList)
+    public function __construct(GoodService $goodService, array $cityNamesList)
     {
         $this->goodService = $goodService;
 
-        $this->citiesAmount = $citiesAmount;
+        $this->citiesAmount = self::CITIES_AMOUNT;
         $this->cityNamesList = $cityNamesList;
     }
 
