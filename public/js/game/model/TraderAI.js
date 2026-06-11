@@ -50,7 +50,7 @@ class TraderAI extends Trader {
         let goodName = "-";
 
         if (this.city !== null && decision.city !== null) {
-            const distance = world.hexDistance(
+            const distance = HexMath.distanceByOffset(
                 this.city.position.x,
                 this.city.position.y,
                 decision.city.position.x,
