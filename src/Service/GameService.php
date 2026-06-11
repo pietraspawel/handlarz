@@ -16,8 +16,6 @@ class GameService
     public const HIGHSCORES_PATH = '/config/game/maps/';
     public const MAPS_PATH = '/config/game/maps/';
     public const LOG_PATH = '/var/game_logs/';
-    private const WORLD_X_SIZE = 20;
-    private const WORLD_Y_SIZE = 10;
     /**
      * Mogą być podane obydwa HEX_WIDTH i HEX_HEIGHT. Jeśli jedno z nich jest null
      * to jest obliczane na podstawie drugiego. Oczywiście obydwa nie * mogą być null.
@@ -82,9 +80,9 @@ class GameService
         $this->cityService->setCitiesAmount($config['game']['citiesAmount']);
         $config['world'] = [
             'map' => $map,
-            'xSize' => self::WORLD_X_SIZE,
-            'ySize' => self::WORLD_Y_SIZE,
-            'cities' => $this->cityService->generateRandomCities(self::WORLD_X_SIZE, self::WORLD_Y_SIZE),
+            'xSize' => $config['world']['xSize'],
+            'ySize' => $config['world']['ySize'],
+            'cities' => $this->cityService->generateRandomCities($config['world']['xSize'], $config['world']['ySize']),
         ];
         return $this->generateTwigData($config);
     }
