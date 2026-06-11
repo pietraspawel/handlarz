@@ -14,7 +14,7 @@ class TraderAI extends Trader {
 
     initTurnZero(gameContext, world) {
         const gold = this.gold;
-        this.buySetDestinationAndSaveInfo(gameContext, world);
+        this.buySetDestinationAndSaveInfo(gameContext);
         this.lastTurnInfo = {
             goodName: "-",
             lastCity: this.city,
@@ -39,11 +39,12 @@ class TraderAI extends Trader {
         if (this.isInDestination()) {
             this.destinationReached(world);
             this.sellAll(world);
-            this.buySetDestinationAndSaveInfo(gameContext, world);
+            this.buySetDestinationAndSaveInfo(gameContext);
         }
     }
 
-    buySetDestinationAndSaveInfo(gameContext, world) {
+    buySetDestinationAndSaveInfo(gameContext) {
+        const world = gameContext.world;
         const lastCity = this.city;
         const decision = this.strategy.decide(world, this);
         const gold = this.gold;
