@@ -45,9 +45,8 @@ class TraderAI extends Trader {
     }
 
     buySetDestinationAndSaveInfo(gameContext) {
-        const world = gameContext.world;
         const lastCity = this.city;
-        const decision = this.strategy.decide(world, this);
+        const decision = this.strategy.decide(gameContext.world, this);
         const gold = this.gold;
         let goodName = "-";
 
@@ -65,7 +64,7 @@ class TraderAI extends Trader {
         }
 
         if (decision.goodId !== null) {
-            this.buy(gameContext, world, decision.goodId);
+            this.buy(gameContext, decision.goodId);
             goodName = this.goods[decision.goodId].name;
         }
         if (decision.city !== null) {

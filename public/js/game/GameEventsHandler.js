@@ -80,7 +80,7 @@ class GameEventsHandler {
         $(".city-info .buy").on("click", "button", (e) => {
             let target = $(e.target);
             let id = target.data("id");
-            this.trader.buy(this.gameContext, this.world, id);
+            this.trader.buy(this.gameContext, id);
             GameView.refreshElementsAfterTrade(this.trader);
         });
 

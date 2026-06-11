@@ -20,11 +20,11 @@ class Trader {
         this.destination = undefined;
     }
 
-    buy(gameContext, world, goodId) {
+    buy(gameContext, goodId) {
         if (this.isTravelling()) {
             return false;
         }
-        let city = this.getCurrentCity(world);
+        let city = this.getCurrentCity(gameContext.world);
         let price = city.goods[goodId].price;
         let amount = Math.floor(this.gold / price);
         this.gold -= price * amount;
