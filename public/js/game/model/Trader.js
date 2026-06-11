@@ -39,11 +39,11 @@ class Trader {
         });
     }
 
-    sell(gameContext, world, goodId) {
+    sell(gameContext, goodId) {
         if (this.isTravelling()) {
             return false;
         }
-        let city = this.getCurrentCity(world);
+        let city = this.getCurrentCity(gameContext.world);
         let price = city.goods[goodId].price;
         let amount = this.goods[goodId].quantity;
         this.gold += price * amount;
