@@ -83,13 +83,13 @@ class Trader {
         this.destination = { ...position };
     }
 
-    turn(gameContext, world) {
+    turn(gameContext) {
         if (this.destination) {
             this.moveOneStepToDestination(gameContext);
         }
 
         if (this.isInDestination()) {
-            this.destinationReached(world);
+            this.destinationReached(gameContext.world);
         }
     }
 

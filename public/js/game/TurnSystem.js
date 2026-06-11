@@ -21,7 +21,7 @@ class TurnSystem {
         for (const aiTrader of aiTraders) {
             aiTrader.turn(gameContext);
         }
-        trader.turn(gameContext, world);
+        trader.turn(gameContext);
         gameContext.turnsLeft--;
         GameView.refreshElementsAfterTurn(gameContext, trader, aiTraders);
 
