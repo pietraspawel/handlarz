@@ -2,6 +2,8 @@ class World {
     xSize;
     ySize;
     map;
+    goods;
+    cities;
 
     constructor(data) {
         this.xSize = data.world.xSize;
