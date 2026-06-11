@@ -1,10 +1,10 @@
 game:
-  citiesAmount: 3
   turnsAmount: 60
   startGold: 100
 world:
   xSize: 20
   ySize: 10
+  citiesAmount: 3
 ai:
   traders:
     - name: AITrader0

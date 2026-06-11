@@ -77,7 +77,7 @@ class GameService
     {
         $filepath = $this->projectDir . self::MAPS_PATH . $map . '.yaml';
         $config = Yaml::parseFile($filepath);
-        $this->cityService->setCitiesAmount($config['game']['citiesAmount']);
+        $this->cityService->setCitiesAmount($config['world']['citiesAmount']);
         $config['world'] = [
             'map' => $map,
             'xSize' => $config['world']['xSize'],
