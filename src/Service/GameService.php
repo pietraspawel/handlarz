@@ -75,7 +75,7 @@ class GameService
 
     public function generateRandomMap(string $map): array
     {
-        $filepath = $this->projectDir . self::MAPS_PATH . $map . '.yaml';
+        $filepath = $this->projectDir . self::MAPS_PATH . "$map/$map" . '.yaml';
         $config = Yaml::parseFile($filepath);
         $this->cityService->setCitiesAmount($config['world']['citiesAmount']);
         $config['world'] = [
@@ -89,7 +89,7 @@ class GameService
 
     public function loadPredefinedMap(string $map): array
     {
-        $filepath = $this->projectDir . self::MAPS_PATH . $map . '.yaml';
+        $filepath = $this->projectDir . self::MAPS_PATH . "$map/$map" . '.yaml';
         $config = Yaml::parseFile($filepath);
         $config['world']['map'] = $map;
         return $this->generateTwigData($config);
@@ -97,7 +97,8 @@ class GameService
 
     private function generateTwigData($config): array
     {
-        $filepath = $this->projectDir . self::HIGHSCORES_PATH . $config['world']['map'] . '.hs';
+        $map = $config['world']['map'];
+        $filepath = $this->projectDir . self::HIGHSCORES_PATH . "$map/$map" . '.hs';
         if (!is_file($filepath)) {
             file_put_contents($filepath, '0');
         }
@@ -121,7 +122,7 @@ class GameService
         $config['world']['hexWidth'] = $this->hexWidth;
         $config['world']['hexHeight'] = $this->hexHeight;
 
-        $config['ai']['puppetScripts'] = $this->loadPuppetScripts($config['world']['map']);
+        $config['ai']['puppetScripts'] = $this->loadPuppetScripts($map);
 
         UIService::calculateCityNamePosition($config);
 
@@ -141,7 +142,7 @@ class GameService
     private function loadPuppetScripts(string $map): array
     {
         $puppetScripts = [];
-        $scriptsDir = $this->projectDir . '/config/game/maps/puppet_scripts/' . $map;
+        $scriptsDir = $this->projectDir . '/config/game/maps/' . $map;
 
         if (is_dir($scriptsDir)) {
             foreach (glob($scriptsDir . '/*.ai') as $scriptFile) {

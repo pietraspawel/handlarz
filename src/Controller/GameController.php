@@ -18,7 +18,7 @@ class GameController extends AbstractController
     public function index(string $map, GameService $gameService): Response
     {
         $projectDir = $this->getParameter('kernel.project_dir');
-        $filepath = $projectDir . GameService::MAPS_PATH . $map . '.yaml';
+        $filepath = $projectDir . GameService::MAPS_PATH . "$map/" . $map . '.yaml';
 
         if ($map == 'random') {
             $args = $gameService->generateRandomMap($map);
@@ -96,7 +96,7 @@ class GameController extends AbstractController
     private function _handleHighscore(string $map, int $score): int
     {
         $projectDir = $this->getParameter('kernel.project_dir');
-        $filepath = $projectDir . GameService::HIGHSCORES_PATH . $map . '.hs';
+        $filepath = $projectDir . GameService::HIGHSCORES_PATH . "$map/$map" . '.hs';
 
         $highscore = file_get_contents($filepath);
 

@@ -18,13 +18,11 @@ class HomeController extends AbstractController
         $projectDir = $this->getParameter('kernel.project_dir');
         $dir = $projectDir . GameService::MAPS_PATH;
         $highscores = [];
-        $files = glob($dir . '*.yaml');
-        $files[] = 'random.yaml';
+        $mapDirs = glob($dir . '*', GLOB_ONLYDIR);
 
-        foreach ($files as $file) {
-            $map = pathinfo($file, PATHINFO_FILENAME);
-            $hsFile = $dir . $map . '.hs';
-
+        foreach ($mapDirs as $mapDir) {
+            $map = basename($mapDir);
+            $hsFile = $mapDir . '/' . $map . '.hs';
             $highscore = '';
             if (file_exists($hsFile)) {
                 $score = (int) file_get_contents($hsFile);
@@ -32,6 +30,7 @@ class HomeController extends AbstractController
                     $highscore = ' ( ' . $formatterService->formatGold($score) . ' $ )';
                 }
             }
+
             $highscores[$map] = $highscore;
         }
 
