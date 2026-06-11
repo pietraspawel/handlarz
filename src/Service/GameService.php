@@ -144,7 +144,7 @@ class GameService
         $scriptsDir = $this->projectDir . '/config/game/maps/puppet_scripts/' . $map;
 
         if (is_dir($scriptsDir)) {
-            foreach (glob($scriptsDir . '/*.txt') as $scriptFile) {
+            foreach (glob($scriptsDir . '/*.ai') as $scriptFile) {
                 $name = pathinfo($scriptFile, PATHINFO_FILENAME);
                 $puppetScripts[$name] = $this->parsePuppetScript(file_get_contents($scriptFile));
             }
