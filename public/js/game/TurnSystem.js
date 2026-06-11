@@ -19,7 +19,7 @@ class TurnSystem {
         let gameLog = gameContext.gameLog;
 
         for (const aiTrader of aiTraders) {
-            aiTrader.turn(gameContext, world);
+            aiTrader.turn(gameContext);
         }
         trader.turn(gameContext, world);
         gameContext.turnsLeft--;

@@ -27,7 +27,8 @@ class TraderAI extends Trader {
         TraderAIView.refreshInfo();
     }
 
-    turn(gameContext, world) {
+    turn(gameContext) {
+        const world = gameContext.world;
         if (!this.isInDestination() && this.destination !== null) {
             this.moveOneStepToDestination(gameContext);
         }
