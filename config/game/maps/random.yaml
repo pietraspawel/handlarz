@@ -1,4 +1,5 @@
 game:
+  citiesAmount: 3
   turnsAmount: 60
   startGold: 100
 ai:

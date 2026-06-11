@@ -6,7 +6,7 @@ use App\Game\Service\GoodService;
 
 class CityService
 {
-    private const CITIES_AMOUNT = 4;
+    private const CITIES_AMOUNT = 3;
     private $citiesAmount;
     private $cityNamesList;
 
@@ -98,5 +98,10 @@ class CityService
         }
 
         return true;
+    }
+
+    public function setCitiesAmount(int $value): void
+    {
+        $this->citiesAmount = $value;
     }
 }
