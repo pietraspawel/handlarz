@@ -85,7 +85,7 @@ class Trader {
 
     turn(gameContext, world) {
         if (this.destination) {
-            this.moveOneStepToDestination(gameContext, world);
+            this.moveOneStepToDestination(gameContext);
         }
 
         if (this.isInDestination()) {
@@ -93,7 +93,8 @@ class Trader {
         }
     }
 
-    moveOneStepToDestination(gameContext, world) {
+    moveOneStepToDestination(gameContext) {
+        const world = gameContext.world;
         const steps = HexMath.getBestSteps(
             this.position,
             this.destination,
