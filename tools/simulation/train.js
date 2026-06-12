@@ -27,17 +27,18 @@ const highscore = loader.loadHighscore(mapName);
 mapConfig.game.highscore = highscore;
 mapConfig.world.map = mapName;
 
-let simulationContext = new SimulationContext(mapConfig);
+let simulationContext = new SimulationContext(simConfig, mapConfig);
+simulationContext.start();
 
 // === output ===
-console.log("\n==============================");
-console.log("🧠 SIMULATION CONFIG");
-console.dir(simConfig, { depth: null });
+// console.log("\n==============================");
+// console.log("🧠 SIMULATION CONFIG");
+// console.dir(simConfig, { depth: null });
 
-console.log("\n==============================");
-console.log("🗺️ MAP CONFIG");
-console.dir(mapConfig, { depth: null });
+// console.log("\n==============================");
+// console.log("🗺️ MAP CONFIG");
+// console.dir(mapConfig, { depth: null });
 
-console.log("\n==============================");
-console.log("WORLD");
-console.dir(simulationContext.gameContext.world, { depth: null });
+// console.log("\n==============================");
+// console.log("WORLD");
+// console.dir(simulationContext.gameContext.world, { depth: null });
