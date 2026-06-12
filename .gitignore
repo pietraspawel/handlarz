@@ -20,3 +20,7 @@
 ###< symfony/phpunit-bridge ###
 
 *.hs
+public/ideas.txt
+
+### simulation
+tools/simulation/node_modules
