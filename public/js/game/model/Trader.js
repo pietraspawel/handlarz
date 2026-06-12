@@ -1,6 +1,10 @@
+import { HexMath } from "../HexMath.js";
+import { Action } from "../log/Action.js";
+import { Good } from "./Good.js";
+
 // position - obecna pozycja {x:,y:}
 // destination - pozycja celu {x:,y:}
-class Trader {
+export class Trader {
     city;
     gold;
     goods = [];

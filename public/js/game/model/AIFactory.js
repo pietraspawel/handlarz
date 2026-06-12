@@ -1,4 +1,8 @@
-class AIFactory {
+import { AIPuppetStrategy } from "../ai/AIPuppetStrategy.js";
+import { GreedyStrategy } from "../ai/GreedyStrategy.js";
+import { TraderAI } from "./TraderAI.js";
+
+export class AIFactory {
     static defaultCityIndex;
 
     static create(gameContext, data) {
@@ -9,7 +13,11 @@ class AIFactory {
 
         aiConfigs.forEach((config, index) => {
             const strategy = this.createStrategy(config, data);
-            let city = this.resolveStartCity(config, strategy, gameContext.world);
+            let city = this.resolveStartCity(
+                config,
+                strategy,
+                gameContext.world,
+            );
             aiTraders.push(
                 new TraderAI(gameContext, index, config.name, city, strategy),
             );

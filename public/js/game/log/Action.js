@@ -1,4 +1,4 @@
-class Action {
+export class Action {
     static type = {
         BUY: "buy",
         SELL: "sell",

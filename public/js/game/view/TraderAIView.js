@@ -1,4 +1,8 @@
-class TraderAIView {
+import { GameContext } from "../GameContext.js";
+import { MathLibrary } from "../MathLibrary.js";
+import { WorldView } from "./WorldView.js";
+
+export class TraderAIView {
 	static refreshElementsAfterTurn(aiTraders) {
 		for (
 			let i = 0;

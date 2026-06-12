@@ -1,5 +1,7 @@
+import { TurnLog } from "./TurnLog.js";
+
 // Przechowuje logi wszystkich tur.
-class GameLog {
+export class GameLog {
     mapName;
     turnsLogs;
 

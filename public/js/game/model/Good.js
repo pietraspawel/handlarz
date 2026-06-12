@@ -1,5 +1,4 @@
-class Good
-{
+export class Good {
     name;
     price;
     quantity;

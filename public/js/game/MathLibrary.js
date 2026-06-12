@@ -1,4 +1,4 @@
-class MathLibrary {
+export class MathLibrary {
     static formatNumber(integerNumber) {
         if (integerNumber < 1_000_000) {
             return MathLibrary.separateThousands(integerNumber);

@@ -1,6 +1,5 @@
 // position - {x:,y:}
-class City
-{
+export class City {
     constructor(name, position, goods) {
         this.name = name;
         this.position = position;

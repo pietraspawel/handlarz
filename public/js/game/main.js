@@ -1,3 +1,12 @@
+import { GameContext } from "./GameContext.js";
+import { GreedyStrategy } from "./ai/GreedyStrategy.js";
+import { GameEventsHandler } from "./GameEventsHandler.js";
+import { AIFactory } from "./model/AIFactory.js";
+import { Trader } from "./model/Trader.js";
+import { World } from "./model/World.js";
+import { GameView } from "./view/GameView.js";
+import { TooltipsView } from "./view/TooltipsView.js";
+
 $().ready(() => {
     const GAME_MODE = { MANUAL: "manual", AUTO_TRAVEL: "autoTurns" };
 

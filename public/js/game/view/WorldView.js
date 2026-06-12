@@ -1,4 +1,4 @@
-class WorldView {
+export class WorldView {
 	static getHexElementByCoords(x, y) {
 		return document.querySelector(
 			`#terrain .hex[data-x="${x}"][data-y="${y}"]`,

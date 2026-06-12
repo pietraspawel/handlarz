@@ -1,4 +1,7 @@
-class TraderView {
+import { MathLibrary } from "../MathLibrary.js";
+import { WorldView } from "./WorldView.js";
+
+export class TraderView {
 	static refreshElementsAfterTurn(trader) {
 		TraderView.refreshPosition(trader);
 	}

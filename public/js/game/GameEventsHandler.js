@@ -1,4 +1,9 @@
-class GameEventsHandler {
+import { GameContext } from "./GameContext.js";
+import { HexMath } from "./HexMath.js";
+import { TurnSystem } from "./TurnSystem.js";
+import { GameView } from "./view/GameView.js";
+
+export class GameEventsHandler {
     gameContext;
     gameLog;
     aiTraders;
@@ -19,7 +24,10 @@ class GameEventsHandler {
     bind() {
         $(".map-container").on("click", "#map", (e) => {
             if (this.gameContext.gameMode === GameContext.GAME_MODE.MANUAL) {
-                if (this.trader.isTravelling() && this.gameContext.turnsLeft > 0) {
+                if (
+                    this.trader.isTravelling() &&
+                    this.gameContext.turnsLeft > 0
+                ) {
                     TurnSystem.nextTurn(
                         this.gameContext,
                         this.trader,
@@ -101,7 +109,10 @@ class GameEventsHandler {
     // Jeśli jest w trybie auto, to przewiń kolejki do końca.
     // Lub po prostu włącz tryb auto.
     handleCityClickForAutoMode(clickedCity) {
-        if (this.trader.isInThatCity(clickedCity) && this.gameContext.turnsLeft > 0) {
+        if (
+            this.trader.isInThatCity(clickedCity) &&
+            this.gameContext.turnsLeft > 0
+        ) {
             TurnSystem.nextTurn(this.gameContext, this.trader, this.aiTraders);
             return;
         }

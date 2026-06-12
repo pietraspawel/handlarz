@@ -1,5 +1,8 @@
+import { Action } from "./Action.js";
+import { Snapshot } from "./Snapshot.js";
+
 // Przechowuje logi jednego Tradera.
-class TraderLogs {
+export class TraderLogs {
     trader;
     snapshot;
     actions;

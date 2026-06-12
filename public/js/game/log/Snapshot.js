@@ -1,4 +1,7 @@
-class Snapshot {
+import { Good } from "../model/Good.js";
+import { TraderAI } from "../model/TraderAI.js";
+
+export class Snapshot {
     name;
     position;
     cityName;

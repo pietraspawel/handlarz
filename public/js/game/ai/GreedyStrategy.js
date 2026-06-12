@@ -1,4 +1,6 @@
-class GreedyStrategy extends AIStrategy {
+import { AIStrategy } from "./AIStrategy.js";
+
+export class GreedyStrategy extends AIStrategy {
     decide(world, trader) {
         const city = trader.getCurrentCity(world);
         let bestGoodId = this.getCheapestGood(city);

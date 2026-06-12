@@ -1,4 +1,4 @@
-class TooltipsView {
+export class TooltipsView {
 	tooltipList;
 
 	constructor() {

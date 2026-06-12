@@ -1,4 +1,8 @@
-class TraderAI extends Trader {
+import { HexMath } from "../HexMath.js";
+import { Trader } from "./Trader.js";
+import { TraderAIView } from "../view/TraderAIView.js";
+
+export class TraderAI extends Trader {
     name;
     lastTurnInfo;
     strategy;

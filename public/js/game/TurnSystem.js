@@ -1,3 +1,6 @@
+import { GameOverService } from "./GameOverService.js";
+import { GameView } from "./view/GameView.js";
+
 // Podczas swojej tury Gracz może:
 // kupować/sprzedawać
 // wyznaczyć cel - to kończy turę i rozgrywa się część automatyczna
@@ -11,7 +14,7 @@
 // Przesuń Gracza o jedno pole.
 // Jeśli Gracz jest u celu to sprzedaj wszystko, kup towar, wyznacz nowy cel.
 
-class TurnSystem {
+export class TurnSystem {
     static autoTurnTimeout = null;
 
     static nextTurn(gameContext, trader, aiTraders) {

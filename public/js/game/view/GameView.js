@@ -1,4 +1,10 @@
-class GameView {
+import { MathLibrary } from "../MathLibrary.js";
+import { CityView } from "./CityView.js";
+import { TraderAIView } from "./TraderAIView.js";
+import { TraderView } from "./TraderView.js";
+import { WorldView } from "./WorldView.js";
+
+export class GameView {
     static refreshAll(gameContext, trader, aiTraders) {
         const world = gameContext.world;
         GameView.refreshMapRecordView(gameContext.highscore);

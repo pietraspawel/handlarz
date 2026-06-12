@@ -1,4 +1,6 @@
-class CityView {
+import { MathLibrary } from "../MathLibrary.js";
+
+export class CityView {
 	static setTravelMode(isTraveling, trader) {
 		$(".city-group").toggleClass("travel-mode", isTraveling);
 		if (isTraveling) {

@@ -1,4 +1,6 @@
-class AIPuppetStrategy extends AIStrategy {
+import { AIStrategy } from "./AIStrategy.js";
+
+export class AIPuppetStrategy extends AIStrategy {
     start;
     commands;
     infiniteLoop;

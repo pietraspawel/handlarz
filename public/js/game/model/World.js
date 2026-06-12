@@ -1,4 +1,7 @@
-class World {
+import { City } from "./City.js";
+import { Good } from "./Good.js";
+
+export class World {
     xSize;
     ySize;
     map;

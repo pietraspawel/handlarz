@@ -1,4 +1,6 @@
-class GameContext {
+import { GameLog } from "./log/GameLog.js";
+
+export class GameContext {
     static GAME_MODE = { MANUAL: "manual", AUTO_TURNS: "autoTurns" };
     static MAX_NON_HIDDEN_AI = 3;
 

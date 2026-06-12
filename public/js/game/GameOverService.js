@@ -1,4 +1,4 @@
-class GameOverService {
+export class GameOverService {
     static async gameOver(gameContext, trader, aiTraders) {
         const world = gameContext.world;
         const gameLog = gameContext.gameLog;

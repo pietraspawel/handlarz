@@ -1,5 +1,7 @@
+import { TraderLogs } from "./TraderLogs.js";
+
 // Przechowuje logi jednej tury.
-class TurnLog {
+export class TurnLog {
     number;
     tradersLogs;
 
