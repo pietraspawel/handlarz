@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { ConfigLoader } from "./core/ConfigLoader.js";
+import { World } from "../../public/js/game/model/World.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,8 @@ const highscore = loader.loadHighscore(mapName);
 // inject
 mapConfig.game.highscore = highscore;
 
+let world = new World(mapConfig);
+
 // === output ===
 console.log("\n==============================");
 console.log("🧠 SIMULATION CONFIG");
@@ -32,3 +35,7 @@ console.dir(simConfig, { depth: null });
 console.log("\n==============================");
 console.log("🗺️ MAP CONFIG");
 console.dir(mapConfig, { depth: null });
+
+console.log("\n==============================");
+console.log("WORLD");
+console.dir(world, { depth: null });
