@@ -24,6 +24,7 @@ const highscore = loader.loadHighscore(mapName);
 
 // inject
 mapConfig.game.highscore = highscore;
+mapConfig.world.map = mapName;
 
 let world = new World(mapConfig);
 
