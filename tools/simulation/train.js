@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { ConfigLoader } from "./core/ConfigLoader.js";
+import { SimulationContext } from "./core/SimulationContext.js";
 import { World } from "../../public/js/game/model/World.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,7 +27,7 @@ const highscore = loader.loadHighscore(mapName);
 mapConfig.game.highscore = highscore;
 mapConfig.world.map = mapName;
 
-let world = new World(mapConfig);
+let simulationContext = new SimulationContext(mapConfig);
 
 // === output ===
 console.log("\n==============================");
@@ -39,4 +40,4 @@ console.dir(mapConfig, { depth: null });
 
 console.log("\n==============================");
 console.log("WORLD");
-console.dir(world, { depth: null });
+console.dir(simulationContext.gameContext.world, { depth: null });
