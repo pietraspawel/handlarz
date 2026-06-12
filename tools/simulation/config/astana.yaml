@@ -1,0 +1,6 @@
+map: astana
+aiTradersAmount: 1000
+survivors: 10
+mutationChance: 0.01
+generationsAmountCondition: 10000
+goldAmountCondition: 1_000_000_000
