@@ -23,6 +23,11 @@ export class GeneService {
 	}
 
 	static translateGenomeToScript(genome) {
-		// return script;
+		return {
+			infiniteLoop: genome.map((gene) => ({
+				good: gene.good.name,
+				city: gene.city.name,
+			})),
+		};
 	}
 }

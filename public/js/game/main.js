@@ -28,6 +28,8 @@ $().ready(() => {
         aiTrader.initTurnZero(gameContext);
     }
 
+    console.log(aiTraders);
+
     let tooltipsView = new TooltipsView();
     let gameEventsHandler = new GameEventsHandler(
         aiTraders,
