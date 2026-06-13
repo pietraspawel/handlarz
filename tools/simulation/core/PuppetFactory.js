@@ -17,8 +17,11 @@ export class PuppetFactory {
     static createPuppet({ gameContext, index }) {
         const name = `Puppet-${index}`;
         const city = gameContext.world.getRandomCity();
+        // odległość między miastami to min. 3, więc liczba poleceń dla całej gry to max. turnsLeft / 3
+        // +1 dla na wszelki wypadek
+        const genesAmount = Math.floor(gameContext.turnsLeft / 3) + 1;
         const genome = GeneService.createRandomGenes(
-            3,
+            genesAmount,
             gameContext.world.cities,
             gameContext.world.goods,
         );

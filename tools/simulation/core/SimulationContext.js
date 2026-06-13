@@ -25,13 +25,11 @@ export class SimulationContext {
     }
 
     initFirstGeneration() {
+        console.log("Initialize first generation.");
+
         const puppetCollection = PuppetFactory.create({
             gameContext: this.gameContext,
-            aiTradersAmount: 1,
+            aiTradersAmount: this.aiTradersAmount,
         });
-
-console.log("\n==============================");
-console.log("PUPPET");
-console.dir(puppetCollection, { depth: null });
     }
 }
