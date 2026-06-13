@@ -17,13 +17,14 @@ export class PuppetFactory {
     static createPuppet({ gameContext, index }) {
         const name = `Puppet-${index}`;
         const city = gameContext.world.getRandomCity();
-        const genom = GeneService.createRandomGenes(
+        const genome = GeneService.createRandomGenes(
             3,
             gameContext.world.cities,
             gameContext.world.goods,
         );
+        // const script = GeneService.translateGenomeToScript(genome);
         const script = "";
         const strategy = new AIPuppetStrategy({ script });
-        return new Puppet({ gameContext, index, name, city, strategy, genom });
+        return new Puppet({ gameContext, index, name, city, strategy, genome });
     }
 }

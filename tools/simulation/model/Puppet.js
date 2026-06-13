@@ -1,10 +1,10 @@
 import { TraderAI } from "../../../public/js/game/model/TraderAI.js";
 
 export class Puppet extends TraderAI {
-	genom;
+	genome;
 
-	constructor({ gameContext, index, name, city, strategy, genom }) {
+	constructor({ gameContext, index, name, city, strategy, genome }) {
 		super(gameContext, index, name, city, strategy);
-		this.genom = genom;
+		this.genome = genome;
 	}
 }
