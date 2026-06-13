@@ -1,6 +1,6 @@
 import { AIPuppetStrategy } from "../../../public/js/game/ai/AIPuppetStrategy.js";
-import { TraderAI } from "../../../public/js/game/model/TraderAI.js";
 import { GeneService } from "./GeneService.js";
+import { Puppet } from "../model/Puppet.js";
 
 export class PuppetFactory {
     static create({ gameContext, aiTradersAmount }) {
@@ -22,11 +22,8 @@ export class PuppetFactory {
             gameContext.world.cities,
             gameContext.world.goods,
         );
-console.log("\n==============================");
-console.log("GENOM");
-console.dir(genom, { depth: null });
         const script = "";
         const strategy = new AIPuppetStrategy({ script });
-        return new TraderAI(gameContext, index, name, city, strategy);
+        return new Puppet({ gameContext, index, name, city, strategy, genom });
     }
 }
