@@ -7,18 +7,15 @@ import { World } from "../../public/js/game/model/World.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// === CLI ===
+// CLI
 const mapName = process.argv[2];
-
 if (!mapName) {
     console.error("❌ Podaj nazwę mapy: node train.js astana");
     process.exit(1);
 }
 
-// === loader ===
+// load data
 const loader = new ConfigLoader(__dirname);
-
-// === load data ===
 const simConfig = loader.loadSimulationConfig(mapName);
 const mapConfig = loader.loadMapConfig(mapName);
 const highscore = loader.loadHighscore(mapName);
@@ -29,16 +26,3 @@ mapConfig.world.map = mapName;
 
 let simulationContext = new SimulationContext(simConfig, mapConfig);
 simulationContext.start();
-
-// === output ===
-// console.log("\n==============================");
-// console.log("🧠 SIMULATION CONFIG");
-// console.dir(simConfig, { depth: null });
-
-// console.log("\n==============================");
-// console.log("🗺️ MAP CONFIG");
-// console.dir(mapConfig, { depth: null });
-
-// console.log("\n==============================");
-// console.log("WORLD");
-// console.dir(simulationContext.gameContext.world, { depth: null });
