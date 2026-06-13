@@ -9,6 +9,7 @@ export class SimulationContext {
     mutationChance;
     generationsAmountCondition;
     goldAmountCondition;
+    puppetCollection;
 
     constructor(simConfig, mapConfig) {
         this.gameContext = new GameContext(mapConfig);
@@ -18,16 +19,20 @@ export class SimulationContext {
         this.mutationChance = simConfig.mutationChance;
         this.generationsAmountCondition = simConfig.generationsAmountCondition;
         this.goldAmountCondition = simConfig.goldAmountCondition;
+        this.puppetCollection = [];
     }
 
     start() {
         this.initFirstGeneration();
+        for (const puppet of this.puppetCollection) {
+            puppet.initTurnZero(this.gameContext);
+        }
     }
 
     initFirstGeneration() {
         console.log("Initialize first generation.");
 
-        const puppetCollection = PuppetFactory.create({
+        this.puppetCollection = PuppetFactory.create({
             gameContext: this.gameContext,
             aiTradersAmount: this.aiTradersAmount,
         });
