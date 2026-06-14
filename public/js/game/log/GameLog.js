@@ -10,7 +10,7 @@ export class GameLog {
         this.turnsLogs = [];
     }
 
-    startTurn({ trader, aiTraders }) {
+    startTurn({ trader = null, aiTraders }) {
         let turnNumber = this.turnsLogs.length;
         const turnLog = new TurnLog({ turnNumber, trader, aiTraders });
         this.turnsLogs.push(turnLog);
@@ -18,7 +18,9 @@ export class GameLog {
     }
 
     addSnapshots({ trader, aiTraders }) {
-        this.addSnapshot({ trader });
+        if (trader !== null) {
+            this.addSnapshot({ trader });
+        }
         for (const aiTrader of aiTraders) {
             this.addSnapshot({ trader: aiTrader });
         }
