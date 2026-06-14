@@ -22,7 +22,7 @@ export class GeneService {
 		return goods[index];
 	}
 
-	static translateGenomeToScript(genome) {
+	static translateGenomeToCommands(genome) {
 		return {
 			infiniteLoop: genome.map((gene) => ({
 				good: gene.good.name,
