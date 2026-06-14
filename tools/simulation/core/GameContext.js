@@ -16,6 +16,9 @@ export class GameContext {
 
     playAGame(puppetCollection) {
         this.init(puppetCollection);
+        while (this.turnsLeft > 0) {
+            this.nextTurn(puppetCollection);
+        }
     }
 
     init(puppetCollection) {
@@ -23,5 +26,13 @@ export class GameContext {
         for (const puppet of puppetCollection) {
             puppet.initTurnZero(this);
         }
+    }
+
+    nextTurn(puppetCollection) {
+        for (const puppet of puppetCollection) {
+            puppet.turn(this);
+        }
+        this.turnsLeft--;
+        this.gameLog.startTurn({ aiTraders: puppetCollection });
     }
 }
