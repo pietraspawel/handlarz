@@ -15,6 +15,10 @@ export class GameContext {
     }
 
     playAGame(puppetCollection) {
+        this.init(puppetCollection);
+    }
+
+    init(puppetCollection) {
         this.gameLog.startTurn({ aiTraders: puppetCollection });
         for (const puppet of puppetCollection) {
             puppet.initTurnZero(this);
