@@ -8,6 +8,7 @@ export class SimulationContext {
     aiTradersAmount;
     survivorsPercentage;
     mutationChance;
+    targetPopulationSize;
     generationsAmountCondition;
     goldAmountCondition;
     puppetCollection;
@@ -18,6 +19,7 @@ export class SimulationContext {
         this.aiTradersAmount = simConfig.aiTradersAmount;
         this.survivorsPercentage = simConfig.survivorsPercentage;
         this.mutationChance = simConfig.mutationChance;
+        this.targetPopulationSize = simConfig.targetPopulationSize;
         this.generationsAmountCondition = simConfig.generationsAmountCondition;
         this.goldAmountCondition = simConfig.goldAmountCondition;
         this.puppetCollection = [];
@@ -27,6 +29,11 @@ export class SimulationContext {
         this.initFirstGeneration();
         this.gameContext.playAGame(this.puppetCollection);
         this.puppetCollection = GeneService.selection(this.puppetCollection, this.survivorsPercentage);
+        this.puppetCollection = GeneService.multiplication({
+            gameContext: this.gameContext,
+            population: this.puppetCollection,
+            targetPopulationSize: this.targetPopulationSize,
+        });
     }
 
     initFirstGeneration() {
