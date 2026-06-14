@@ -9,8 +9,8 @@ import { TooltipsView } from "./view/TooltipsView.js";
 
 $().ready(() => {
     const GAME_MODE = { MANUAL: "manual", AUTO_TRAVEL: "autoTurns" };
-
     const gameMode = GAME_MODE.AUTO_TRAVEL;
+
     let data = JSON.parse(atob($(".js-data").data("json")));
 
     console.log(data);
