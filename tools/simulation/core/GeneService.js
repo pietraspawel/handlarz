@@ -22,8 +22,9 @@ export class GeneService {
 		return goods[index];
 	}
 
-	static translateGenomeToCommands(genome) {
+	static translateGenomeToCommands(startCity, genome) {
 		return {
+			start: startCity,
 			infiniteLoop: genome.map((gene) => ({
 				good: gene.good.name,
 				city: gene.city.name,

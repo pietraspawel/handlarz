@@ -25,7 +25,7 @@ export class PuppetFactory {
             gameContext.world.cities,
             gameContext.world.goods,
         );
-        const script = GeneService.translateGenomeToCommands(genome);
+        const script = GeneService.translateGenomeToCommands(city, genome);
         const strategy = new AIPuppetStrategy({ script });
         return new Puppet({ gameContext, index, name, city, strategy, genome });
     }
