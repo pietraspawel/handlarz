@@ -36,5 +36,6 @@ export class SimulationContext {
             gameContext: this.gameContext,
             aiTradersAmount: this.aiTradersAmount,
         });
+        this.gameContext.gameLog.startTurn({ aiTraders: this.puppetCollection });
     }
 }
