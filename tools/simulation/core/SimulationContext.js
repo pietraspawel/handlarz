@@ -34,6 +34,11 @@ export class SimulationContext {
             population: this.puppetCollection,
             targetPopulationSize: this.targetPopulationSize,
         });
+        this.puppetCollection = GeneService.mutation({
+            gameContext: this.gameContext,
+            population: this.puppetCollection,
+            mutationChance: this.mutationChance,
+        });
     }
 
     initFirstGeneration() {

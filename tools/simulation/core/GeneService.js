@@ -119,4 +119,47 @@ export class GeneService {
                 }),
         );
     }
+
+    static mutation({ gameContext, population, mutationChance }) {
+        if (!population || population.length === 0) {
+            return [];
+        }
+
+        const mutatedPopulation = [];
+
+        for (const puppet of population) {
+            const newGenome = GeneService.cloneGenome(puppet.genome);
+
+            for (let i = 0; i < newGenome.length; i++) {
+                if (Math.random() * 100 < mutationChance) {
+                    const gene = newGenome[i];
+
+                    // mutacja miasta
+                    if (Math.random() < 0.5) {
+                        gene.city = GeneService.getRandomCity(gameContext.world.cities);
+                    }
+
+                    // mutacja towaru
+                    if (Math.random() < 0.5) {
+                        gene.good = GeneService.getRandomGood(gameContext.world.goods);
+                    }
+                }
+            }
+
+            const script = GeneService.translateGenomeToCommands(puppet.city, newGenome);
+            const strategy = new AIPuppetStrategy({ script });
+            const mutatedPuppet = new Puppet({
+                gameContext: gameContext,
+                index: puppet.index,
+                name: puppet.name,
+                city: puppet.city,
+                strategy,
+                genome: newGenome,
+            });
+
+            mutatedPopulation.push(mutatedPuppet);
+        }
+
+        return mutatedPopulation;
+    }
 }
