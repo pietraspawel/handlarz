@@ -18,7 +18,6 @@ export class TurnSystem {
     static autoTurnTimeout = null;
 
     static nextTurn(gameContext, trader, aiTraders) {
-        let world = gameContext.world;
         let gameLog = gameContext.gameLog;
 
         for (const aiTrader of aiTraders) {
@@ -36,7 +35,6 @@ export class TurnSystem {
     }
 
     static autoTurns(gameContext, trader, aiTraders) {
-        let world = gameContext.world;
         if (this.autoTurnTimeout) {
             return;
         }
