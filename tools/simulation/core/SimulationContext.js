@@ -24,9 +24,7 @@ export class SimulationContext {
 
     start() {
         this.initFirstGeneration();
-        for (const puppet of this.puppetCollection) {
-            puppet.initTurnZero(this.gameContext);
-        }
+        this.gameContext.playAGame(this.puppetCollection);
     }
 
     initFirstGeneration() {
@@ -34,8 +32,8 @@ export class SimulationContext {
 
         this.puppetCollection = PuppetFactory.create({
             gameContext: this.gameContext,
-            aiTradersAmount: this.aiTradersAmount,
+            // aiTradersAmount: this.aiTradersAmount,
+            aiTradersAmount: 3, // testowo
         });
-        this.gameContext.gameLog.startTurn({ aiTraders: this.puppetCollection });
     }
 }

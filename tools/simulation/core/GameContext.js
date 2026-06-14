@@ -13,4 +13,11 @@ export class GameContext {
         this.world = new World(config);
         this.gameLog = new GameLog(this.world.map);
     }
+
+    playAGame(puppetCollection) {
+        this.gameLog.startTurn({ aiTraders: puppetCollection });
+        for (const puppet of puppetCollection) {
+            puppet.initTurnZero(this);
+        }
+    }
 }
