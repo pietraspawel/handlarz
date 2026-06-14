@@ -23,8 +23,7 @@ export class AIPuppetStrategy extends AIStrategy {
             command = this.commands[this.commandPointer];
             this.commandPointer++;
         } else if (this.infiniteLoop.length > 0) {
-            command =
-                this.infiniteLoop[this.loopPointer % this.infiniteLoop.length];
+            command = this.infiniteLoop[this.loopPointer % this.infiniteLoop.length];
             this.loopPointer++;
         }
 
@@ -39,5 +38,30 @@ export class AIPuppetStrategy extends AIStrategy {
             city: world.findCityByName(command.city),
             goodId: world.findGoodIdByName(command.good),
         };
+    }
+
+    toTextScript() {
+        let script = "";
+
+        if (this.start !== null) {
+            script += `start(${this.start.name})\n\n`;
+        }
+
+        if (this.infiniteLoop.length > 0) {
+            script += "loop:\n";
+            for (const command of this.infiniteLoop) {
+                script += `    (${command.good}) ${command.city}\n`;
+            }
+            script += ":endloop";
+        }
+
+        if (this.commands.length > 0) {
+            for (const command of this.commands) {
+                script += `(${command.good}) ${command.city}\n`;
+            }
+            script += "\n";
+        }
+
+        return script;
     }
 }

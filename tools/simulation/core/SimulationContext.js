@@ -32,8 +32,7 @@ export class SimulationContext {
 
         this.puppetCollection = PuppetFactory.create({
             gameContext: this.gameContext,
-            // aiTradersAmount: this.aiTradersAmount,
-            aiTradersAmount: 3, // testowo
+            aiTradersAmount: this.aiTradersAmount,
         });
     }
 }
