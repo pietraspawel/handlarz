@@ -1,3 +1,6 @@
+2026.06.29
+	zakończono skrypt dla pacynek grających w tle z mutacja na zasadzie programowania genetycznego
+
 2026.06.11
 	uporządkowano World, przeniesiono do GameContext to co nie należy do świata
 	stałe z GameService poszły do random.yaml
