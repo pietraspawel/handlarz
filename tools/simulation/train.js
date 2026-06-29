@@ -25,4 +25,7 @@ mapConfig.game.highscore = highscore;
 mapConfig.world.map = mapName;
 
 let simulationContext = new SimulationContext(simConfig, mapConfig);
+
+console.time("⏱️ Simulation time");
 simulationContext.start();
+console.timeEnd("⏱️ Simulation time");
