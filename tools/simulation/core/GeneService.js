@@ -75,7 +75,7 @@ export class GeneService {
         return survivors;
     }
 
-    static multiplication({ gameContext, population, targetPopulationSize }) {
+    static multiplication({ gameContext, population, aiTradersAmount }) {
         if (population.length === 0) {
             return [];
         }
@@ -83,9 +83,9 @@ export class GeneService {
         const newPopulation = [];
         let index = 0;
 
-        while (newPopulation.length < targetPopulationSize) {
+        while (newPopulation.length < aiTradersAmount) {
             for (const parent of population) {
-                if (newPopulation.length >= targetPopulationSize) {
+                if (newPopulation.length >= aiTradersAmount) {
                     break;
                 }
 
