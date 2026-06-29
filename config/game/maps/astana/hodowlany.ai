@@ -1,0 +1,25 @@
+start(Skopje)
+
+loop:
+    (tymianek) Astana
+    (bazylia) Zagrzeb
+    (oregano) Zagrzeb
+    (oregano) Astana
+    (bazylia) Skopje
+    (tymianek) Astana
+    (bazylia) Skopje
+    (tymianek) Zagrzeb
+    (oregano) Zagrzeb
+    (oregano) Astana
+    (bazylia) Zagrzeb
+    (oregano) Zagrzeb
+    (oregano) Astana
+    (bazylia) Skopje
+    (bazylia) Zagrzeb
+    (oregano) Skopje
+    (bazylia) Astana
+    (tymianek) Zagrzeb
+    (bazylia) Astana
+    (bazylia) Skopje
+    (bazylia) Zagrzeb
+:endloop

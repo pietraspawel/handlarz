@@ -52,10 +52,10 @@ ai:
       strategy: 
         name: AIPuppetStrategy
         script: spryciarz
-    - name: normal
+    - name: hodowlany
       strategy: 
         name: AIPuppetStrategy
-        script: normal
+        script: hodowlany
     - name: AITrader0
     - name: AITrader1
     - name: AITrader2
