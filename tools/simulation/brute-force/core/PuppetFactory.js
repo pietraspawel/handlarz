@@ -29,7 +29,7 @@ export class PuppetFactory {
 
     static createPuppet({ gameContext, index, genome }) {
         const name = `Puppet-${index}`;
-        const city = genome[0].city;
+        const city = genome[genome.length - 1].city;
         const script = GeneService.translateGenomeToCommands(city, genome);
         const strategy = new AIPuppetStrategy({ script });
         return new Puppet({ gameContext, index, name, city, strategy, genome });
