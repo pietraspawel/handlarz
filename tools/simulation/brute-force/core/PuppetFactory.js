@@ -1,5 +1,6 @@
 import { AIPuppetStrategy } from "../../../../public/js/game/ai/AIPuppetStrategy.js";
 import { GeneService } from "../../core/GeneService.js";
+import { Gene } from "../../model/Gene.js";
 import { Puppet } from "../../model/Puppet.js";
 
 export class PuppetFactory {
@@ -10,12 +11,16 @@ export class PuppetFactory {
         for (const loop of loops) {
             const goodChoices = PuppetFactory.generateGoodChoices(gameContext, loop);
             for (const goods of goodChoices) {
+                const genome = [];
                 for (let i = 0; i < goods.length; i++) {
                     let good = goods[i];
                     let city = loop[i];
+                    const gene = new Gene({ city, good });
+                    genome.push(gene);
                 }
+                console.log("-----");
+                console.log(genome);
             }
-
             // const puppet = this.createPuppet({ gameContext, index: i, loop: loops[i] });
             // puppetCollection.push(puppet);
         }
@@ -23,7 +28,7 @@ export class PuppetFactory {
         return puppetCollection;
     }
 
-    static createPuppet({ gameContext, index, loop }) {
+    static createPuppet({ gameContext, index, genome }) {
         const name = `Puppet-${index}`;
         const city = loop[0];
         // const gene1 =
