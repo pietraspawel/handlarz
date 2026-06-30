@@ -1,7 +1,7 @@
-import { MathLibrary } from "../../../public/js/game/MathLibrary.js";
-import { GameContext } from "./GameContext.js";
-import { GeneService } from "./GeneService.js";
-import { PuppetFactory } from "./PuppetFactory.js";
+import { MathLibrary } from "../../../../public/js/game/MathLibrary.js";
+import { GameContext } from "../../core/GameContext.js";
+import { GeneService } from "../../core/GeneService.js";
+import { PuppetFactory } from "../../core/PuppetFactory.js";
 
 export class SimulationContext {
     gameContext;
