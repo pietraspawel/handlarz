@@ -7,20 +7,39 @@ export class PuppetFactory {
         const puppetCollection = [];
         const loops = [...PuppetFactory.generateLoops(gameContext.world.cities)];
 
-        console.dir(loops, { depth: 2 });
+        console.log(loops);
+        console.log(loops.length);
+
+        for (let i = 0; i < loops.length; i++) {
+            const steps = loops[i].length;
+            const goodsChoices = Array.from({ length: steps }, () => gameContext.world.goods);
+            const combinations = PuppetFactory.cartesian(goodsChoices);
+
+            // console.log(loops[0], combinations[0]);
+
+            // for (let j=0; j < combinations.length; j++) {
+            //     let city = loops[i].name;
+            //     let good = combinations[j].name;
+            //     // let action = combo.map((good, j) => `${loops[i][j].name}${good.name}`);
+
+            //     // console.log(city, good);
+            // }
+
+            // const puppet = this.createPuppet({ gameContext, index: i, loop: loops[i] });
+            // puppetCollection.push(puppet);
+        }
 
         return puppetCollection;
     }
 
-    static createPuppet({ gameContext, index }) {
-        // const name = `Puppet-${index}`;
-        // const city = gameContext.world.getRandomCity();
-        // // odległość między miastami to min. 3, więc liczba poleceń dla całej gry to max. turnsLeft / 3
-        // // +1 dla na wszelki wypadek
+    static createPuppet({ gameContext, index, loop }) {
+        const name = `Puppet-${index}`;
+        const city = loop[0];
+        // const gene1 =
         // const genesAmount = Math.floor(gameContext.turnsLeft / 3) + 1;
         // const genome = GeneService.createRandomGenes(genesAmount, gameContext.world.cities, gameContext.world.goods);
         // const script = GeneService.translateGenomeToCommands(city, genome);
-        const strategy = new AIPuppetStrategy({ script });
+        // const strategy = new AIPuppetStrategy({ script });
         // return new Puppet({ gameContext, index, name, city, strategy, genome });
     }
 
@@ -57,5 +76,9 @@ export class PuppetFactory {
             route.pop();
             visited[i] = false;
         }
+    }
+
+    static cartesian(arrays) {
+        return arrays.reduce((acc, curr) => acc.flatMap((a) => curr.map((b) => [...a, b])), [[]]);
     }
 }
