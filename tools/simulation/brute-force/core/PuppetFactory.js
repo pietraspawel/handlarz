@@ -8,21 +8,20 @@ export class PuppetFactory {
         const puppetCollection = [];
         const loops = [...PuppetFactory.generateLoops(gameContext.world.cities)];
 
-        for (const loop of loops) {
+        for (let i = 0; i < loops.length; i++) {
+            let loop = loops[i];
             const goodChoices = PuppetFactory.generateGoodChoices(gameContext, loop);
             for (const goods of goodChoices) {
-                const genome = [];
-                for (let i = 0; i < goods.length; i++) {
-                    let good = goods[i];
-                    let city = loop[i];
+                let genome = [];
+                for (let j = 0; j < goods.length; j++) {
+                    let good = goods[j];
+                    let city = loop[j];
                     const gene = new Gene({ city, good });
                     genome.push(gene);
                 }
-                console.log("-----");
-                console.log(genome);
+                const puppet = this.createPuppet({ gameContext, index: i, genome });
+                puppetCollection.push(puppet);
             }
-            // const puppet = this.createPuppet({ gameContext, index: i, loop: loops[i] });
-            // puppetCollection.push(puppet);
         }
 
         return puppetCollection;
@@ -30,13 +29,10 @@ export class PuppetFactory {
 
     static createPuppet({ gameContext, index, genome }) {
         const name = `Puppet-${index}`;
-        const city = loop[0];
-        // const gene1 =
-        // const genesAmount = Math.floor(gameContext.turnsLeft / 3) + 1;
-        // const genome = GeneService.createRandomGenes(genesAmount, gameContext.world.cities, gameContext.world.goods);
-        // const script = GeneService.translateGenomeToCommands(city, genome);
-        // const strategy = new AIPuppetStrategy({ script });
-        // return new Puppet({ gameContext, index, name, city, strategy, genome });
+        const city = genome[0].city;
+        const script = GeneService.translateGenomeToCommands(city, genome);
+        const strategy = new AIPuppetStrategy({ script });
+        return new Puppet({ gameContext, index, name, city, strategy, genome });
     }
 
     static *generateLoops(cities) {
