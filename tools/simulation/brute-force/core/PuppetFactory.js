@@ -7,23 +7,14 @@ export class PuppetFactory {
         const puppetCollection = [];
         const loops = [...PuppetFactory.generateLoops(gameContext.world.cities)];
 
-        console.log(loops);
-        console.log(loops.length);
-
-        for (let i = 0; i < loops.length; i++) {
-            const steps = loops[i].length;
-            const goodsChoices = Array.from({ length: steps }, () => gameContext.world.goods);
-            const combinations = PuppetFactory.cartesian(goodsChoices);
-
-            // console.log(loops[0], combinations[0]);
-
-            // for (let j=0; j < combinations.length; j++) {
-            //     let city = loops[i].name;
-            //     let good = combinations[j].name;
-            //     // let action = combo.map((good, j) => `${loops[i][j].name}${good.name}`);
-
-            //     // console.log(city, good);
-            // }
+        for (const loop of loops) {
+            const goodChoices = PuppetFactory.generateGoodChoices(gameContext, loop);
+            for (const goods of goodChoices) {
+                for (let i = 0; i < goods.length; i++) {
+                    let good = goods[i];
+                    let city = loop[i];
+                }
+            }
 
             // const puppet = this.createPuppet({ gameContext, index: i, loop: loops[i] });
             // puppetCollection.push(puppet);
@@ -76,6 +67,13 @@ export class PuppetFactory {
             route.pop();
             visited[i] = false;
         }
+    }
+
+    static generateGoodChoices(gameContext, loop) {
+        const cityAmount = loop.length;
+        const goodsChoices = Array.from({ length: cityAmount }, () => gameContext.world.goods);
+        const combinations = PuppetFactory.cartesian(goodsChoices);
+        return combinations;
     }
 
     static cartesian(arrays) {
