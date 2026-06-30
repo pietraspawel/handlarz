@@ -21,5 +21,11 @@ export class SimulationContext {
         this.puppetCollection = PuppetFactory.create({
             gameContext: this.gameContext,
         });
+        this.gameContext.playAGame(this.puppetCollection);
+        const sortedPopulation = [...this.puppetCollection].sort((a, b) => b.gold - a.gold);
+        const maxGold = sortedPopulation[0].gold;
+        console.log(MathLibrary.describeBigNumber(maxGold), maxGold);
+        const script = sortedPopulation[0].strategy.toTextScript();
+        console.log(script);
     }
 }
