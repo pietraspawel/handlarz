@@ -1,7 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { ConfigLoader } from "./core/ConfigLoader.js";
-import { SimulationContext } from "./genetic_algorithms/core/SimulationContext.js";
+import { SimulationContext } from "./genetic-algorithms/core/SimulationContext.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

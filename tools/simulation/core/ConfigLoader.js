@@ -29,7 +29,7 @@ export class ConfigLoader {
     }
 
     loadSimulationConfig(mapName) {
-        const file = path.join(this.baseDir, `./genetic_algorithms/config/${mapName}.yaml`);
+        const file = path.join(this.baseDir, `./genetic-algorithms/config/${mapName}.yaml`);
         return this.loadYaml(file);
     }
 
