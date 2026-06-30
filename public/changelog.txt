@@ -1,3 +1,8 @@
+2026.06.30
+	dodano skrypt brute-force, sprawdzający wszystkie możliwe pętle dla pacynek grających w tle
+	nie jest idealny, bo czasem trasa "na pusto" może być lepsza niż kupno
+	nie jest idealny, bo pod koniec gry może opłacać się wykonać dodatkowy ruch, nie do następnego miasta w pętli, bo do niego się nie dojdzie, ale do bliższego, gdzie jest mniej opłacalny handel ale za to możliwy
+
 2026.06.29
 	zakończono skrypt dla pacynek grających w tle z mutacja na zasadzie programowania genetycznego
 
