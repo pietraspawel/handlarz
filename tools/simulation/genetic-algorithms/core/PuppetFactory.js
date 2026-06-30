@@ -1,6 +1,6 @@
-import { AIPuppetStrategy } from "../../../public/js/game/ai/AIPuppetStrategy.js";
-import { GeneService } from "./GeneService.js";
-import { Puppet } from "../model/Puppet.js";
+import { AIPuppetStrategy } from "../../../../public/js/game/ai/AIPuppetStrategy.js";
+import { GeneService } from "../../core/GeneService.js";
+import { Puppet } from "../../model/Puppet.js";
 
 export class PuppetFactory {
     static create({ gameContext, aiTradersAmount }) {
